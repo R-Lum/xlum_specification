@@ -6,6 +6,6 @@ the format specification is submitted for publication**
 
 ## Contributors 
 
- * Sebastian Kreutzer, Université Bordeaux Montainge (France)
+ * Sebastian Kreutzer, Université Bordeaux Montaigne (France)
  * Steve Grehl, TU Bergakademie Freiberg (Germany)
  * Oliver Simmank, Freiberg Instruments (Germany)
