@@ -3,17 +3,17 @@ title: "XSYG-file format: Documentation"
 author: "Steve Grehl, Sebastian Kreutzer, Michael Höhne"
 date: "version: 1.0 [23 October 2013]"
 output:
-  #word_document:
-  #  toc: yes
+  word_document:
+    toc: yes
   #pdf_document:
   #  toc: yes
-  html_document:
-    theme: simplex
-    toc: yes
-    number_sections: true
-    toc_float:
-      collapsed: yes
-      smooth_scroll: yes
+  #html_document:
+  #  theme: simplex
+  #  toc: yes
+  #  number_sections: true
+  #  toc_float:
+  #    collapsed: yes
+  #    smooth_scroll: yes
 ---
 
 #Motivation
@@ -96,7 +96,7 @@ may in the same record as the heating (f.e. to document a TL).
   stimulator                                      String                  standard heating component             technical name of the component
   detector                                        String                  UV-VIS                                 technical name of the component
   curveDescripter                                 Pair (String, String)   time, counts                           x, y
-  offset                                          number                  60                                     idle time till the component starts
+  offset                                          number                  60                                     idle time till the component starts [s]
   [detectionWindow]                               number                  375                                    wavelength window being detected
   [filterIDs]                                     List (number)           14783;89362                            technical identifiers of the used filters
   [filterNames]                                   List (String)           infrared filter; interference filter   name of the used filters
@@ -260,3 +260,25 @@ There are a few parameters that are stored on every level.
   state        enumeration             analyse of Hanburg/Germany/1989     Values: {finished, recording, …}
   parentID     number                  201007145551910                     ID of the parent node
   comment      String                  measurement to verify a assumtion
+  
+## Pulsing data
+
+In measurements with pulsed light stimulation, multiple detector curves might be stored per record, one for each (x) pulse(-s).
+The record contains some additional Metadata
+
+  identifier         data type    example    information
+  ------------------ ------------ ---------- ---------------------------------------
+  OnTime             number       1E-01      on time of stimulation per pulse, [s]
+  OffTime            number       1E-01      on time of stimulation per pulse, [s]
+  NrPulses           number       10         number of stimulation pulses total
+  Summations         number       2          how many consecutive pulse records are summated (e.g. 10 pulses, 2 summations -> 5 records)
+  ChannelsPerPulse   number       1000       number of channels that are recorded in one curve
+  CountsNormalized   number       1          if not 0, counts per channel are normalized to counts per second (helpful with uneven distributed channel times)
+  
+Also the curves contain additional metadata
+
+  identifier         data type    example    information
+  ------------------ ------------ ---------- ---------------------------------------
+  PulseNr            number       1          current Pulse
+  
+Pulsing Curves typically contain value pairs of channel time in microseconds and counts, see curveDescripter.
