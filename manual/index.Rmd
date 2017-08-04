@@ -155,14 +155,14 @@ measurement. Curves are stored in a record and used to describe it.
 
   |identifier          | data type / structure  | example                  |information
   |--------------------| -----------------------| ------------------------ |----------------------------------------------------------|
-  |startDate           |  Date                  |  20130214100122          |date when the computer software started the measurement   |
-  |endDate             |  Date                  |  20130213100242          |  date when the computer software finished the measurement |
-  |recordType          |  Enumeration           |  TL                      |  legal values found in next table                        |
-  |name                |  String                |  2nd thermoluminescence  |  user given name of the record     |
-  |sequenceStepNumber  |  number                |  5                       |  index in the sequence     |
-  |metaIrrType         |  String                |  none                    |  describes the type of irradiation   |
-  |metaIrrDuration     |  number                |  7200.0                  |  time $[s]$ the aliquot has been irradiated    |
-  |sampleCondition     |  Enumeration           |  dose                    | legal values found in next table   |
+  |startDate           |  `Date`                  |  20130214100122          |date when the computer software started the measurement   |
+  |endDate             |  `Date`                  |  20130213100242          |  date when the computer software finished the measurement |
+  |recordType          |  `Enumeration`           |  TL                      |  legal values found in next table                        |
+  |name                |  `String`                |  2nd thermoluminescence  |  user given name of the record     |
+  |sequenceStepNumber  |  `number`                |  5                       |  index in the sequence     |
+  |metaIrrType         |  `String`                |  none                    |  describes the type of irradiation   |
+  |metaIrrDuration     |  `number`                |  7200.0                  |  time $[s]$ the aliquot has been irradiated    |
+  |sampleCondition     |  `Enumeration`           |  dose                    | legal values found in next table   |
 
 Valid recordTypes:
 
@@ -234,11 +234,11 @@ storage, and the last to transfer the probe back.
 
   |identifier     |data type / structure  | example                  | information        |
   |-------------- |-----------------------| -------------------------| -----------------------------------|
-  |position       |number                 | 42                      |  position in the sample wheel |
-  |creationDate   |Date                   | 20130214100242          |  date when this sequence was created |
-  |name           |String                 | SAR OSL CW - derivative  | user name for this sequence |
-  |protocol       |String                 | SAR OSL CW              |  name of the protocol used |
-  |mineral        |String                 | aluminium oxide         |  name of the substance used  |
+  |position       |`number`                 | 42                      |  position in the sample wheel |
+  |creationDate   |`Date`                   | 20130214100242          |  date when this sequence was created |
+  |name           |`String`                 | SAR OSL CW - derivative  | user name for this sequence |
+  |protocol       |`String`                 | SAR OSL CW              |  name of the protocol used |
+  |mineral        |`String`                 | aluminium oxide         |  name of the substance used  |
 
 In the luminescence context a sequence can fit a SAR protocol. It is
 defined that all measurements hold by one sequence are made with one
@@ -257,14 +257,14 @@ stored. It defines the parameter of the used system.
 
   |identifier         |data type / structure  | example                          | information            |
   |------------------ |-----------------------| ---------------------------------| ------------------------------------------|
-  |name               |number                 | analyse of Hanburg/Germany/1989  |  user given name           |
-  |user               |String                 | Jane Doe                         |  name of the person in authority     |
-  |startDate          |Date                   | 20130217100242                  |  start of the analyse     |
-  |sampleCarrier      |String                 | unknown                          | used sample carrier    |
-  |lexsygID           |number                 | 201312                          |  ID to identifie the used measurement system|
-  |lexStudioVersion   |decimal                | 1.0                              | version of the used measurement software|
-  |firmwareVersion    |decimal                | 0.6                             |  version of the firmware in the lexsyg system |
-  |os                 |String                 | aluminium oxide                  | operating system of the computer |
+  |name               |`number`                 | analyse of Hanburg/Germany/1989  |  user given name           |
+  |user               |`String`                 | Jane Doe                         |  name of the person in authority     |
+  |startDate          |`Date`                   | 20130217100242                  |  start of the analyse     |
+  |sampleCarrier      |`String`                 | unknown                          | used sample carrier    |
+  |lexsygID           |`number`                 | 201312                          |  ID to identifie the used measurement system|
+  |lexStudioVersion   |`decimal`                | 1.0                              | version of the used measurement software|
+  |firmwareVersion    |`decimal`                | 0.6                             |  version of the firmware in the lexsyg system |
+  |os                 |`String`                 | aluminium oxide                  | operating system of the computer |
 
 ```{r, engine='bash', eval = FALSE}
 <Sample state="finished" parentID="0" name="TL spectra Feldspar" user="" 
@@ -281,9 +281,9 @@ There are a few parameters that are stored on every level.
 
   |identifier   |data type / structure  | example                             |information      |
   |------------ |-----------------------| ----------------------------------- |----------------------------------|
-  |state        |enumeration            | analyse of Hanburg/Germany/1989     |Values: {finished, recording, …} |
-  |parentID     |number                 | 201007145551910                     |ID of the parent node  |
-  |comment      |String                 | measurement to verify a assumtion   |   |
+  |state        |`enumeration`            | analyse of Hanburg/Germany/1989     |Values: {finished, recording, …} |
+  |parentID     |`number`                 | 201007145551910                     |ID of the parent node  |
+  |comment      |`String`                 | measurement to verify a assumtion   |   |
   
 ## Pulsing data
 
@@ -292,18 +292,18 @@ The record contains some additional Metadata
 
   |identifier        | data type    |example    |information            |
   |------------------| ------------ |---------- |---------------------------------------|
-  |OnTime           |  number      | 1E-01     | on time of stimulation per pulse, [s]     |
-  |OffTime          |  number      |  1E-01   |   on time of stimulation per pulse, [s]    |
-  |NrPulses         |  number      |  10      |   number of stimulation pulses total     |
-  |Summations       |  number     |  2        |  how many consecutive pulse records are summated (e.g. 10 pulses, 2 summations -> 5 records) |
-  |ChannelsPerPulse |  number     |  1000      | number of channels that are recorded in one curve      |
-  |CountsNormalized  | number      | 1        |  if not 0, counts per channel are normalized to counts per second (helpful with uneven distributed channel times) |
+  |OnTime           |  `number`      | 1E-01     | on time of stimulation per pulse, [s]     |
+  |OffTime          |  `number`      |  1E-01   |   on time of stimulation per pulse, [s]    |
+  |NrPulses         |  `number`      |  10      |   number of stimulation pulses total     |
+  |Summations       |  `number`     |  2        |  how many consecutive pulse records are summated (e.g. 10 pulses, 2 summations -> 5 records) |
+  |ChannelsPerPulse |  `number`     |  1000      | number of channels that are recorded in one curve      |
+  |CountsNormalized  | `number`      | 1        |  if not 0, counts per channel are normalized to counts per second (helpful with uneven distributed channel times) |
   
 Also the curves contain additional metadata
 
   |identifier         |data type   | example    |information |
   |------------------ |------------| ---------- |---------------------------------------|
-  |PulseNr            |number      |1          | current Pulse |
+  |PulseNr            |`number`      |1          | current Pulse |
   
 Pulsing Curves typically contain value pairs of channel time in microseconds and counts, see curveDescripter.
 
