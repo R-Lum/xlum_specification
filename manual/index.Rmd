@@ -62,10 +62,11 @@ describes the state of this level. The stored data in the node describes
 the process(es) assigned to the node. An minimal example is shown in the
 listing. The documentation provides an overview starting with the leaf node
 description and going to the root from there. This is done to start in a
-comprehensible environment and abstract from there. Further note:
+comprehensible environment and abstract from there. Further notes:
 
 * The format version bases on XLM version 1.0
 * File encoding should be always UTF-8
+* Attributes are NOT mandatory. 
 
 # Detailed description
 
