@@ -165,12 +165,44 @@ measurement. Curves are stored in a record and used to describe it.
   -------------------- ----------------------- ------------------------ ----------------------------------------------------------
   startDate            Date                    20130214100122           date when the computer software started the measurement
   endDate              Date                    20130213100242           date when the computer software finished the measurement
-  recordType           Enumeration             TL                       legal values found in table x.x
+  recordType           Enumeration             TL                       legal values found in next table
   name                 String                  2nd thermoluminescence   user given name of the record
   sequenceStepNumber   number                  5                        index in the sequence
   metaIrrType          String                  none                     describes the type of irradiation
   metaIrrDuration      number                  7200.0                   time $[s]$ the aliquot has been irradiated
-  sampleCondition      Enumeration             dose                     legal values found in table x.x
+  sampleCondition      Enumeration             dose                     legal values found in next table
+
+Valid recordTypes:
+
+  recordType           information
+  -------------------- -------------------------------
+  bleaching            bleaching
+  irradiation          irradiation
+  atmosphereExchange   atmosphere exchange
+  preheat              preheat
+  spectrometer         spectrometer
+  camera               camera
+  TL                   thermoluminescense
+  RF                   radiofluorescense
+  OSL                  optical stimulated luminescense
+  pause                pause
+  custom               custom
+  none                 none
+  POSL                 pulsed optical stimulated luminescense
+
+valid sampleConditions:
+
+  sampleConditions     information
+  -------------------- -------------------------------
+  Natural              Natural
+  Natural+Dose         Natural+Dose
+  Bleach               Bleach
+  Bleach+Dose          Bleach+Dose
+  Nat.(Bleach)         Nat.(Bleach)
+  Nat.+Dose(Bleach)    Nat.+Dose(Bleach)
+  Dose                 Dose
+  Background           Background
+
 
 All curves within the record should have been detected within the same
 time frame. An example is given in listing
