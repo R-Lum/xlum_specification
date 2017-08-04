@@ -16,7 +16,7 @@ output:
      smooth_scroll: yes
 ---
 
-#Motivation
+# Motivation
 
 In 2011 Freiberg Instruments introduced a newly developed luminescence reader called lexsyg. Along with routine measurement data, the system records a variety of additional system information 
 (e.g., LED power, heating ramp curves), which provides full control over the experimental conditions. However, so far, in the luminescence dating community, no appropriate data format exists to sufficiently store the obtained data.
@@ -67,7 +67,7 @@ comprehensible environment and abstract from there. Further note:
 * The format version bases on XLM version 1.0
 * File encoding should be always UTF-8
 
-#Detailed description
+# Detailed description
 
 ## Description of the curve level
 
@@ -152,47 +152,47 @@ The Record defines one process. That process is further described by the
 stored curves. A record can also be understood as one step of
 measurement. Curves are stored in a record and used to describe it.
 
-  identifier           data type / structure   example                  information
-  -------------------- ----------------------- ------------------------ ----------------------------------------------------------
-  startDate            Date                    20130214100122           date when the computer software started the measurement
-  endDate              Date                    20130213100242           date when the computer software finished the measurement
-  recordType           Enumeration             TL                       legal values found in next table
-  name                 String                  2nd thermoluminescence   user given name of the record
-  sequenceStepNumber   number                  5                        index in the sequence
-  metaIrrType          String                  none                     describes the type of irradiation
-  metaIrrDuration      number                  7200.0                   time $[s]$ the aliquot has been irradiated
-  sampleCondition      Enumeration             dose                     legal values found in next table
+  |identifier          | data type / structure  | example                  |information
+  |--------------------| -----------------------| ------------------------ |----------------------------------------------------------|
+  |startDate           |  Date                  |  20130214100122          |date when the computer software started the measurement   |
+  |endDate             |  Date                  |  20130213100242          |  date when the computer software finished the measurement |
+  |recordType          |  Enumeration           |  TL                      |  legal values found in next table                        |
+  |name                |  String                |  2nd thermoluminescence  |  user given name of the record     |
+  |sequenceStepNumber  |  number                |  5                       |  index in the sequence     |
+  |metaIrrType         |  String                |  none                    |  describes the type of irradiation   |
+  |metaIrrDuration     |  number                |  7200.0                  |  time $[s]$ the aliquot has been irradiated    |
+  |sampleCondition     |  Enumeration           |  dose                    | legal values found in next table   |
 
 Valid recordTypes:
 
-  recordType           information
-  -------------------- -------------------------------
-  bleaching            bleaching
-  irradiation          irradiation
-  atmosphereExchange   atmosphere exchange
-  preheat              preheat
-  spectrometer         spectrometer
-  camera               camera
-  TL                   thermoluminescense
-  RF                   radiofluorescense
-  OSL                  optical stimulated luminescense
-  pause                pause
-  custom               custom
-  none                 none
-  POSL                 pulsed optical stimulated luminescense
+  |recordType          | information      |
+  |--------------------| -------------------------------|
+  |bleaching           | bleaching                |
+  |irradiation         |  irradiation           |
+  |atmosphereExchange  |  atmosphere exchange   |
+  |preheat             |  preheat       |
+  |spectrometer        |  spectrometer    |
+  |camera              |  camera      |
+  |TL                  |  thermoluminescense      | 
+  |RF                  |  radiofluorescense       |
+  |OSL                 |  optical stimulated luminescense |
+  |pause               |  pause     |
+  |custom              |  custom      |
+  |none                |  none      |
+  |POSL                |  pulsed optical stimulated luminescense |
 
 valid sampleConditions:
 
-  sampleConditions     information
-  -------------------- -------------------------------
-  Natural              Natural
-  Natural+Dose         Natural+Dose
-  Bleach               Bleach
-  Bleach+Dose          Bleach+Dose
-  Nat.(Bleach)         Nat.(Bleach)
-  Nat.+Dose(Bleach)    Nat.+Dose(Bleach)
-  Dose                 Dose
-  Background           Background
+  |sampleConditions   |  information        |
+  |-------------------| --------------------|
+  |Natural             | Natural          |
+  |Natural+Dose       |Natural+Dose     |
+  |Bleach             |  Bleach  |
+  |Bleach+Dose        |  Bleach+Dose  |
+  |Nat.(Bleach)       |  Nat.(Bleach)  |
+  |Nat.+Dose(Bleach)  |  Nat.+Dose(Bleach) |
+  |Dose               |  Dose  |
+  |Background         |  Background |
 
 
 All curves within the record should have been detected within the same
@@ -231,13 +231,13 @@ A sequence describes multiple measurements sequential used at one
 aliquot. The first step often is the unloading of a probe from the
 storage, and the last to transfer the probe back.
 
-  identifier     data type / structure   example                   information
-  -------------- ----------------------- ------------------------- -------------------------------------
-  position       number                  42                        position in the sample wheel
-  creationDate   Date                    20130214100242            date when this sequence was created
-  name           String                  SAR OSL CW - derivative   user name for this sequence
-  protocol       String                  SAR OSL CW                name of the protocol used
-  mineral        String                  aluminium oxide           name of the substance used
+  |identifier     |data type / structure  | example                  | information        |
+  |-------------- |-----------------------| -------------------------| -----------------------------------|
+  |position       |number                 | 42                      |  position in the sample wheel |
+  |creationDate   |Date                   | 20130214100242          |  date when this sequence was created |
+  |name           |String                 | SAR OSL CW - derivative  | user name for this sequence |
+  |protocol       |String                 | SAR OSL CW              |  name of the protocol used |
+  |mineral        |String                 | aluminium oxide         |  name of the substance used  |
 
 In the luminescence context a sequence can fit a SAR protocol. It is
 defined that all measurements hold by one sequence are made with one
@@ -254,16 +254,16 @@ aliquot.
 The sample builds the top level. In one file is always only one sample
 stored. It defines the parameter of the used system.
 
-  identifier         data type / structure   example                           information
-  ------------------ ----------------------- --------------------------------- ----------------------------------------------
-  name               number                  analyse of Hanburg/Germany/1989   user given name
-  user               String                  Jane Doe                          name of the person in authority
-  startDate          Date                    20130217100242                    start of the analyse
-  sampleCarrier      String                  unknown                           used sample carrier
-  lexsygID           number                  201312                            ID to identifie the used measurement system
-  lexStudioVersion   decimal                 1.0                               version of the used measurement software
-  firmwareVersion    decimal                 0.6                               version of the firmware in the lexsyg system
-  os                 String                  aluminium oxide                   operating system of the computer
+  |identifier         |data type / structure  | example                          | information            |
+  |------------------ |-----------------------| ---------------------------------| ------------------------------------------|
+  |name               |number                 | analyse of Hanburg/Germany/1989  |  user given name           |
+  |user               |String                 | Jane Doe                         |  name of the person in authority     |
+  |startDate          |Date                   | 20130217100242                  |  start of the analyse     |
+  |sampleCarrier      |String                 | unknown                          | used sample carrier    |
+  |lexsygID           |number                 | 201312                          |  ID to identifie the used measurement system|
+  |lexStudioVersion   |decimal                | 1.0                              | version of the used measurement software|
+  |firmwareVersion    |decimal                | 0.6                             |  version of the firmware in the lexsyg system |
+  |os                 |String                 | aluminium oxide                  | operating system of the computer |
 
 ```{r, engine='bash', eval = FALSE}
 <Sample state="finished" parentID="0" name="TL spectra Feldspar" user="" 
@@ -278,37 +278,37 @@ stored. It defines the parameter of the used system.
 
 There are a few parameters that are stored on every level.
 
-  identifier   data type / structure   example                             information
-  ------------ ----------------------- ----------------------------------- ----------------------------------
-  state        enumeration             analyse of Hanburg/Germany/1989     Values: {finished, recording, …}
-  parentID     number                  201007145551910                     ID of the parent node
-  comment      String                  measurement to verify a assumtion
+  |identifier   |data type / structure  | example                             |information      |
+  |------------ |-----------------------| ----------------------------------- |----------------------------------|
+  |state        |enumeration            | analyse of Hanburg/Germany/1989     |Values: {finished, recording, …} |
+  |parentID     |number                 | 201007145551910                     |ID of the parent node  |
+  |comment      |String                 | measurement to verify a assumtion   |   |
   
 ## Pulsing data
 
 In measurements with pulsed light stimulation, multiple detector curves might be stored per record, one for each (x) pulse(-s).
 The record contains some additional Metadata
 
-  identifier         data type    example    information
-  ------------------ ------------ ---------- ---------------------------------------
-  OnTime             number       1E-01      on time of stimulation per pulse, [s]
-  OffTime            number       1E-01      on time of stimulation per pulse, [s]
-  NrPulses           number       10         number of stimulation pulses total
-  Summations         number       2          how many consecutive pulse records are summated (e.g. 10 pulses, 2 summations -> 5 records)
-  ChannelsPerPulse   number       1000       number of channels that are recorded in one curve
-  CountsNormalized   number       1          if not 0, counts per channel are normalized to counts per second (helpful with uneven distributed channel times)
+  |identifier        | data type    |example    |information            |
+  |------------------| ------------ |---------- |---------------------------------------|
+  |OnTime           |  number      | 1E-01     | on time of stimulation per pulse, [s]     |
+  |OffTime          |  number      |  1E-01   |   on time of stimulation per pulse, [s]    |
+  |NrPulses         |  number      |  10      |   number of stimulation pulses total     |
+  |Summations       |  number     |  2        |  how many consecutive pulse records are summated (e.g. 10 pulses, 2 summations -> 5 records) |
+  |ChannelsPerPulse |  number     |  1000      | number of channels that are recorded in one curve      |
+  |CountsNormalized  | number      | 1        |  if not 0, counts per channel are normalized to counts per second (helpful with uneven distributed channel times) |
   
 Also the curves contain additional metadata
 
-  identifier         data type    example    information
-  ------------------ ------------ ---------- ---------------------------------------
-  PulseNr            number       1          current Pulse
+  |identifier         |data type   | example    |information |
+  |------------------ |------------| ---------- |---------------------------------------|
+  |PulseNr            |number      |1          | current Pulse |
   
 Pulsing Curves typically contain value pairs of channel time in microseconds and counts, see curveDescripter.
 
-#Practical guidlines
+# Practical guidlines
 
-An import function must not crash parsing the following minimal examples
+An import function must not crash parsing the following minimal example.
 
 ```{r, engine='bash', eval = FALSE}
 <?xml version="1.0" encoding="utf-8"?>
