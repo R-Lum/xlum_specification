@@ -1,5 +1,5 @@
 ---
-title: "XSYG-file format: Documentation"
+title: "XLUM-file format: Documentation"
 author: "Steve Grehl, Sebastian Kreutzer, Michael Höhne"
 date: "version: 1.0 [23 October 2013]"
 output:
@@ -18,15 +18,15 @@ output:
 
 # Motivation
 
-In 2011 Freiberg Instruments introduced a newly developed luminescence reader called lexsyg. Along with routine measurement data, the system records a variety of additional system information 
+In 2011 Freiberg Instruments introduced a newly developed luminescence reader called *lexsyg*. Along with routine measurement data, the system records a variety of additional system information 
 (e.g., LED power, heating ramp curves), which provides full control over the experimental conditions. However, so far, in the luminescence dating community, no appropriate data format exists to sufficiently store the obtained data.
 
-With this documentation, a new XML based file format (XSYG) is introduced to support the variety of needs of luminescence measurements. In contrast to the existing binary file format from Risø, which mainly focuses on small data volumes, the XSYG format, as an XML derivate, is easy to read and extendible. The setup accounts for various configurations of the lexsyg measurement system but can be also adapted for other measurements systems. As the format is human readable, the data can be easily checked with any kind of text reader, on any major operating system. This allows a platform independent operation. The following documentation provides basic information on the file XSYG format and accounts for the needs of individual flexible data analysis, even with self-written software applications.
+With this documentation, a new XML based file format (`XLUM`) is introduced to support the variety of needs of luminescence measurements. In contrast to the existing binary file format from Risø, which mainly focuses on small data volumes, the XLUM format, as an XML derivative, is easy to read and extendible. The setup accounts for various configurations of the *lexsyg* measurement system but can be also adapted for other measurements systems. As the format is human readable, the data can be easily checked with any kind of text reader, on any major operating system. This allows a platform independent operation. The following documentation provides basic information on the file XLUM format and accounts for the needs of individual flexible data analysis, even with self-written software applications.
 
 
 # General description
 
-The XSYG-format is an XML derivative, i.e. the base
+The XLUM-format is an XML derivative, i.e. the base
 data structure is a tree with nodes storing the data. The depth of the
 tree is four levels. Any level has its unique denotation.
 
@@ -261,14 +261,14 @@ stored. It defines the parameter of the used system.
   |user               |`String`                 | Jane Doe                         |  name of the person in authority     |
   |startDate          |`Date`                   | 20130217100242                  |  start of the analyse     |
   |sampleCarrier      |`String`                 | unknown                          | used sample carrier    |
-  |lexsygID           |`number`                 | 201312                          |  ID to identifie the used measurement system|
+  |lexsyg           |`number`                 | 201312                          |  ID to identify the used measurement system|
   |lexStudioVersion   |`decimal`                | 1.0                              | version of the used measurement software|
   |firmwareVersion    |`decimal`                | 0.6                             |  version of the firmware in the lexsyg system |
   |os                 |`String`                 | aluminium oxide                  | operating system of the computer |
 
 ```{r, engine='bash', eval = FALSE}
 <Sample state="finished" parentID="0" name="TL spectra Feldspar" user="" 
-    startDate="20131007145455" sampleCarrier="" lexsygID="11-re-01-0006" 
+    startDate="20131007145455" sampleCarrier="" leXLUMID="11-re-01-0006" 
     lexStudioVersion="Lexstudio 2beta 0.15.0" 
     firmwareVersion="unknown" os="Microsoft Windows NT 6.1.7601 Service Pack 1" comment="">
     {...}
