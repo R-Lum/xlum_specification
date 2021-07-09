@@ -1,77 +1,65 @@
 ---
 title: "XLUM-file format Documentation"
-author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne"
+author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne,...\\<further authors\\>"
 date: "version: 1.0 [`r Sys.Date()`]"
 output:
   # word_document:
   #   toc: yes
-  #pdf_document:
-  #  toc: yes
-  html_document:
-   theme: simplex
-   toc: yes
-   number_sections: true
-   toc_float:
-     collapsed: yes
-     smooth_scroll: yes
+  # bookdown::pdf_document2:
+  #    toc: yes
+  #    number_sections: true
+  bookdown::html_document2: 
+     theme: simplex
+     toc: yes
+     number_sections: true
+     toc_float:
+       collapsed: yes
+       smooth_scroll: yes
 ---
 
 # Motivation and principles
 
-This documents details the `XLUM` format, an XML based file format for long-term
-data preservation and exchange of luminescence data. The format is readable by 
-humans and machines and the data can be easily checked with any kind of text reader, 
-on any major operating system. This allows a platform independent operation. 
-The following documentation provides basic information on the file `XLUM` format 
-and accounts for the needs for individual flexible data analysis, even with 
+This document details the `XLUM` format, an XML based file format for long-term data preservation and exchange of luminescence data. The format is readable by humans and machines, and the data can be easily checked with any text reader on any major operating system. This design allows a platform-independent operation. The following documentation provides essential information on the file `XLUM` format  and accounts for the needs for individual flexible data analysis, even with 
 self-written software applications.
 
-The format is underpinned by a two very simple guiding principles
+Two simple design principles underpin the format specification:
 
-* Stored are data recorded over **time**
-* Stored are data on a technical component level 
+* Stored are data recorded over **time** or time derived instances, 
+* stored are data on a technical component level.
 
 # General description
 
-The XLUM-format is an XML derivative, i.e. the base data structure is a tree with five nodes 
-storing the data. Each level has its unique denotation.
+The `XLUM`-format is an [XML](https://www.w3.org/xml) derivative. The base data structure is a 
+tree with five nodes storing the data. Each level has its unique denotation.
 
-The levels and a short introduction is given in table below, a detailed description 
-can be found in the following sections. Each level in the structure is represented by a node. 
-**Only the node `curve` contains luminescence data** all other nodes are parent nodes of `curve` 
+The levels and a short introduction is given in the table below. A detailed description can be found in the following sections. Nodes represent each level in the structure. **Only `<curve>` nodes contain luminescence data** all other nodes are parent nodes of `<curve>` 
 to structure the dataset and ship additional metadata. 
 
-The first level `xlum` is a super node to enable storage of luminescence data 
-in arbitrary files following the XML scheme. As a side effect this 
+The first level, `xlum` is a supernode to enable storage of luminescence data in arbitrary files following the XML scheme. As a side effect this 
 also allows custom file endings different from `*.xlum`.
 
 
-  |Node name   | Number of samples   |Number of aliquots  | Number of records  | Number of data curves |
-  |------------| --------------------| -------------------| -------------------| ----------------------|
-  xlum         |$\inf$               |$\inf$              |$\inf$              |$\inf$  
-  sample       |1                    |$\inf$              |$\inf$              |$\inf$
-  sequence     |1                    |1                   |$\inf$              |$\inf$
-  record       |1                    |1                   |1                   |$\inf$
-  curve        |1                    |1                   |1                   | 1  
+  |Node name       | Number of samples   |Number of aliquots  | Number of records  | Number of data curves |
+  |:---------------|:--------------------|:-------------------|:-------------------|:----------------------|
+  `<xlum>`         |$\inf$               |$\inf$              |$\inf$              |$\inf$  
+  `<sample>`       |1                    |$\inf$              |$\inf$              |$\inf$
+  `<sequence>`     |1                    |1                   |$\inf$              |$\inf$
+  `<record>`       |1                    |1                   |1                   |$\inf$
+  `<curve>`        |1                    |1                   |1                   | 1  
 
   Table: Node overview
 
-A node has a name, attributes, and data stored in it. The data stored in the attributes
-describes the state of this level. The stored data in the node describes
-the process(es) assigned to the node. An minimal example is shown in the
-listing. The documentation provides an overview starting with the leaf node
-description and going up to the root from there. Further notes:
+A node has a name, attributes, and data stored in it. The data stored in the attributes describe the state of this level. The stored data in the node describes the process(es) assigned to the node. A minimal example is shown in the listing. The documentation provides an overview starting with the leaf node description and going up to the root from there. Further notes:
 
-* The format version bases on XLM version 1.0
-* File encoding should be always UTF-8
-* This specification lists only mandatory attributes. Additional, custom attributes,
-are explicitly supported.
-* Parser supporting the `XLUM` format must not crash when encountering non-specified
-node attributes, however, they are allowed to skip them.
+* The format version bases on [XML version 1.0 (Fith Edition)](http://www.w3.org/TR/2008/REC-xml-20081126/)
+* File encoding should always be UTF-8
+* Attributes and 
+* This specification lists only mandatory attributes. Additional, custom attributes are explicitly supported.
+* Parser supporting the `XLUM` format must not crash when encountering non-specified node attributes. However, they may skip them.
 
-```{r basic example xlum, engine='bash', eval = FALSE}
-<?xml version="1.0" encoding="utf-8"?>
-<xlum formatVersion="1.0" flavour="generic" author="" license="" doi="">
+```{r, engine='bash', eval = FALSE}
+<?xml version="1.0" encoding="UTF-8"?>
+<xlum>
   <sample>
     <sequence>
       <record>
@@ -91,69 +79,98 @@ node attributes, however, they are allowed to skip them.
 The `curve` level is the deepest node (leaf) and has no further sub-levels. 
 A curve holds the predefined/simulated or measured output of one single 
 technical component. For example, a typical thermoluminescence measurement 
-may record only one or three or more curves.
+may record only one or more curves.
 
- 1. **The one curve example**: Time against temperature (which is probably a processed 
- quantity). 
- 2. **The three curve example**: (a) Time against temperature recorded by thermocouple 
+ 1. **The three curve example**: (a) Time against temperature recorded by a thermocouple 
  (temperature sensor), (b) time against photon counts recorded by a photomultiplier tube, 
  (c) time against a predefined heating ramp.
+ 2. **The one curve example**: Time against temperature. In this case temperature
+ is a processed quantity, because measurements happen over a time instant. However, for
+ compatibility reasons, this would be allowed although it is not preferred.
 
 In both cases, all mentioned `curve` nodes belong to one parent `record`. In case 1, 
 the record contains one curve and three in case 2. Ideally, curves represent technical 
 components and not processed quantities. 
 
-### Attributes
-
-  |Identifier                     |Type        |Allows `NA`? |Example                         |Information   |
-  |-------------------------------|----------- |-------------|--------------------------------|--------------|
-  startDate                       | `date`     |No           |`"2021-07-14T22:59:35.0Z"`      | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time |
-  curveType                       | `string`   |No           |`"predefined"`                  | Values allowed are only `"predefined"` or `"measured"`    |
-  duration                        | `number`   |No           |`"20.000"`                      | Duration of the measurement in seconds or a fraction of it|
-  offset                          | `number`   |No           |`"10.000"`                      | Before the detection starts in seconds or a fraction of it|
-  xValues                         | `number`   |Yes          |`"1.0,2.0,3.0"`                 | x-coordinate values of the detector                       |
-  yValues                         | `number`   |Yes          |`"1.0,2.0,3.0"`                 | y-coordinate values of detector                           |
-  tValues                         | `number`   |No           |`"1.0,2.0,3.0"`                 | time values in seconds or a fraction of it                |
-  xLabel                          | `string`   |Yes          |`"pixel"`                       | label of the x-coordinate values                          |
-  yLabel                          | `string`   |Yes          |`"pixel"`                       | label of the y-coordinate values                          |  
-  tLabel                          | `string`   |No           |`"time"`                        | label of t-values, usually 'time'                         |
-  xUnit                           | `string`   |Yes          |`"nm"`                          | SI unit or equivalent for x-values                        |
-  yUnit                           | `string`   |Yes          |`"px"`                          | SI unit or equivalent for y-values                        |
-  tUnit                           | `string`   |No           |`"s"`                           | SI unit or equivalent for t-values                        |
-  stimulator                      | `String`   |Yes          |`"SiN heater"`                  | name of the technical component. `NA` allowed only for `"predefined"` |
-  [detector]                      | `String`   |No           |`"EMI 9235QB15"`                | technical name of the component can be `NA` for `"predefined"`|
-  [detectionWindow]               | `String`   |No           |`"375"`                         | Centre wavelength if applicable. can be set to `NA`    |
-  [filter]                        | `List` (`String`) |No    |`"Hoya U340; Delta BP 365/50EX"`|  Filter names separated by `;` |
-
-Table: Specified curve attributes. Attributes in `[]` are optional, hence `NA` is not allowed.
-
 ### Value storage
 
-```{r, echo=FALSE, fig.align='center', fig.cap="The three cases for data storage depending on the detector.", fig.width=12}
-knitr::include_graphics("img/CountValueStorage.png")
+Values in the `<curve>` node are stored comma separated. **Only quantities detected
+by the detector are stored in the nodes.** Figure \@ref(fig:fig1) shows three types
+of detectors, distinguished by their capacity to record spatially resolved information. 
+Regardless of the detector, recorded quantities are stored in the `<curve>` node 
+separated by a comma. Example: 
+
+```{r, engine='bash', eval = FALSE}
+<curve>59.5167,109.5164,149.7003,109.5170,156.2654</curve>
 ```
+
+Values in the node are real numbers (-1e-307 $\leqslant x \leqslant$ 1e+307; $x \in \mathbb{R}$).
+Scientific 'E'/'e' notations of numbers are explicitly allowed, example: 1e+2 for 100 or 1e-2 for 0.01.
+Decimal separator is a `.` (dot).
+
+For consistency reasons, the value in the node span an array with dimensions 
+defined through the node attributes `xValues`, `yValues` and `tValues` (see Fig. \@ref(fig:fig1)).
+
+```{r fig1, echo=FALSE, fig.align='center', fig.cap="The three cases for data storage depending on the detector. The black solid arrows indicate how the array is constructed from the values stored in the node."}
+knitr::include_graphics("img/Curve_Level_Storage.png", auto_pdf = TRUE, dpi = 200)
+```
+
+1. The simplest form is a detector that records no spatial information. For instance,
+a photomultiplier tube only knows about count recorded over time. Alternatively, the
+detector can be any sensor, measuring, e.g., temperature, pressure or current. 
+
+2. A spectrometer (here a camera in front of a spectrograph) is another type of 
+detector with spatial information, here wavelengths split by the spectrograph 
+hitting different pixel areas of the detector. 
+
+3. The most complex from is a detector that records events (e.g., luminescence), 
+spatially resolved. Such as a camera. 
+
+
+### Node attributes
+
+  |Identifier       |Type        |Allows `NA`?   |Example               |Information   |
+  |:----------------|:-----------|:---------|:-------------------------|:---------------------|
+  stimulator        | `string`   |yes            |`"SiN heater"`                  | name of the technical component. `NA` allowed only for `"predefined"` |
+  [detector]        | `string`   |no             |`"EMI 9235QB15"`                | technical name of the component can be `NA` for `"predefined"`|
+  startDate         | `date`     |no             |`"2021-07-14T22:59:35.0Z"`      | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time |
+  curveType         | `string`   |no             |`"predefined"`                  | Values allowed are only `"predefined"` or `"measured"`    |
+  duration          | `number`   |no             |`"20.000"`                      | Duration of the measurement in seconds or a fraction of it|
+  offset            | `number`   |no             |`"10.000"`                      | Before the detection starts in seconds or a fraction of it|
+  xValues           | `number`   |yes            |`"1.0,2.0,3.0"`                 | x-coordinate values of the detector                       |
+  yValues           | `number`   |yes            |`"1.0,2.0,3.0"`                 | y-coordinate values of detector                           |
+  tValues           | `number`   |no             |`"1.0,2.0,3.0"`                 | time values in seconds or fractions of it. Values must be positive|
+  xLabel            | `string`   |yes            |`"pixel"`                       | label of the x-coordinate values                          |
+  yLabel            | `string`   |yes            |`"pixel"`                       | label of the y-coordinate values                          |  
+  tLabel            | `string`   |no             |`"time"`                        | label of t-values, usually 'time'                         |
+  xUnit             | `string`   |yes            |`"nm"`                          | SI unit or equivalent for x-values                        |
+  yUnit             | `string`   |yes            |`"px"`                          | SI unit or equivalent for y-values                        |
+  tUnit             | `string`   |no             |`"s"`                           | SI unit or equivalent for t-values                        |
+  [detectionWindow] | `string`   |no             |`"375"`                         | Centre wavelength if applicable. can be set to `NA`    |
+  [filter]          | `list` (`string`) |no      |`"Hoya U340; Delta BP 365/50EX"`| Filter names separated by `;` |
+
+  Table: Specified curve attributes. Attributes in `[]` are optional, hence `NA` is not allowed.
 
 ### Example 
 
 In order to define a suitable standard only a few attributes are required. A few of them are useful for every kind of component, 
 others are only meaningfully in combination. For instance, providing information on the detection window is not meaningful for 
-a heating element. Listing shows some definitions that are intended on this level.
+a heating element. 
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-<record name="TL measurement">
-  <curve startDate="2021-02-14T225935.0Z" duaration="120" offset="0"
-     curveType="predefined" curveDescriptor="time (s), temperature (K)" 
-     stimulator="heating element">
-        0,273;60,393;120,493
+  <curve stimulator="heating element" detector="thermo couple" 
+    startDate="2021-02-14T225935.0Z" curveType="predefined" duaration="120" 
+    offset="0" xValues="NA" yValues="NA" tValues="1,2,3,4,5" xLabel="NA" yLabel="NA"
+    tLabel="time" xUnit="" yUnit="" tUnit="s">
+        0,273,60,393,23
   </curve>
   <curve startDate="2021-02-14T225935.0Z" duaration="120" offset="0"
      curveType="measured" curveDescriptor="time (s), luminescence (cts)"
      stimulator="heating element" detector="EMI 9235QB" detectionWindow="375"> 
         0,30;10,33;20,452;...;120,200;
     </curve>
-    {...}
-</record>
+   {...}
 {...}
 ```
 
@@ -303,10 +320,28 @@ stored. It defines the parameter of the used system.
 
 ## The `<xlum>` level 
 
+The `<xlum>` is the format parent node 
+
 ### Attributes
+
+|Identifier   |Type           |Allows `NA`? |Example                |Information   |
+|:------------|:--------------|:---------|:-------------------------|:--------------|
+xml:lang      |`string'`      |no        |: *predefined*            | ISO 639-1 language code, must not be changed
+version       |`numeric`      |no        |`"1.0"`                   | The `xlum` format version number relevant |
+flavour       |`string`       |no        |`"generic"`               | Allows to specify a particular flavour of the format
+author        |`list(string)` |yes       |`"Max Planck; Marie Curie"` | Names of the author(s) of this dataset
+license       |`string`       |yes       |`"CC BY 4.0"`               | License for the distribution of the dataset.
+doi           |`string`       |yes       |`"10.5281/zenodo.596252"`   | A digital document identifier referencing the dataset already archive in a data repository
+
 
 ### Example
 
+```{r, engine='bash', eval = FALSE}
+{...}
+<xlum xml:lang="en" formatVersion="1.0" flavour="generic" author="Marie Curie" 
+  license="CC BY 4.0" doi="NA">
+{...}
+```
 
 ## General parameters
 
@@ -344,7 +379,7 @@ Pulsing Curves typically contain value pairs of channel time in microseconds and
 
 An import function must not crash parsing the following minimal example.
 
-```{r, engine='bash', eval = FALSE}
+```{xml, engine='bash', eval = FALSE, tidy=FALSE}
 <?xml version="1.0" encoding="utf-8"?>
 <Sample>
   <Sequence>
