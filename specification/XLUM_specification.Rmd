@@ -32,7 +32,8 @@ Two simple design principles underpin the format specification:
 The `XLUM`-format is an [XML](https://www.w3.org/xml) derivative. The base data structure is a 
 tree with five nodes storing the data. Each level has its unique denotation.
 
-The levels and a short introduction is given in the table below. A detailed description can be found in the following sections. Nodes represent each level in the structure. **Only `<curve>` nodes contain luminescence data** all other nodes are parent nodes of `<curve>` 
+The levels and a short introduction is given in the table below. A detailed description can be found in the following sections. 
+Nodes represent each level in the structure. **Only `<curve>` nodes contain physical quantities, such as luminescence data** all other nodes are parent nodes of `<curve>` 
 to structure the dataset and ship additional metadata. 
 
 The first level, `xlum` is a supernode to enable storage of luminescence data in arbitrary files following the XML scheme. As a side effect this 
@@ -53,7 +54,6 @@ A node has a name, attributes, and data stored in it. The data stored in the att
 
 * The format version bases on [XML version 1.0 (Fith Edition)](http://www.w3.org/TR/2008/REC-xml-20081126/)
 * File encoding should always be UTF-8
-* Attributes and 
 * This specification lists only mandatory attributes. Additional, custom attributes are explicitly supported.
 * Parser supporting the `XLUM` format must not crash when encountering non-specified node attributes. However, they may skip them.
 
@@ -79,7 +79,7 @@ A node has a name, attributes, and data stored in it. The data stored in the att
 The `curve` level is the deepest node (leaf) and has no further sub-levels. 
 A curve holds the predefined/simulated or measured output of one single 
 technical component. For example, a typical thermoluminescence measurement 
-may record only one or more curves.
+may consist of one or many curves.
 
  1. **The three curve example**: (a) Time against temperature recorded by a thermocouple 
  (temperature sensor), (b) time against photon counts recorded by a photomultiplier tube, 
@@ -95,8 +95,8 @@ components and not processed quantities.
 ### Value storage
 
 Values in the `<curve>` node are stored comma separated. **Only quantities detected
-by the detector are stored in the nodes.** Figure \@ref(fig:fig1) shows three types
-of detectors, distinguished by their capacity to record spatially resolved information. 
+by a detector/sensor are stored in this node.** Figure \@ref(fig:fig1) shows three types
+of (luminescence) detectors, distinguished by their capacity to record spatially resolved information. 
 Regardless of the detector, recorded quantities are stored in the `<curve>` node 
 separated by a comma. Example: 
 
@@ -112,7 +112,7 @@ For consistency reasons, the value in the node span an array with dimensions
 defined through the node attributes `xValues`, `yValues` and `tValues` (see Fig. \@ref(fig:fig1)).
 
 ```{r fig1, echo=FALSE, fig.align='center', fig.cap="The three cases for data storage depending on the detector. The black solid arrows indicate how the array is constructed from the values stored in the node."}
-knitr::include_graphics("img/Curve_Level_Storage.png", auto_pdf = TRUE, dpi = 200)
+knitr::include_graphics("img/Curve_Level_Storage.png", auto_pdf = TRUE, dpi = 300)
 ```
 
 1. The simplest form is a detector that records no spatial information. For instance,
@@ -126,23 +126,33 @@ hitting different pixel areas of the detector.
 3. The most complex from is a detector that records events (e.g., luminescence), 
 spatially resolved. Such as a camera. 
 
+In the examples and the Fig.\@ref(fig:fig1) the detectors detect luminescence, 
+however, any type of sensor, electronic component recording information of
+relevance for the measurement of luminescence are suitable. Typical examples:
+
+* Temperature sensor (thermocouple), recording the temperature of the heating element
+* Photo diode, monitoring the optical power density at the sample position
+* Resistor, measuring the current of a LED
+* Pressure sensor, monitoring the atmosphere in the measurement chamber
+* Inductive sensor, monitoring closing and opening of a shutter
 
 ### Node attributes
 
   |Identifier       |Type        |Allows `NA`?   |Example               |Information   |
   |:----------------|:-----------|:---------|:-------------------------|:---------------------|
-  stimulator        | `string`   |yes            |`"SiN heater"`                  | name of the technical component. `NA` allowed only for `"predefined"` |
-  [detector]        | `string`   |no             |`"EMI 9235QB15"`                | technical name of the component can be `NA` for `"predefined"`|
+  component         | `string`   |yes            |`"EMI 9235QB15"`     | name of the technical component. `NA` allowed only for `"predefined"` |
   startDate         | `date`     |no             |`"2021-07-14T22:59:35.0Z"`      | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time |
   curveType         | `string`   |no             |`"predefined"`                  | Values allowed are only `"predefined"` or `"measured"`    |
-  duration          | `number`   |no             |`"20.000"`                      | Duration of the measurement in seconds or a fraction of it|
+  duration          | `number`   |no             |`"20.000"`                      | Duration of the detection in seconds or a fraction of it|
   offset            | `number`   |no             |`"10.000"`                      | Before the detection starts in seconds or a fraction of it|
   xValues           | `number`   |yes            |`"1.0,2.0,3.0"`                 | x-coordinate values of the detector                       |
   yValues           | `number`   |yes            |`"1.0,2.0,3.0"`                 | y-coordinate values of detector                           |
   tValues           | `number`   |no             |`"1.0,2.0,3.0"`                 | time values in seconds or fractions of it. Values must be positive|
+  vLabel            | `string`   |no             |`"Luminescence"`                | Measured physical quantity                                |
   xLabel            | `string`   |yes            |`"pixel"`                       | label of the x-coordinate values                          |
   yLabel            | `string`   |yes            |`"pixel"`                       | label of the y-coordinate values                          |  
   tLabel            | `string`   |no             |`"time"`                        | label of t-values, usually 'time'                         |
+  vUnit             | `string`   |no             |`"cts"`                         | label of the v-values, for luminescence usually photon counts
   xUnit             | `string`   |yes            |`"nm"`                          | SI unit or equivalent for x-values                        |
   yUnit             | `string`   |yes            |`"px"`                          | SI unit or equivalent for y-values                        |
   tUnit             | `string`   |no             |`"s"`                           | SI unit or equivalent for t-values                        |
@@ -159,67 +169,72 @@ a heating element.
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-  <curve stimulator="heating element" detector="thermo couple" 
-    startDate="2021-02-14T225935.0Z" curveType="predefined" duaration="120" 
-    offset="0" xValues="NA" yValues="NA" tValues="1,2,3,4,5" xLabel="NA" yLabel="NA"
-    tLabel="time" xUnit="" yUnit="" tUnit="s">
-        0,273,60,393,23
+  <curve component="heating element" startDate="2021-02-14T225700.0Z" curveType="predefined" duaration="5" 
+    offset="0" xValues="NA" yValues="NA" vLabel="temperature" tValues="1,2,3,4,5" xLabel="NA" yLabel="NA"
+    tLabel="time" vLabel="temperature" xUnit="" yUnit="" vUnit="K" tUnit="s">
+        293,303,313,323,333
   </curve>
-  <curve startDate="2021-02-14T225935.0Z" duaration="120" offset="0"
-     curveType="measured" curveDescriptor="time (s), luminescence (cts)"
-     stimulator="heating element" detector="EMI 9235QB" detectionWindow="375"> 
-        0,30;10,33;20,452;...;120,200;
-    </curve>
-   {...}
+  <curve component="thermo couple" startDate="2021-02-14T225700.0Z" curveType="measured" duaration="5" 
+    offset="0" xValues="NA" yValues="NA" tValues="1,2,3,4,5" xLabel="NA" yLabel="NA"
+    vLabel="temperature" tLabel="time" xUnit="" yUnit="" vUnit="K" tUnit="s">
+        293,303,313,323,333
+  </curve>
+  <curve component="EMI 9123QB15" startDate="2021-02-14T225700.0Z" curveType="measured" duaration="5" 
+    offset="0" xValues="NA" yValues="NA" tValues="1,2,3,4,5" xLabel="NA" yLabel="NA"
+    vLabel="luminescence" tLabel="time" xUnit="" yUnit="" vUnit="cts" tUnit="s" 
+    detectionWindow="380 nm" filter="Hoya U340 + Delta 365/40">
+        20,25,32,41,46
+  </curve>
 {...}
 ```
 
-One curve is related to one technical device. To define a accurate time
-window, the parameters *duration* and *offset* should be used. 
-These parameters are related to the start of the parent record.
+One curve is related to one technical device. To define a accurate time window, 
+the parameters *duration* and *offset* should be used. These parameters are related to the 
+start of the parent `<record>` node.
 
 ## The `<record>` level
 
-The Record defines one process. That process is further described by the
-stored curves. A record can also be understood as one step of
-measurement. Curves are stored in a record and used to describe it.
+A `<record>` defines one process involving many components, hence `<record>` may 
+contain $1\leq n\leq Inf; n \in \mathbb{Z}$ `<curve>` nodes.  A record can also be understood 
+as one step in a measurement sequence, e.g., a TL measurement. 
 
 ### Attributes
 
-  |identifier          | data type / structure  | example                  |information
-  |--------------------| -----------------------| ------------------------ |----------------------------------------------------------|
-  |startDate           |  `Date`                  |  20130214100122          |date when the computer software started the measurement   |
-  |endDate             |  `Date`                  |  20130213100242          |  date when the computer software finished the measurement |
-  |recordType          |  `Enumeration`           |  TL                      |  legal values found in next table                        |
-  |name                |  `String`                |  2nd thermoluminescence  |  user given name of the record     |
-  |sequenceStepNumber  |  `number`                |  5                       |  index in the sequence     |
-  |metaIrrType         |  `String`                |  none                    |  describes the type of irradiation   |
-  |metaIrrDuration     |  `number`                |  7200.0                  |  time $[s]$ the aliquot has been irradiated    |
-  |sampleCondition     |  `Enumeration`           |  dose                    | legal values found in next table   |
+  |Identifier          | Type          |Allows `NA`? | Example        |Information  |
+  |:-------------------|:--------------|:------------|:---------------|:------------|
+  |startDate           | `date`        |no           |`"2021-07-14T22:59:35.0Z"`     | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time. Time when the record starts |
+  |endDate             |`date`         |no          |  `"2021-07-14T22:59:35.0Z"`     | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time. Time when this measurement step was finished |
+  |recordType          |`string`       |no          |  `"TL"`                  |  valid values according the `recordType` table                 |
+  |sequenceStepNumber  |`integer`      |yes         |  `5`                     |  index in the sequence     |
+  |sampleCondition     |`string`       |yes         |  dose                    | valid values according to the table below   |
+  
+  Table: Allowed attributes for `<record>` node.
 
-Valid recordTypes:
+The `recordType` names are not carved in stone, but should be chosen to best describe a record in one
+word or using an accepted abbreviation (e.g., OSL for optically stimulated luminescence). 
 
-  |recordType          | information      |
-  |--------------------| -------------------------------|
-  |bleaching           | bleaching                |
-  |irradiation         |  irradiation           |
-  |atmosphereExchange  |  atmosphere exchange   |
-  |preheat             |  preheat       |
-  |spectrometer        |  spectrometer    |
-  |camera              |  camera      |
-  |TL                  |  thermoluminescense      | 
-  |RF                  |  radiofluorescense       |
-  |OSL                 |  optical stimulated luminescense |
-  |pause               |  pause     |
-  |custom              |  custom      |
-  |none                |  none      |
-  |POSL                |  pulsed optical stimulated luminescense |
+  |`recordType`          | Information      |
+  |:---------------------|:----------------------------------------|
+  |`"bleaching"`         | any kind of bleaching                   |
+  |`"irradiation"`       | irradiation with ionising source        |
+  |`"atmosphereExchange"`| atmosphere exchange                     |
+  |`"heating"`           | any kind for heating without signal detection       |
+  |`"spectrometer"`      | spectrometer                            |
+  |`"camera"`            | camera, e.g. any kind of imaging other than spectrometry      |
+  |`"TL"`                | thermoluminescense measurement                     | 
+  |`"RF"`                | radiofluorescense                                  |
+  |`"OSL"`               | optical stimulated luminescense                    |
+  |`"POSL"`              | pulsed optical stimulated luminescense               |
+  |`"pause"`             | pause     |
+  |`"custom"`            | any undefined or custom record type      |
+  
+  Table: Valid `recordTypes`
 
 valid sampleConditions:
 
   |sampleConditions   |  information        |
   |-------------------| --------------------|
-  |Natural             | Natural          |
+  |Natural            | Natural          |
   |Natural+Dose       |Natural+Dose     |
   |Bleach             |  Bleach  |
   |Bleach+Dose        |  Bleach+Dose  |
