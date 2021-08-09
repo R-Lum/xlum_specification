@@ -208,7 +208,6 @@ detected within the same time frame defined through the attributes `<startDate>`
   |endDate             |`date`         |no          |  `"2021-07-14T22:59:35.0Z"`     | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time. Time when this measurement step was finished |
   |recordType          |`string`       |no          |  `"TL"`                  |  valid values according the `recordType` table                 |
   |description         |`string`       |yes         | `"green stimulated luminescence"` | allows a longer description of the record |
-  |comment             |`string`       |yes         | `"measured with joy"`    | free text field for additional comments on the record |
   |sequenceStepNumber  |`integer`      |yes         |  `5`                     |  index in the sequence     |
   |sampleCondition     |`string`       |yes         |  dose                    | valid values according to the table below |
   
@@ -272,19 +271,19 @@ The following examples consists of two records.
     <record startDate="2021-02-14T22:59:35.0z" endDate="2021-02-14T23:10:00.0z"
        recordType="GSL" description="green OSL CW" comment="standard green OSL step"
        sequenceStepNumber="1" sampleCondition="NA">
-      <curve {...}>
+      <curve ...>
         {...}
       </curve>
-      <curve {...}>
+      <curve ...>
         {...}
       </curve>
     </record>
     <record startDate="2021-02-14T23:10:10.0z" endDate="2021-02-14T23:20:00.0z"
        recordType="bleach" description="bleaching with solar simulator" comment="NA"
        sequenceStepNumber="2" sampleCondition="NA">
-        <curve {...}>
-          {...}
-        </curve>
+      <curve ...>
+        {...}
+      </curve>
     </record>
 {...}
 ```
@@ -292,9 +291,11 @@ The following examples consists of two records.
 ## The `<sequence>` level
 
 A sequence describes multiple measurements sequentially used at **one** aliquot, 
-for instance as cup/disc with multiple grains or a single grain. Naturally the
-information stored an that level can be very verbose, so the attributes 
-are limited to a meaningful minimum. 
+for instance as cup/disc with multiple grains or a single grain. Hence, another
+aliquot from the **same** sample needs to be wrapped in a new `<sequence>` node. 
+Naturally the information stored an that level can be very verbose, but are limited to  
+a few required attributes only. In the luminescence context a sequence can fit, e.g., 
+a SAR protocol, but also a succession of protocols measured on one aliquot.
 
 ### Attributes
 
@@ -305,112 +306,171 @@ are limited to a meaningful minimum.
   |name           |`string`     |yes               |`"SAR measurement"`      | name of the sequence |
   |fileName       |`string`     |yes               |`"SAR_OSL.seq"`          | sequence file so far applicable |
   |software       |`string`     |yes               |`"Sequence Editor 4.4"`  | software used to write the sequence if applicable |
-  |comment        |`String`     |yes                |`"just a test sequence"` | any comment on the sequence  |
+  |readerName     |`string`     |yes               |`"Risø OSL/TL"`          | name of the luminescence reader employed for the measurement
+  |readerSN       |`string`     |yes               |`"234-23"`               | reader serial number 
+  |readerFW       |`string`     |yes               |`"reader OSL 12.3"`      | reader firmware version           
   
   Table: Mandatory attributes `<sequence>` node
 
-In the luminescence context a sequence can fit a SAR protocol. It is
-defined that all measurements hold by one sequence are made with one
-aliquot.
 
 ### Example
 
 ```{r, engine='bash', eval = FALSE}
-<Sequence state="finished" parentID="1010071454551909" name="TL spectra Feldspar" position="18" comment="" creationDate="20131007145455" protocol="" mineral="">
+<sequence starteDate="2021-08-14T22:59:35.0Z", position="1" name="SAR measuremt"
+ fileName="Testsequence.seq" software="LexStudio 2, 2.37">
+  <record ...>
+    <curve ...>
+      {...}
+    </curve>
+    {...}
+  </record>
   {...}
-</Sequence>
+</sequence>
 ```
 
 ## The `<sample>` level
 
-The sample builds the top level. In one file is always only one sample
-stored. It defines the parameter of the used system.
+The sample constitutes the top level for one particular sample. The sample 
+level may contain an infinite number of sequences measured for one sample.
 
 ### Attributes 
 
-  |identifier         |data type / structure  | example                          | information            |
-  |------------------ |-----------------------| ---------------------------------| ------------------------------------------|
-  |name               |`number`                 | analyse of Hanburg/Germany/1989  |  user given name           |
-  |user               |`String`                 | Jane Doe                         |  name of the person in authority     |
-  |startDate          |`Date`                   | 20130217100242                  |  start of the analyse     |
-  |sampleCarrier      |`String`                 | unknown                          | used sample carrier    |
-  |lexsyg           |`number`                 | 201312                          |  ID to identify the used measurement system|
-  |lexStudioVersion   |`decimal`                | 1.0                              | version of the used measurement software|
-  |firmwareVersion    |`decimal`                | 0.6                             |  version of the firmware in the lexsyg system |
-  |os                 |`String`                 | aluminium oxide                  | operating system of the computer |
+  |Identifier         |Data type            |Allows `NA`?   | Example                           |Information            |
+  |:----------------- |:--------------------|:--------------|:---------------------------------|:----------------------|
+  |name               |`number`             |yes            |`"LUM-21321"`                      | unique sample identifier   |
+  |mineral            |`string`             |yes            |`"quartz"`                         | dominant mineral composition of the sample
+  |latitude           |`numeric`            |yes            |`"52.4091392"`                     | latitude in decimal degrees of the sample origin
+  |longitude          |`numeric`            |yes            |`"-4.0702446"`                     | longitude in decimal degrees of the sample origin
+  |altitude           |`numeric`            |yes            |`"50"`                             | altitude in m above see level 
+  |doi                |`string`             |yes            |`"10.1016/j.radmeas.2017.02.003"`  | valid DOI with further information on the sample, if applicable            
 
+  Table: Mandatory attributes `<sample>` node
 
 ### Example 
 
 ```{r, engine='bash', eval = FALSE}
-<Sample state="finished" parentID="0" name="TL spectra Feldspar" user="" 
-    startDate="20131007145455" sampleCarrier="" leXLUMID="11-re-01-0006" 
-    lexStudioVersion="Lexstudio 2beta 0.15.0" 
-    firmwareVersion="unknown" os="Microsoft Windows NT 6.1.7601 Service Pack 1" comment="">
+<sample name="LUM-21321" mineral="quartz" latitude="52.4091392" longitude="-4.0702446"
+ altitude="50" doi="10.1016/j.radmeas.2017.02.003">
+  <sequence ...>
+    <record ...>
+     <curve ...>
+      {...}
+     </curve>
+     {...}
+    </record>
     {...}
-</Sequence>
+  </sequence>
+  {...}
+</sample>
 ```
 
 ## The `<xlum>` level 
 
-The `<xlum>` is the format parent node 
+The `<xlum>` is the format parent node and it can contain an infinite number
+of samples. Only this level allows to set a licence for the distribution 
+and usage of the data. All data within a particular `<xlum>` are considered
+distributed under the licence. You have to create new instances of the `<xlum>` 
+to set different licences. 
 
 ### Attributes
 
-|Identifier   |Type           |Allows `NA`? |Example                |Information   |
-|:------------|:--------------|:---------|:-------------------------|:--------------|
-xml:lang      |`string'`      |no        |: *predefined*            | ISO 639-1 language code, must not be changed
-version       |`numeric`      |no        |`"1.0"`                   | The `xlum` format version number relevant |
-flavour       |`string`       |no        |`"generic"`               | Allows to specify a particular flavour of the format
-author        |`list(string)` |yes       |`"Max Planck; Marie Curie"` | Names of the author(s) of this dataset
-license       |`string`       |yes       |`"CC BY 4.0"`               | License for the distribution of the dataset.
-doi           |`string`       |yes       |`"10.5281/zenodo.596252"`   | A digital document identifier referencing the dataset already archive in a data repository
+  |Identifier   |Type           |Allows `NA`? |Example                  |Information   |
+  |:------------|:--------------|:---------|:---------------------------|:--------------|
+  xml:lang      |`string'`      |no        |: *predefined*              | ISO 639-1 language code, must not be changed
+  version       |`numeric`      |no        |`"1.0"`                     | the `xlum` format version number relevant |
+  flavour       |`string`       |no        |`"generic"`                 | allows to specify a particular flavour of the format
+  author        |`list(string)` |yes       |`"Max Planck; Marie Curie"` | names of the author(s) of this dataset
+  license       |`string`       |yes       |`"CC BY 4.0"`               | license for the distribution of the dataset.
+  doi           |`string`       |yes       |`"10.5281/zenodo.596252"`   | A digital document identifier referencing the dataset already archive in a data repository
+
+  Table: Mandatory attributes of `<xlum>` node
+  
+
+|`licence`            | Licence name  |Reference            |Comment            |
+|:--------------------|:--------------|:--------------------|:------------------|
+`"CC BY 4.0"`         |Creative commons| https://creativecommons.org | all flavours of the creative commons license scheme
+`"Copyright"`         |Copyright protected | -            | data are copyright protected and cannot be used or distributed without the creator's agreement 
+
+Table: Allowed `licence` types 
 
 
 ### Example
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-<xlum xml:lang="en" formatVersion="1.0" flavour="generic" author="Marie Curie" 
+<xlum xml:lang="en" formatVersion="1.0" flavour="generic" author="Marie Curie; Max Planck" 
   license="CC BY 4.0" doi="NA">
+  <sample ...>
+    <sequence ...>
+      <record ...>
+        <curve ...>
+         {...}
+        </curve>
+        {...}
+      </record>
+    </sequence>
+    {...}
+  </sample>
+  {...}
+</xlum>
 {...}
 ```
 
-## General parameters
+## General parameters (all nodes)
 
-There are a few parameters that are stored on every level.
+A few nodes are available on all node levels. There are mainly of technical 
+nature to ease the sequential of data storage during the measurement process.
 
-  |identifier   |data type / structure  | example                             |information      |
-  |------------ |-----------------------| ----------------------------------- |----------------------------------|
-  |state        |`enumeration`            | analyse of Hanburg/Germany/1989     |Values: {finished, recording, …} |
-  |parentID     |`number`                 | 201007145551910                     |ID of the parent node  |
-  |comment      |`String`                 | measurement to verify a assumtion   |   |
+  |Identifier    |Data type       |Allows `NA`?         |Example               |Information      |
+  |:-------------|:---------------|:--------------------|:---------------------|:----------------|
+  |state        |`string`         |yes                  |`"recording"`         |defines the state of the node; only used by equipment manufactures 
+  |parentID     |`number`         |yes                  |`"201007145551910"`   |unique identifying the parent node, the super node has the ID `0`, this is usually not needed but may help to store data |
+  |comment      |`String`         |yes                  |`"what a wonderful sample"`| comment field |
   
+  Table: Attributes valid in all nodes
+  
+# Special cases
+
+This section provides suggestions for attributes for particular types of measurements. 
+These attributes are not compulsory, but may be used for the sake of consistency. 
+
+Either way, these metadata must not be required to store and analyse the data!
+
 ## Pulsing data
 
-In measurements with pulsed light stimulation, multiple detector curves might be stored per record, one for each (x) pulse(-s).
-The record contains some additional Metadata
+In measurements with pulsed light stimulation data processing usually requires 
+summations of photon counts on the hardware level, because it is neither meaningful 
+nor feasible to store every single count in separate curves for photon arrival 
+times of $10^{-6} \leq \tau \leq 10^{-3}$ s. Hence, multiple detector `<curve>` data may be stored per `<record>`, 
+one for each (x) pulse(-s). The `<record>` node  contains some additional metadata that may help 
+to understand the data and the undertaken processing on the hardware level better.
 
-  |identifier        | data type    |example    |information            |
-  |------------------| ------------ |---------- |---------------------------------------|
-  |OnTime           |  `number`      | 1E-01     | on time of stimulation per pulse, [s]     |
-  |OffTime          |  `number`      |  1E-01   |   on time of stimulation per pulse, [s]    |
-  |NrPulses         |  `number`      |  10      |   number of stimulation pulses total     |
-  |Summations       |  `number`     |  2        |  how many consecutive pulse records are summated (e.g. 10 pulses, 2 summations -> 5 records) |
-  |ChannelsPerPulse |  `number`     |  1000      | number of channels that are recorded in one curve      |
-  |CountsNormalized  | `number`      | 1        |  if not 0, counts per channel are normalized to counts per second (helpful with uneven distributed channel times) |
+  |Identifier        | Data type    |Example    |Information            |
+  |:-----------------|:-------------|:----------|:----------------------|
+  |onTime            |`numeric`     |`"1E-01"` | on time of stimulation per pulse, [s]     |
+  |offTime           |`numeric`     |`"1E-01"` | on time of stimulation per pulse, [s]    |
+  |nPulses           |`numeric`     |`"10"`     | number of stimulation pulses total     |
+  |summations        |`numeric`     |`"2"`     | how many consecutive pulse records are summed (e.g. 10 pulses, 2 summations -> 5 records) |
+  |channelsPerPulse  |`numeric`     |`"1000"`   | number of channels that are recorded in one curve      |
+  |countsNormalized  |`numeric`     |`"1"`    |  if not 0, counts per channel are normalized to counts per second (helpful with uneven distributed channel times) |
+  
+  Table: Additional metadata `<record>` node pulsing data
   
 Also the curves contain additional metadata
 
-  |identifier         |data type   | example    |information |
-  |------------------ |------------| ---------- |---------------------------------------|
-  |PulseNr            |`number`      |1          | current Pulse |
+  |Identifier         |Data type   |Example    |Information |
+  |:------------------|:-----------|:----------|:---------------------------------------|
+  |pulseID            |`numeric`   |`"1"`     | current pulse number |
   
-Pulsing Curves typically contain value pairs of channel time in microseconds and counts, see curveDescripter.
+  Table: Additional metadata `<curve>` node pulsing data
+  
 
-# Practical guidlines
+# Pratical examples
 
-An import function must not crash parsing the following minimal example.
+This section contains detailed examples for particular curve types in order 
+to provide usuable examples for the data format. 
+
+tbc.
 
 ```{xml, engine='bash', eval = FALSE, tidy=FALSE}
 <?xml version="1.0" encoding="utf-8"?>
