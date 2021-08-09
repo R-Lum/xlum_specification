@@ -242,7 +242,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">XLUM-file format Documentation</h1>
 <h4 class="author">Sebastian Kreutzer, Steve Grehl, Michael Höhne,…&lt;further authors&gt;</h4>
-<h4 class="date">version: 1.0 [2021-08-02]</h4>
+<h4 class="date">version: 1.0 [2021-08-09]</h4>
 
 </div>
 
@@ -251,10 +251,11 @@ div.tocify {
 <h1><span class="header-section-number">1</span> Motivation and principles</h1>
 <p>This document details the <code>XLUM</code> format, an XML based file format for long-term data preservation and exchange of luminescence data. The format is readable by humans and machines, and the data can be easily checked with any text reader on any major operating system. This design allows a platform-independent operation. The following documentation provides essential information on the file <code>XLUM</code> format and accounts for the needs for individual flexible data analysis, even with
 self-written software applications.</p>
-<p>Two simple design principles underpin the format specification:</p>
+<p>Three simple design principles underpin the format specification:</p>
 <ul>
 <li>Stored are data recorded over <strong>time</strong> or time derived instances,</li>
-<li>stored are data on a technical component level.</li>
+<li>stored are data on a technical component level,</li>
+<li>data stored in a file are self-consistent.</li>
 </ul>
 </div>
 <div id="general-description" class="section level1" number="2">
@@ -368,8 +369,8 @@ components and not processed quantities.</p>
 <div id="value-storage" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Value storage</h3>
 <p>Values in the <code>&lt;curve&gt;</code> node are stored comma separated. <strong>Only quantities detected
-by a detector/sensor are stored in this node.</strong> Figure <a href="#fig:fig1">3.1</a> shows three types
-of (luminescence) detectors, distinguished by their capacity to record spatially resolved information.
+by a detector/sensor are stored in this node.</strong> This includes simulated values.
+Figure <a href="#fig:fig1">3.1</a> shows three types of (luminescence) detectors, distinguished by their capacity to record spatially resolved information.
 Regardless of the detector, recorded quantities are stored in the <code>&lt;curve&gt;</code> node
 separated by a comma. Example:</p>
 <pre class="bash"><code>&lt;curve&gt;59.5167,109.5164,149.7003,109.5170,156.2654&lt;/curve&gt;</code></pre>
@@ -587,7 +588,8 @@ start of the parent <code>&lt;record&gt;</code> node.</p>
 <h2><span class="header-section-number">3.2</span> The <code>&lt;record&gt;</code> level</h2>
 <p>A <code>&lt;record&gt;</code> defines one process involving many components, hence <code>&lt;record&gt;</code> may
 contain <span class="math inline">\(1\leq n\leq Inf; n \in \mathbb{Z}\)</span> <code>&lt;curve&gt;</code> nodes. A record can also be understood
-as one step in a measurement sequence, e.g., a TL measurement.</p>
+as one step in a measurement sequence, e.g., a TL measurement. All curves within the record should have been
+detected within the same time frame defined through the attributes <code>&lt;startDate&gt;</code> and <code>&lt;endDate&gt;</code>.</p>
 <div id="attributes" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Attributes</h3>
 <table>
@@ -631,6 +633,20 @@ as one step in a measurement sequence, e.g., a TL measurement.</p>
 <td align="left">valid values according the <code>recordType</code> table</td>
 </tr>
 <tr class="even">
+<td align="left">description</td>
+<td align="left"><code>string</code></td>
+<td align="left">yes</td>
+<td align="left"><code>&quot;green stimulated luminescence&quot;</code></td>
+<td align="left">allows a longer description of the record</td>
+</tr>
+<tr class="odd">
+<td align="left">comment</td>
+<td align="left"><code>string</code></td>
+<td align="left">yes</td>
+<td align="left"><code>&quot;measured with joy&quot;</code></td>
+<td align="left">free text field for additional comments on the record</td>
+</tr>
+<tr class="even">
 <td align="left">sequenceStepNumber</td>
 <td align="left"><code>integer</code></td>
 <td align="left">yes</td>
@@ -647,7 +663,10 @@ as one step in a measurement sequence, e.g., a TL measurement.</p>
 </tbody>
 </table>
 <p>The <code>recordType</code> names are not carved in stone, but should be chosen to best describe a record in one
-word or using an accepted abbreviation (e.g., OSL for optically stimulated luminescence).</p>
+word or using an accepted abbreviation (e.g., OSL for optically stimulated luminescence).
+However, it is important to keep in mind that the <code>recordType</code> makes <strong>no</strong> claim on the technical
+components involved, but is solely set to ease the understanding of the record. The hard
+physical information a stored in the <code>&lt;curve&gt;</code> node.</p>
 <table>
 <caption>Valid <code>recordTypes</code></caption>
 <thead>
@@ -683,19 +702,51 @@ word or using an accepted abbreviation (e.g., OSL for optically stimulated lumin
 </tr>
 <tr class="odd">
 <td align="left"><code>&quot;TL&quot;</code></td>
-<td align="left">thermoluminescense measurement</td>
+<td align="left">thermoluminescence measurement</td>
+</tr>
+<tr class="even">
+<td align="left"><code>&quot;ITL&quot;</code></td>
+<td align="left">Isothermal luminescence</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>&quot;TM-OSL&quot;</code></td>
+<td align="left">thermally modulated luminescence</td>
 </tr>
 <tr class="even">
 <td align="left"><code>&quot;RF&quot;</code></td>
-<td align="left">radiofluorescense</td>
+<td align="left">radiofluorescence</td>
 </tr>
 <tr class="odd">
+<td align="left"><code>&quot;UV-RF&quot;</code></td>
+<td align="left">radiofluorescence with detection in the UV wavelength range</td>
+</tr>
+<tr class="even">
+<td align="left"><code>&quot;IR-RF&quot;</code></td>
+<td align="left">radiofluorescence with detection in the infrared wavelength range</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>&quot;IR-PL&quot;</code></td>
+<td align="left">infrared photoluminescence</td>
+</tr>
+<tr class="even">
 <td align="left"><code>&quot;OSL&quot;</code></td>
-<td align="left">optical stimulated luminescense</td>
+<td align="left">optically stimulated luminescence</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>&quot;GSL&quot;</code></td>
+<td align="left">green optically stimulated luminescence</td>
+</tr>
+<tr class="even">
+<td align="left"><code>&quot;VSL&quot;</code></td>
+<td align="left">violet optically stimulated luminescence</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>&quot;YSL&quot;</code></td>
+<td align="left">yellow optically stimulated luminescence</td>
 </tr>
 <tr class="even">
 <td align="left"><code>&quot;POSL&quot;</code></td>
-<td align="left">pulsed optical stimulated luminescense</td>
+<td align="left">pulsed optical stimulated luminescence</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>&quot;pause&quot;</code></td>
@@ -703,81 +754,78 @@ word or using an accepted abbreviation (e.g., OSL for optically stimulated lumin
 </tr>
 <tr class="even">
 <td align="left"><code>&quot;custom&quot;</code></td>
-<td align="left">any undefined or custom record type</td>
+<td align="left">any undefined or custom record type not listed above</td>
 </tr>
 </tbody>
 </table>
-<p>valid sampleConditions:</p>
+<p>valid entries for <code>sampleConditions</code> are:</p>
 <table>
+<caption>Valid values for <code>sampleConditions</code></caption>
 <thead>
 <tr class="header">
-<th>sampleConditions</th>
-<th>information</th>
+<th align="left"><code>sampleCondition</code></th>
+<th align="left">Information</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Natural</td>
-<td>Natural</td>
+<td align="left"><code>&quot;Natural&quot;</code></td>
+<td align="left">Natural</td>
 </tr>
 <tr class="even">
-<td>Natural+Dose</td>
-<td>Natural+Dose</td>
+<td align="left"><code>&quot;Natural+Dose&quot;</code></td>
+<td align="left">Natural+Dose</td>
 </tr>
 <tr class="odd">
-<td>Bleach</td>
-<td>Bleach</td>
+<td align="left"><code>&quot;Bleach&quot;</code></td>
+<td align="left">Bleach</td>
 </tr>
 <tr class="even">
-<td>Bleach+Dose</td>
-<td>Bleach+Dose</td>
+<td align="left"><code>&quot;Bleach+Dose&quot;</code></td>
+<td align="left">Bleach+Dose</td>
 </tr>
 <tr class="odd">
-<td>Nat.(Bleach)</td>
-<td>Nat.(Bleach)</td>
+<td align="left"><code>&quot;Nat.(Bleach)&quot;</code></td>
+<td align="left">Nat.(Bleach)</td>
 </tr>
 <tr class="even">
-<td>Nat.+Dose(Bleach)</td>
-<td>Nat.+Dose(Bleach)</td>
+<td align="left"><code>&quot;Nat.+Dose(Bleach)&quot;</code></td>
+<td align="left">Nat.+Dose(Bleach)</td>
 </tr>
 <tr class="odd">
-<td>Dose</td>
-<td>Dose</td>
+<td align="left"><code>&quot;Dose&quot;</code></td>
+<td align="left">Dose</td>
 </tr>
 <tr class="even">
-<td>Background</td>
-<td>Background</td>
+<td align="left"><code>&quot;Background&quot;</code></td>
+<td align="left">Background</td>
 </tr>
 </tbody>
 </table>
+<p><em>Please note that the attribute <code>sampleCondition</code> is of informative nature, accounting
+for information stored in BIN/BINX-files. The field can be set to <code>NA</code>.</em></p>
 </div>
 <div id="example-1" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Example</h3>
-<p>All curves within the record should have been detected within the same
-time frame. An example is given in listing</p>
+<p>The following examples consists of two records.</p>
 <pre class="bash"><code>{...}
-&lt;Sequence name=&quot;SAR OSL CW&quot;&gt;
-      {...}
-      &lt;Record startDate=&quot;20130214225935&quot; endDate=&quot;20130214230124&quot;
-       recordType=&quot;OSL&quot; name=&quot;green OSL CW&quot; comment=&quot;standard OSL curve for Le and Ne&quot;
-      &gt;
-    &lt;Curve {...}&gt;
-      {...}
-        &lt;/Curve&gt;
-        &lt;Curve {...}&gt;
+    &lt;record startDate=&quot;2021-02-14T22:59:35.0z&quot; endDate=&quot;2021-02-14T23:10:00.0z&quot;
+       recordType=&quot;GSL&quot; description=&quot;green OSL CW&quot; comment=&quot;standard green OSL step&quot;
+       sequenceStepNumber=&quot;1&quot; sampleCondition=&quot;NA&quot;&gt;
+      &lt;curve {...}&gt;
+        {...}
+      &lt;/curve&gt;
+      &lt;curve {...}&gt;
+        {...}
+      &lt;/curve&gt;
+    &lt;/record&gt;
+    &lt;record startDate=&quot;2021-02-14T23:10:10.0z&quot; endDate=&quot;2021-02-14T23:20:00.0z&quot;
+       recordType=&quot;bleach&quot; description=&quot;bleaching with solar simulator&quot; comment=&quot;NA&quot;
+       sequenceStepNumber=&quot;2&quot; sampleCondition=&quot;NA&quot;&gt;
+        &lt;curve {...}&gt;
           {...}
-        &lt;/Curve&gt;
-    {...}
-      &lt;/Record&gt;
-      &lt;Record startDate=&quot;20130214230132&quot; endDate=&quot;20130222013020&quot;
-       recordType=&quot;bleach&quot; name=&quot;bleaching&quot;
-      &gt;
-        &lt;Curve {...}&gt;
-          {...}
-        &lt;/Curve&gt;
-      &lt;/Record&gt;
-      {...}
-&lt;/Sequence&gt;
+        &lt;/curve&gt;
+    &lt;/record&gt;
 {...}</code></pre>
 </div>
 </div>

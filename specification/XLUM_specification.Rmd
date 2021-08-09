@@ -22,10 +22,11 @@ output:
 This document details the `XLUM` format, an XML based file format for long-term data preservation and exchange of luminescence data. The format is readable by humans and machines, and the data can be easily checked with any text reader on any major operating system. This design allows a platform-independent operation. The following documentation provides essential information on the file `XLUM` format  and accounts for the needs for individual flexible data analysis, even with 
 self-written software applications.
 
-Two simple design principles underpin the format specification:
+Three simple design principles underpin the format specification:
 
 * Stored are data recorded over **time** or time derived instances, 
-* stored are data on a technical component level.
+* stored are data on a technical component level, 
+* data stored in a file are self-consistent.
 
 # General description
 
@@ -95,8 +96,8 @@ components and not processed quantities.
 ### Value storage
 
 Values in the `<curve>` node are stored comma separated. **Only quantities detected
-by a detector/sensor are stored in this node.** Figure \@ref(fig:fig1) shows three types
-of (luminescence) detectors, distinguished by their capacity to record spatially resolved information. 
+by a detector/sensor are stored in this node.** This includes simulated values. 
+Figure \@ref(fig:fig1) shows three types of (luminescence) detectors, distinguished by their capacity to record spatially resolved information. 
 Regardless of the detector, recorded quantities are stored in the `<curve>` node 
 separated by a comma. Example: 
 
@@ -196,7 +197,8 @@ start of the parent `<record>` node.
 
 A `<record>` defines one process involving many components, hence `<record>` may 
 contain $1\leq n\leq Inf; n \in \mathbb{Z}$ `<curve>` nodes.  A record can also be understood 
-as one step in a measurement sequence, e.g., a TL measurement. 
+as one step in a measurement sequence, e.g., a TL measurement. All curves within the record should have been 
+detected within the same time frame defined through the attributes `<startDate>` and `<endDate>`.
 
 ### Attributes
 
@@ -205,13 +207,18 @@ as one step in a measurement sequence, e.g., a TL measurement.
   |startDate           | `date`        |no           |`"2021-07-14T22:59:35.0Z"`     | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time. Time when the record starts |
   |endDate             |`date`         |no          |  `"2021-07-14T22:59:35.0Z"`     | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time. Time when this measurement step was finished |
   |recordType          |`string`       |no          |  `"TL"`                  |  valid values according the `recordType` table                 |
+  |description         |`string`       |yes         | `"green stimulated luminescence"` | allows a longer description of the record |
+  |comment             |`string`       |yes         | `"measured with joy"`    | free text field for additional comments on the record |
   |sequenceStepNumber  |`integer`      |yes         |  `5`                     |  index in the sequence     |
-  |sampleCondition     |`string`       |yes         |  dose                    | valid values according to the table below   |
+  |sampleCondition     |`string`       |yes         |  dose                    | valid values according to the table below |
   
   Table: Allowed attributes for `<record>` node.
 
 The `recordType` names are not carved in stone, but should be chosen to best describe a record in one
 word or using an accepted abbreviation (e.g., OSL for optically stimulated luminescence). 
+However, it is important to keep in mind that the `recordType` makes **no** claim on the technical 
+components involved, but is solely set to ease the understanding of the record. The hard 
+physical information a stored in the `<curve>` node.
 
   |`recordType`          | Information      |
   |:---------------------|:----------------------------------------|
@@ -221,75 +228,86 @@ word or using an accepted abbreviation (e.g., OSL for optically stimulated lumin
   |`"heating"`           | any kind for heating without signal detection       |
   |`"spectrometer"`      | spectrometer                            |
   |`"camera"`            | camera, e.g. any kind of imaging other than spectrometry      |
-  |`"TL"`                | thermoluminescense measurement                     | 
-  |`"RF"`                | radiofluorescense                                  |
-  |`"OSL"`               | optical stimulated luminescense                    |
-  |`"POSL"`              | pulsed optical stimulated luminescense               |
+  |`"TL"`                | thermoluminescence measurement                     | 
+  |`"ITL"`               | Isothermal luminescence                  | 
+  |`"TM-OSL"`            | thermally modulated luminescence                 |
+  |`"RF"`                | radiofluorescence                                  |
+  |`"UV-RF"`             | radiofluorescence with detection in the UV wavelength range    |
+  |`"IR-RF"`             | radiofluorescence with detection in the infrared wavelength range    |
+  |`"IR-PL"`             | infrared photoluminescence    |
+  |`"OSL"`               | optically stimulated luminescence                    |
+  |`"GSL"`               | green optically stimulated luminescence                    |
+  |`"VSL"`               | violet optically stimulated luminescence                    |
+  |`"YSL"`               | yellow optically stimulated luminescence                    |
+  |`"POSL"`              | pulsed optical stimulated luminescence               |
   |`"pause"`             | pause     |
-  |`"custom"`            | any undefined or custom record type      |
+  |`"custom"`            | any undefined or custom record type  not listed above   |
   
   Table: Valid `recordTypes`
 
-valid sampleConditions:
+valid entries for  `sampleConditions` are:
 
-  |sampleConditions   |  information        |
-  |-------------------| --------------------|
-  |Natural            | Natural          |
-  |Natural+Dose       |Natural+Dose     |
-  |Bleach             |  Bleach  |
-  |Bleach+Dose        |  Bleach+Dose  |
-  |Nat.(Bleach)       |  Nat.(Bleach)  |
-  |Nat.+Dose(Bleach)  |  Nat.+Dose(Bleach) |
-  |Dose               |  Dose  |
-  |Background         |  Background |
-
+  |`sampleCondition`   |  Information        |
+  |:-------------------|:--------------------|
+  |`"Natural"`            | Natural          |
+  |`"Natural+Dose"`       |Natural+Dose     |
+  |`"Bleach"`             |  Bleach  |
+  |`"Bleach+Dose"`        |  Bleach+Dose  |
+  |`"Nat.(Bleach)"`       |  Nat.(Bleach)  |
+  |`"Nat.+Dose(Bleach)"`  |  Nat.+Dose(Bleach) |
+  |`"Dose"`               |  Dose  |
+  |`"Background"`         |  Background |
+  
+  Table: Valid values for `sampleConditions`
+  
+*Please note that the attribute `sampleCondition` is of informative nature, accounting
+for information stored in BIN/BINX-files. The field can be set to `NA`.*
 
 ### Example 
-All curves within the record should have been detected within the same
-time frame. An example is given in listing
+
+The following examples consists of two records. 
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-<Sequence name="SAR OSL CW">
-      {...}
-      <Record startDate="20130214225935" endDate="20130214230124"
-       recordType="OSL" name="green OSL CW" comment="standard OSL curve for Le and Ne"
-      >
-    <Curve {...}>
-      {...}
-        </Curve>
-        <Curve {...}>
+    <record startDate="2021-02-14T22:59:35.0z" endDate="2021-02-14T23:10:00.0z"
+       recordType="GSL" description="green OSL CW" comment="standard green OSL step"
+       sequenceStepNumber="1" sampleCondition="NA">
+      <curve {...}>
+        {...}
+      </curve>
+      <curve {...}>
+        {...}
+      </curve>
+    </record>
+    <record startDate="2021-02-14T23:10:10.0z" endDate="2021-02-14T23:20:00.0z"
+       recordType="bleach" description="bleaching with solar simulator" comment="NA"
+       sequenceStepNumber="2" sampleCondition="NA">
+        <curve {...}>
           {...}
-        </Curve>
-    {...}
-      </Record>
-      <Record startDate="20130214230132" endDate="20130222013020"
-       recordType="bleach" name="bleaching"
-      >
-        <Curve {...}>
-          {...}
-        </Curve>
-      </Record>
-      {...}
-</Sequence>
+        </curve>
+    </record>
 {...}
 ```
 
 ## The `<sequence>` level
 
-A sequence describes multiple measurements sequential used at one
-aliquot. The first step often is the unloading of a probe from the
-storage, and the last to transfer the probe back.
+A sequence describes multiple measurements sequentially used at **one** aliquot, 
+for instance as cup/disc with multiple grains or a single grain. Naturally the
+information stored an that level can be very verbose, so the attributes 
+are limited to a meaningful minimum. 
 
 ### Attributes
 
-  |identifier     |data type / structure  | example                  | information        |
-  |-------------- |-----------------------| -------------------------| -----------------------------------|
-  |position       |`number`                 | 42                      |  position in the sample wheel |
-  |creationDate   |`Date`                   | 20130214100242          |  date when this sequence was created |
-  |name           |`String`                 | SAR OSL CW - derivative  | user name for this sequence |
-  |protocol       |`String`                 | SAR OSL CW              |  name of the protocol used |
-  |mineral        |`String`                 | aluminium oxide         |  name of the substance used  |
+  |Identifier     |Type         |  Allows `NA`?    |  Example                | Information        |
+  |:------------- |:------------|:-----------------|:------------------------|:-------------------|
+  |startDate      |`Date`       |no                |`"2021-08-14T22:59:35.0Z`| start date of the sequence (can be identical with first `<record>` and `<curve>` entry)
+  |position       |`numeric`    |no                |`"42"`                   | position of aliquot in the reader, can be `1` in case samples are changed manually |
+  |name           |`string`     |yes               |`"SAR measurement"`      | name of the sequence |
+  |fileName       |`string`     |yes               |`"SAR_OSL.seq"`          | sequence file so far applicable |
+  |software       |`string`     |yes               |`"Sequence Editor 4.4"`  | software used to write the sequence if applicable |
+  |comment        |`String`     |yes                |`"just a test sequence"` | any comment on the sequence  |
+  
+  Table: Mandatory attributes `<sequence>` node
 
 In the luminescence context a sequence can fit a SAR protocol. It is
 defined that all measurements hold by one sequence are made with one
