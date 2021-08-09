@@ -468,7 +468,7 @@ Also the curves contain additional metadata
 # Pratical examples
 
 This section contains detailed examples for particular curve types in order 
-to provide usuable examples for the data format. 
+to provide usable examples for the data format. 
 
 tbc.
 
