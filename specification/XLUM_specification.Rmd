@@ -5,9 +5,9 @@ date: "version: 1.0 [`r Sys.Date()`]"
 output:
   # word_document:
   #   toc: yes
-  # bookdown::pdf_document2:
-  #    toc: yes
-  #    number_sections: true
+  bookdown::pdf_document2:
+     toc: yes
+     number_sections: true
   bookdown::html_document2: 
      theme: simplex
      toc: yes
