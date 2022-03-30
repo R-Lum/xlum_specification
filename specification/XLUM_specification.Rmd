@@ -2,12 +2,14 @@
 title: "XLUM-file format Documentation"
 author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne,...\\<further authors\\>"
 date: "version: 1.0 [`r Sys.Date()`]"
+params: 
+  output_format: "all"
 output:
   # word_document:
   #   toc: yes
-  bookdown::pdf_document2:
-     toc: yes
-     number_sections: true
+  # bookdown::pdf_document2:
+  #    toc: yes
+  #    number_sections: true
   bookdown::html_document2: 
      theme: simplex
      toc: yes
@@ -316,6 +318,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.
 ### Example
 
 ```{r, engine='bash', eval = FALSE}
+{...}
 <sequence starteDate="2021-08-14T22:59:35.0Z", position="1" name="SAR measuremt"
  fileName="Testsequence.seq" software="LexStudio 2, 2.37">
   <record ...>
@@ -326,6 +329,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.
   </record>
   {...}
 </sequence>
+{...}
 ```
 
 ## The `<sample>` level
@@ -349,19 +353,21 @@ level may contain an infinite number of sequences measured for one sample.
 ### Example 
 
 ```{r, engine='bash', eval = FALSE}
-<sample name="LUM-21321" mineral="quartz" latitude="52.4091392" longitude="-4.0702446"
- altitude="50" doi="10.1016/j.radmeas.2017.02.003">
-  <sequence ...>
-    <record ...>
-     <curve ...>
+{...}
+  <sample name="LUM-21321" mineral="quartz" latitude="52.4091392" longitude="-4.0702446"
+   altitude="50" doi="10.1016/j.radmeas.2017.02.003">
+    <sequence ...>
+      <record ...>
+       <curve ...>
+        {...}
+       </curve>
+       {...}
+      </record>
       {...}
-     </curve>
-     {...}
-    </record>
+    </sequence>
     {...}
-  </sequence>
-  {...}
-</sample>
+  </sample>
+{...}
 ```
 
 ## The `<xlum>` level 
@@ -470,16 +476,17 @@ Also the curves contain additional metadata
 This section contains detailed examples for particular curve types in order 
 to provide usable examples for the data format. 
 
-tbc.
-
 ```{xml, engine='bash', eval = FALSE, tidy=FALSE}
-<?xml version="1.0" encoding="utf-8"?>
-<Sample>
-  <Sequence>
-    <Record>
-      <Curve>
-      </Curve>
-    </Record>
-  </Sequence>
-</Sample>
+<?xml version="1.0" encoding="utf-8">
+<xlum version="1.0" flavour="xlum" doiRef="">
+ <sample ...>
+  <sequence ...>
+   <record ...>
+    <curve ...>
+     12,23,23,23,13,23
+    </curve>
+   </record>
+  </sequence>
+ </sample>
+</xlum>
 ```
