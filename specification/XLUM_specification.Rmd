@@ -382,7 +382,8 @@ to set different licences.
 
   |Identifier   |Type           |Allows `NA`? |Example                  |Information   |
   |:------------|:--------------|:---------|:---------------------------|:--------------|
-  lang          |`string`      |no        |: *predefined*              | ISO 639-1 language code, must not be changed
+  xmlns         |`namespace`    |no       | *predefined*               | Format specific namespace
+  lang          |`string`      |no        | *predefined*              | ISO 639-1 language code, must not be changed
   version       |`numeric`      |no        |`"1.0"`                     | the `xlum` format version number relevant |
   flavour       |`string`       |no        |`"generic"`                 | allows to specify a particular flavour of the format
   author        |`list(string)` |yes       |`"Max Planck; Marie Curie"` | names of the author(s) of this dataset
@@ -404,7 +405,7 @@ Table: Allowed `licence` types
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-<xlum lang="en" formatVersion="1.0" flavour="generic" author="Marie Curie; Max Planck" 
+<xlum xmlns:xlum="xlum.org" lang="en" formatVersion="1.0" flavour="generic" author="Marie Curie; Max Planck" 
   license="CC BY 4.0" doi="NA">
   <sample ...>
     <sequence ...>

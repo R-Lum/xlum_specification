@@ -2316,41 +2316,48 @@ to set different licences.</p>
 </thead>
 <tbody>
 <tr class="odd">
+<td align="left">xmlns</td>
+<td align="left"><code>namespace</code></td>
+<td align="left">no</td>
+<td align="left"><em>predefined</em></td>
+<td align="left">Format specific namespace</td>
+</tr>
+<tr class="even">
 <td align="left">lang</td>
 <td align="left"><code>string</code></td>
 <td align="left">no</td>
-<td align="left">: <em>predefined</em></td>
+<td align="left"><em>predefined</em></td>
 <td align="left">ISO 639-1 language code, must not be changed</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">version</td>
 <td align="left"><code>numeric</code></td>
 <td align="left">no</td>
 <td align="left"><code>&quot;1.0&quot;</code></td>
 <td align="left">the <code>xlum</code> format version number relevant</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">flavour</td>
 <td align="left"><code>string</code></td>
 <td align="left">no</td>
 <td align="left"><code>&quot;generic&quot;</code></td>
 <td align="left">allows to specify a particular flavour of the format</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">author</td>
 <td align="left"><code>list(string)</code></td>
 <td align="left">yes</td>
 <td align="left"><code>&quot;Max Planck; Marie Curie&quot;</code></td>
 <td align="left">names of the author(s) of this dataset</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">license</td>
 <td align="left"><code>string</code></td>
 <td align="left">yes</td>
 <td align="left"><code>&quot;CC BY 4.0&quot;</code></td>
 <td align="left">license for the distribution of the dataset.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">doi</td>
 <td align="left"><code>string</code></td>
 <td align="left">yes</td>
@@ -2394,7 +2401,7 @@ to set different licences.</p>
 <div id="example-4" class="section level3" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> Example</h3>
 <pre class="bash"><code>{...}
-&lt;xlum lang=&quot;en&quot; formatVersion=&quot;1.0&quot; flavour=&quot;generic&quot; author=&quot;Marie Curie; Max Planck&quot; 
+&lt;xlum xmlns:xlum=&quot;xlum.org&quot; lang=&quot;en&quot; formatVersion=&quot;1.0&quot; flavour=&quot;generic&quot; author=&quot;Marie Curie; Max Planck&quot; 
   license=&quot;CC BY 4.0&quot; doi=&quot;NA&quot;&gt;
   &lt;sample ...&gt;
     &lt;sequence ...&gt;
