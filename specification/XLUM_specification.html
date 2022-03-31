@@ -1510,7 +1510,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">XLUM-file format Documentation</h1>
 <h4 class="author">Sebastian Kreutzer, Steve Grehl, Michael Höhne,…&lt;further authors&gt;</h4>
-<h4 class="date">version: 1.0 [2022-03-30]</h4>
+<h4 class="date">version: 1.0 [2022-03-31]</h4>
 
 </div>
 
@@ -1808,16 +1808,16 @@ relevance for the measurement of luminescence are suitable. Typical examples:</p
 <td align="left">SI unit or equivalent for t-values</td>
 </tr>
 <tr class="odd">
-<td align="left">[detectionWindow]</td>
+<td align="left">detectionWindow</td>
 <td align="left"><code>string</code></td>
-<td align="left">no</td>
+<td align="left">yes</td>
 <td align="left"><code>&quot;375&quot;</code></td>
 <td align="left">Centre wavelength if applicable. can be set to <code>NA</code></td>
 </tr>
 <tr class="even">
-<td align="left">[filter]</td>
+<td align="left">filter</td>
 <td align="left"><code>list</code> (<code>string</code>)</td>
-<td align="left">no</td>
+<td align="left">yes</td>
 <td align="left"><code>&quot;Hoya U340; Delta BP 365/50EX&quot;</code></td>
 <td align="left">Filter names separated by <code>;</code></td>
 </tr>
@@ -1831,7 +1831,7 @@ others are only meaningfully in combination. For instance, providing information
 a heating element.</p>
 <pre class="bash"><code>{...}
   &lt;curve component=&quot;heating element&quot; startDate=&quot;2021-02-14T225700.0Z&quot; curveType=&quot;predefined&quot; duaration=&quot;5&quot; 
-    offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; vLabel=&quot;temperature&quot; tValues=&quot;1,2,3,4,5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
+    offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1,2,3,4,5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
     tLabel=&quot;time&quot; vLabel=&quot;temperature&quot; xUnit=&quot;&quot; yUnit=&quot;&quot; vUnit=&quot;K&quot; tUnit=&quot;s&quot;&gt;
         293,303,313,323,333
   &lt;/curve&gt;
@@ -2075,8 +2075,8 @@ for information stored in BIN/BINX-files. The field can be set to <code>NA</code
 <p>The following examples consists of two records.</p>
 <pre class="bash"><code>{...}
     &lt;record startDate=&quot;2021-02-14T22:59:35.0z&quot; endDate=&quot;2021-02-14T23:10:00.0z&quot;
-       recordType=&quot;GSL&quot; description=&quot;green OSL CW&quot; comment=&quot;standard green OSL step&quot;
-       sequenceStepNumber=&quot;1&quot; sampleCondition=&quot;NA&quot;&gt;
+       recordType=&quot;GSL&quot; description=&quot;green OSL CW&quot; sequenceStepNumber=&quot;1&quot; 
+       sampleCondition=&quot;NA&quot;&gt;
       &lt;curve ...&gt;
         {...}
       &lt;/curve&gt;
@@ -2085,7 +2085,7 @@ for information stored in BIN/BINX-files. The field can be set to <code>NA</code
       &lt;/curve&gt;
     &lt;/record&gt;
     &lt;record startDate=&quot;2021-02-14T23:10:10.0z&quot; endDate=&quot;2021-02-14T23:20:00.0z&quot;
-       recordType=&quot;bleach&quot; description=&quot;bleaching with solar simulator&quot; comment=&quot;NA&quot;
+       recordType=&quot;bleach&quot; description=&quot;bleaching with solar simulator&quot; 
        sequenceStepNumber=&quot;2&quot; sampleCondition=&quot;NA&quot;&gt;
       &lt;curve ...&gt;
         {...}
@@ -2185,8 +2185,8 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.</p>
 <div id="example-2" class="section level3" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Example</h3>
 <pre class="bash"><code>{...}
-&lt;sequence starteDate=&quot;2021-08-14T22:59:35.0Z&quot;, position=&quot;1&quot; name=&quot;SAR measuremt&quot;
- fileName=&quot;Testsequence.seq&quot; software=&quot;LexStudio 2, 2.37&quot;&gt;
+&lt;sequence starteDate=&quot;2021-08-14T22:59:35.0Z&quot; position=&quot;1&quot; name=&quot;SAR measuremt&quot;
+ fileName=&quot;Testsequence.seq&quot; software=&quot;DeviceStudio, 2.37&quot;&gt;
   &lt;record ...&gt;
     &lt;curve ...&gt;
       {...}
@@ -2316,8 +2316,8 @@ to set different licences.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">xml:lang</td>
-<td align="left"><code>string&#39;</code></td>
+<td align="left">lang</td>
+<td align="left"><code>string</code></td>
 <td align="left">no</td>
 <td align="left">: <em>predefined</em></td>
 <td align="left">ISO 639-1 language code, must not be changed</td>
@@ -2394,7 +2394,7 @@ to set different licences.</p>
 <div id="example-4" class="section level3" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> Example</h3>
 <pre class="bash"><code>{...}
-&lt;xlum xml:lang=&quot;en&quot; formatVersion=&quot;1.0&quot; flavour=&quot;generic&quot; author=&quot;Marie Curie; Max Planck&quot; 
+&lt;xlum lang=&quot;en&quot; formatVersion=&quot;1.0&quot; flavour=&quot;generic&quot; author=&quot;Marie Curie; Max Planck&quot; 
   license=&quot;CC BY 4.0&quot; doi=&quot;NA&quot;&gt;
   &lt;sample ...&gt;
     &lt;sequence ...&gt;
@@ -2414,7 +2414,7 @@ to set different licences.</p>
 </div>
 <div id="general-parameters-all-nodes" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> General parameters (all nodes)</h2>
-<p>A few nodes are available on all node levels. There are mainly of technical
+<p>A few nodes are available on all node levels except the super node <code>&lt;xlum&gt;</code>. There are mainly of technical
 nature to ease the sequential of data storage during the measurement process.</p>
 <table>
 <caption>Attributes valid in all nodes</caption>
@@ -2560,8 +2560,8 @@ to understand the data and the undertaken processing on the hardware level bette
 <h1><span class="header-section-number">5</span> Pratical examples</h1>
 <p>This section contains detailed examples for particular curve types in order
 to provide usable examples for the data format.</p>
-<pre class="xml"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;&gt;
-&lt;xlum version=&quot;1.0&quot; flavour=&quot;xlum&quot; doiRef=&quot;&quot;&gt;
+<pre class="xml"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;xlum lang=&quot;en&quot; version=&quot;1.0&quot; flavour=&quot;xlum&quot; doiRef=&quot;&quot;&gt;
  &lt;sample ...&gt;
   &lt;sequence ...&gt;
    &lt;record ...&gt;

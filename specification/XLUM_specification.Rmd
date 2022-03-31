@@ -159,8 +159,8 @@ relevance for the measurement of luminescence are suitable. Typical examples:
   xUnit             | `string`   |yes            |`"nm"`                          | SI unit or equivalent for x-values                        |
   yUnit             | `string`   |yes            |`"px"`                          | SI unit or equivalent for y-values                        |
   tUnit             | `string`   |no             |`"s"`                           | SI unit or equivalent for t-values                        |
-  [detectionWindow] | `string`   |no             |`"375"`                         | Centre wavelength if applicable. can be set to `NA`    |
-  [filter]          | `list` (`string`) |no      |`"Hoya U340; Delta BP 365/50EX"`| Filter names separated by `;` |
+  detectionWindow | `string`   |yes             |`"375"`                         | Centre wavelength if applicable. can be set to `NA`    |
+  filter          | `list` (`string`) |yes      |`"Hoya U340; Delta BP 365/50EX"`| Filter names separated by `;` |
 
   Table: Specified curve attributes. Attributes in `[]` are optional, hence `NA` is not allowed.
 
@@ -173,7 +173,7 @@ a heating element.
 ```{r, engine='bash', eval = FALSE}
 {...}
   <curve component="heating element" startDate="2021-02-14T225700.0Z" curveType="predefined" duaration="5" 
-    offset="0" xValues="NA" yValues="NA" vLabel="temperature" tValues="1,2,3,4,5" xLabel="NA" yLabel="NA"
+    offset="0" xValues="NA" yValues="NA" tValues="1,2,3,4,5" xLabel="NA" yLabel="NA"
     tLabel="time" vLabel="temperature" xUnit="" yUnit="" vUnit="K" tUnit="s">
         293,303,313,323,333
   </curve>
@@ -271,8 +271,8 @@ The following examples consists of two records.
 ```{r, engine='bash', eval = FALSE}
 {...}
     <record startDate="2021-02-14T22:59:35.0z" endDate="2021-02-14T23:10:00.0z"
-       recordType="GSL" description="green OSL CW" comment="standard green OSL step"
-       sequenceStepNumber="1" sampleCondition="NA">
+       recordType="GSL" description="green OSL CW" sequenceStepNumber="1" 
+       sampleCondition="NA">
       <curve ...>
         {...}
       </curve>
@@ -281,7 +281,7 @@ The following examples consists of two records.
       </curve>
     </record>
     <record startDate="2021-02-14T23:10:10.0z" endDate="2021-02-14T23:20:00.0z"
-       recordType="bleach" description="bleaching with solar simulator" comment="NA"
+       recordType="bleach" description="bleaching with solar simulator" 
        sequenceStepNumber="2" sampleCondition="NA">
       <curve ...>
         {...}
@@ -319,8 +319,8 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-<sequence starteDate="2021-08-14T22:59:35.0Z", position="1" name="SAR measuremt"
- fileName="Testsequence.seq" software="LexStudio 2, 2.37">
+<sequence starteDate="2021-08-14T22:59:35.0Z" position="1" name="SAR measuremt"
+ fileName="Testsequence.seq" software="DeviceStudio, 2.37">
   <record ...>
     <curve ...>
       {...}
@@ -382,7 +382,7 @@ to set different licences.
 
   |Identifier   |Type           |Allows `NA`? |Example                  |Information   |
   |:------------|:--------------|:---------|:---------------------------|:--------------|
-  xml:lang      |`string'`      |no        |: *predefined*              | ISO 639-1 language code, must not be changed
+  lang          |`string`      |no        |: *predefined*              | ISO 639-1 language code, must not be changed
   version       |`numeric`      |no        |`"1.0"`                     | the `xlum` format version number relevant |
   flavour       |`string`       |no        |`"generic"`                 | allows to specify a particular flavour of the format
   author        |`list(string)` |yes       |`"Max Planck; Marie Curie"` | names of the author(s) of this dataset
@@ -404,7 +404,7 @@ Table: Allowed `licence` types
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-<xlum xml:lang="en" formatVersion="1.0" flavour="generic" author="Marie Curie; Max Planck" 
+<xlum lang="en" formatVersion="1.0" flavour="generic" author="Marie Curie; Max Planck" 
   license="CC BY 4.0" doi="NA">
   <sample ...>
     <sequence ...>
@@ -424,7 +424,7 @@ Table: Allowed `licence` types
 
 ## General parameters (all nodes)
 
-A few nodes are available on all node levels. There are mainly of technical 
+A few nodes are available on all node levels except the super node `<xlum>`. There are mainly of technical 
 nature to ease the sequential of data storage during the measurement process.
 
   |Identifier    |Data type       |Allows `NA`?         |Example               |Information      |
@@ -477,8 +477,8 @@ This section contains detailed examples for particular curve types in order
 to provide usable examples for the data format. 
 
 ```{xml, engine='bash', eval = FALSE, tidy=FALSE}
-<?xml version="1.0" encoding="utf-8">
-<xlum version="1.0" flavour="xlum" doiRef="">
+<?xml version="1.0" encoding="utf-8"?>
+<xlum lang="en" version="1.0" flavour="xlum" doiRef="">
  <sample ...>
   <sequence ...>
    <record ...>
