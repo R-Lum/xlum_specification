@@ -346,7 +346,7 @@ level may contain an infinite number of sequences measured for one sample.
   |latitude           |`numeric`            |yes            |`"52.4091392"`                     | latitude in decimal degrees of the sample origin
   |longitude          |`numeric`            |yes            |`"-4.0702446"`                     | longitude in decimal degrees of the sample origin
   |altitude           |`numeric`            |yes            |`"50"`                             | altitude in m above see level 
-  |doi                |`string`             |yes            |`"10.1016/j.radmeas.2017.02.003"`  | valid DOI with further information on the sample, if applicable            
+  |doi                |`anyURI`             |yes            |`"10.1016/j.radmeas.2017.02.003"`  | valid DOI with further information on the sample, if applicable            
 
   Table: Mandatory attributes `<sample>` node
 
@@ -388,7 +388,7 @@ to set different licences.
   flavour       |`string`       |no        |`"generic"`                 | allows to specify a particular flavour of the format
   author        |`list(string)` |yes       |`"Max Planck; Marie Curie"` | names of the author(s) of this dataset
   license       |`string`       |yes       |`"CC BY 4.0"`               | license for the distribution of the dataset.
-  doi           |`string`       |yes       |`"10.5281/zenodo.596252"`   | A digital document identifier referencing the dataset already archive in a data repository
+  doi           |`anyURI`       |yes       |`"10.5281/zenodo.596252"`   | A digital document identifier referencing the dataset already archive in a data repository
 
   Table: Mandatory attributes of `<xlum>` node
   
