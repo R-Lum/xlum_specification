@@ -77,7 +77,7 @@ A node has a name, attributes, and data stored in it. The data stored in the att
 
 # Detailed description
 
-## The `<curve>` level
+## The `<curve/>` level
 
 The `curve` level is the deepest node (leaf) and has no further sub-levels. 
 A curve holds the predefined/simulated or measured output of one single 
@@ -195,7 +195,7 @@ One curve is related to one technical device. To define a accurate time window,
 the parameters *duration* and *offset* should be used. These parameters are related to the 
 start of the parent `<record>` node.
 
-## The `<record>` level
+## The `<record/>` level
 
 A `<record>` defines one process involving many components, hence `<record>` may 
 contain $1\leq n\leq Inf; n \in \mathbb{Z}$ `<curve>` nodes.  A record can also be understood 
@@ -210,7 +210,7 @@ detected within the same time frame defined through the attributes `<startDate>`
   |endDate             |`dateTime`         |no          |  `"2021-07-14T22:59:35.0Z"`     | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time. Time when this measurement step was finished |
   |recordType          |`string`       |no          |  `"TL"`                  |  valid values according the `recordType` table                 |
   |description         |`string`       |yes         | `"green stimulated luminescence"` | allows a longer description of the record |
-  |sequenceStepNumber  |`integer`      |yes         |  `5`                     |  index in the sequence     |
+  |sequenceStepNumber  |`unsignedInt`      |yes         |  `5`                     |  index in the sequence     |
   |sampleCondition     |`string`       |yes         |  dose                    | valid values according to the table below |
   
   Table: Allowed attributes for `<record>` node.
@@ -290,7 +290,7 @@ The following examples consists of two records.
 {...}
 ```
 
-## The `<sequence>` level
+## The `<sequence/>` level
 
 A sequence describes multiple measurements sequentially used at **one** aliquot, 
 for instance as cup/disc with multiple grains or a single grain. Hence, another
@@ -370,7 +370,7 @@ level may contain an infinite number of sequences measured for one sample.
 {...}
 ```
 
-## The `<xlum>` level 
+## The `<xlum/>` level 
 
 The `<xlum>` is the format parent node and it can contain an infinite number
 of samples. Only this level allows to set a licence for the distribution 
