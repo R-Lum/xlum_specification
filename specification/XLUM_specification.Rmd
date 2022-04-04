@@ -97,14 +97,14 @@ components and not processed quantities.
 
 ### Value storage
 
-Values in the `<curve>` node are stored comma separated. **Only quantities detected
+Values in the `<curve>` node are stored white space separated. **Only quantities detected
 by a detector/sensor are stored in this node.** This includes simulated values. 
 Figure \@ref(fig:fig1) shows three types of (luminescence) detectors, distinguished by their capacity to record spatially resolved information. 
 Regardless of the detector, recorded quantities are stored in the `<curve>` node 
-separated by a comma. Example: 
+separated by white space. Example: 
 
 ```{r, engine='bash', eval = FALSE}
-<curve>59.5167,109.5164,149.7003,109.5170,156.2654</curve>
+<curve>59.5167 109.5164 149.7003 109.5170 156.2654</curve>
 ```
 
 Values in the node are real numbers (-1e-307 $\leqslant x \leqslant$ 1e+307; $x \in \mathbb{R}$).
@@ -148,9 +148,9 @@ relevance for the measurement of luminescence are suitable. Typical examples:
   curveType         | `string`   |no             |`"predefined"`                  | Values allowed are only `"predefined"` or `"measured"`    |
   duration          | `number`   |no             |`"20.000"`                      | Duration of the detection in seconds or a fraction of it|
   offset            | `number`   |no             |`"10.000"`                      | Before the detection starts in seconds or a fraction of it|
-  xValues           | `number`   |yes            |`"1.0,2.0,3.0"`                 | x-coordinate values of the detector                       |
-  yValues           | `number`   |yes            |`"1.0,2.0,3.0"`                 | y-coordinate values of detector                           |
-  tValues           | `number`   |no             |`"1.0,2.0,3.0"`                 | time values in seconds or fractions of it. Values must be positive|
+  xValues           | `number`   |yes            |`"1.0 2.0 3.0"`                 | x-coordinate values of the detector                       |
+  yValues           | `number`   |yes            |`"1.0 2.0 3.0"`                 | y-coordinate values of detector                           |
+  tValues           | `number`   |no             |`"1.0 2.0 3.0"`                 | time values in seconds or fractions of it. Values must be positive|
   vLabel            | `string`   |no             |`"Luminescence"`                | Measured physical quantity                                |
   xLabel            | `string`   |yes            |`"pixel"`                       | label of the x-coordinate values                          |
   yLabel            | `string`   |yes            |`"pixel"`                       | label of the y-coordinate values                          |  
@@ -173,20 +173,20 @@ a heating element.
 ```{r, engine='bash', eval = FALSE}
 {...}
   <curve component="heating element" startDate="2021-02-14T22:57:00.0Z" curveType="predefined" duaration="5" 
-    offset="0" xValues="NA" yValues="NA" tValues="1,2,3,4,5" xLabel="NA" yLabel="NA"
+    offset="0" xValues="NA" yValues="NA" tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
     tLabel="time" vLabel="temperature" xUnit="" yUnit="" vUnit="K" tUnit="s">
-        293,303,313,323,333
+        293 303 313 323 333
   </curve>
   <curve component="thermo couple" startDate="2021-02-14T22:57:00.0Z" curveType="measured" duaration="5" 
-    offset="0" xValues="NA" yValues="NA" tValues="1,2,3,4,5" xLabel="NA" yLabel="NA"
+    offset="0" xValues="NA" yValues="NA" tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
     vLabel="temperature" tLabel="time" xUnit="" yUnit="" vUnit="K" tUnit="s">
-        293,303,313,323,333
+        293 303 313 323 333
   </curve>
   <curve component="EMI 9123QB15" startDate="2021-02-14T22:57:00.0Z" curveType="measured" duaration="5" 
-    offset="0" xValues="NA" yValues="NA" tValues="1,2,3,4,5" xLabel="NA" yLabel="NA"
+    offset="0" xValues="NA" yValues="NA" tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
     vLabel="luminescence" tLabel="time" xUnit="" yUnit="" vUnit="cts" tUnit="s" 
     detectionWindow="380 nm" filter="Hoya U340 + Delta 365/40">
-        20,25,32,41,46
+        20 25 32 41 46
   </curve>
 {...}
 ```
@@ -484,7 +484,7 @@ to provide usable examples for the data format.
   <sequence ...>
    <record ...>
     <curve ...>
-     12,23,23,23,13,23
+     12 23 23 23 13 23
     </curve>
    </record>
   </sequence>
