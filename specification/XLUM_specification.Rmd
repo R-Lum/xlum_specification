@@ -144,7 +144,7 @@ relevance for the measurement of luminescence are suitable. Typical examples:
   |Identifier       |Type        |Allows `NA`?   |Example               |Information   |
   |:----------------|:-----------|:---------|:-------------------------|:---------------------|
   component         | `string`   |yes            |`"EMI 9235QB15"`     | name of the technical component. `NA` allowed only for `"predefined"` |
-  startDate         | `date`     |no             |`"2021-07-14T22:59:35.0Z"`      | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time |
+  startDate         | `dateTime`     |no             |`"2021-07-14T22:59:35.0Z"`  | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time |
   curveType         | `string`   |no             |`"predefined"`                  | Values allowed are only `"predefined"` or `"measured"`    |
   duration          | `number`   |no             |`"20.000"`                      | Duration of the detection in seconds or a fraction of it|
   offset            | `number`   |no             |`"10.000"`                      | Before the detection starts in seconds or a fraction of it|
@@ -172,17 +172,17 @@ a heating element.
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-  <curve component="heating element" startDate="2021-02-14T225700.0Z" curveType="predefined" duaration="5" 
+  <curve component="heating element" startDate="2021-02-14T22:57:00.0Z" curveType="predefined" duaration="5" 
     offset="0" xValues="NA" yValues="NA" tValues="1,2,3,4,5" xLabel="NA" yLabel="NA"
     tLabel="time" vLabel="temperature" xUnit="" yUnit="" vUnit="K" tUnit="s">
         293,303,313,323,333
   </curve>
-  <curve component="thermo couple" startDate="2021-02-14T225700.0Z" curveType="measured" duaration="5" 
+  <curve component="thermo couple" startDate="2021-02-14T22:57:00.0Z" curveType="measured" duaration="5" 
     offset="0" xValues="NA" yValues="NA" tValues="1,2,3,4,5" xLabel="NA" yLabel="NA"
     vLabel="temperature" tLabel="time" xUnit="" yUnit="" vUnit="K" tUnit="s">
         293,303,313,323,333
   </curve>
-  <curve component="EMI 9123QB15" startDate="2021-02-14T225700.0Z" curveType="measured" duaration="5" 
+  <curve component="EMI 9123QB15" startDate="2021-02-14T22:57:00.0Z" curveType="measured" duaration="5" 
     offset="0" xValues="NA" yValues="NA" tValues="1,2,3,4,5" xLabel="NA" yLabel="NA"
     vLabel="luminescence" tLabel="time" xUnit="" yUnit="" vUnit="cts" tUnit="s" 
     detectionWindow="380 nm" filter="Hoya U340 + Delta 365/40">
@@ -206,8 +206,8 @@ detected within the same time frame defined through the attributes `<startDate>`
 
   |Identifier          | Type          |Allows `NA`? | Example        |Information  |
   |:-------------------|:--------------|:------------|:---------------|:------------|
-  |startDate           | `date`        |no           |`"2021-07-14T22:59:35.0Z"`     | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time. Time when the record starts |
-  |endDate             |`date`         |no          |  `"2021-07-14T22:59:35.0Z"`     | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time. Time when this measurement step was finished |
+  |startDate           | `dateTime`        |no           |`"2021-07-14T22:59:35.0Z"`     | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time. Time when the record starts |
+  |endDate             |`dateTime`         |no          |  `"2021-07-14T22:59:35.0Z"`     | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time. Time when this measurement step was finished |
   |recordType          |`string`       |no          |  `"TL"`                  |  valid values according the `recordType` table                 |
   |description         |`string`       |yes         | `"green stimulated luminescence"` | allows a longer description of the record |
   |sequenceStepNumber  |`integer`      |yes         |  `5`                     |  index in the sequence     |
@@ -270,7 +270,7 @@ The following examples consists of two records.
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-    <record startDate="2021-02-14T22:59:35.0z" endDate="2021-02-14T23:10:00.0z"
+    <record startDate="2021-02-14T22:59:35.0Z" endDate="2021-02-14T23:10:00.0Z"
        recordType="GSL" description="green OSL CW" sequenceStepNumber="1" 
        sampleCondition="NA">
       <curve ...>
@@ -280,7 +280,7 @@ The following examples consists of two records.
         {...}
       </curve>
     </record>
-    <record startDate="2021-02-14T23:10:10.0z" endDate="2021-02-14T23:20:00.0z"
+    <record startDate="2021-02-14T23:10:10.0Z" endDate="2021-02-14T23:20:00.0Z"
        recordType="bleach" description="bleaching with solar simulator" 
        sequenceStepNumber="2" sampleCondition="NA">
       <curve ...>
@@ -303,7 +303,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.
 
   |Identifier     |Type         |  Allows `NA`?    |  Example                | Information        |
   |:------------- |:------------|:-----------------|:------------------------|:-------------------|
-  |startDate      |`Date`       |no                |`"2021-08-14T22:59:35.0Z`| start date of the sequence (can be identical with first `<record>` and `<curve>` entry)
+  |startDate      |`dateTime`       |no                |`"2021-08-14T22:59:35.0Z`| start date of the sequence (can be identical with first `<record>` and `<curve>` entry)
   |position       |`numeric`    |no                |`"42"`                   | position of aliquot in the reader, can be `1` in case samples are changed manually |
   |name           |`string`     |yes               |`"SAR measurement"`      | name of the sequence |
   |fileName       |`string`     |yes               |`"SAR_OSL.seq"`          | sequence file so far applicable |
