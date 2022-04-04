@@ -148,9 +148,9 @@ relevance for the measurement of luminescence are suitable. Typical examples:
   curveType         | `string`   |no             |`"predefined"`                  | Values allowed are only `"predefined"` or `"measured"`    |
   duration          | `number`   |no             |`"20.000"`                      | Duration of the detection in seconds or a fraction of it|
   offset            | `number`   |no             |`"10.000"`                      | Before the detection starts in seconds or a fraction of it|
-  xValues           | `number`   |yes            |`"1.0 2.0 3.0"`                 | x-coordinate values of the detector                       |
-  yValues           | `number`   |yes            |`"1.0 2.0 3.0"`                 | y-coordinate values of detector                           |
-  tValues           | `number`   |no             |`"1.0 2.0 3.0"`                 | time values in seconds or fractions of it. Values must be positive|
+  xValues           | `list` `unsignedInt`   |no            |`"1 2 3"`                 | x-coordinate values of the detector; `0` indicates that that this parameter is not used                       |
+  yValues           | `list` `unsignedInt`  |no            |`"1 2 3"`                 | y-coordinate values of detector; `0` indicates that that this parameter is not used                            |
+  tValues           | `list` `double`   |no             |`"1. 2.0 3.0"`                 | time values in seconds or fractions of it. Values must be positive|
   vLabel            | `string`   |no             |`"Luminescence"`                | Measured physical quantity                                |
   xLabel            | `string`   |yes            |`"pixel"`                       | label of the x-coordinate values                          |
   yLabel            | `string`   |yes            |`"pixel"`                       | label of the y-coordinate values                          |  
@@ -431,7 +431,7 @@ nature to ease the sequential of data storage during the measurement process.
   |Identifier    |Data type       |Allows `NA`?         |Example               |Information      |
   |:-------------|:---------------|:--------------------|:---------------------|:----------------|
   |state        |`string`         |yes                  |`"recording"`         |defines the state of the node; only used by equipment manufactures 
-  |parentID     |`number`         |yes                  |`"201007145551910"`   |unique identifying the parent node, the super node has the ID `0`, this is usually not needed but may help to store data |
+  |parentID     |`token`         |yes                  |`"201007145551910"`   |unique identifying the parent node, the super node has the ID `0`, this is usually not needed but may help to store data |
   |comment      |`String`         |yes                  |`"what a wonderful sample"`| comment field |
   
   Table: Attributes valid in all nodes

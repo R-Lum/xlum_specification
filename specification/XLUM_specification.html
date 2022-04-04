@@ -1614,7 +1614,7 @@ also allows custom file endings different from <code>*.xlum</code>.</p>
 <div id="detailed-description" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Detailed description</h1>
 <div id="the-curve-level" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> The <code>&lt;curve&gt;</code> level</h2>
+<h2><span class="header-section-number">3.1</span> The <code>&lt;curve/&gt;</code> level</h2>
 <p>The <code>curve</code> level is the deepest node (leaf) and has no further sub-levels.
 A curve holds the predefined/simulated or measured output of one single
 technical component. For example, a typical thermoluminescence measurement
@@ -1636,12 +1636,12 @@ the record contains one curve and three in case 2. Ideally, curves represent tec
 components and not processed quantities.</p>
 <div id="value-storage" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Value storage</h3>
-<p>Values in the <code>&lt;curve&gt;</code> node are stored comma separated. <strong>Only quantities detected
+<p>Values in the <code>&lt;curve&gt;</code> node are stored white space separated. <strong>Only quantities detected
 by a detector/sensor are stored in this node.</strong> This includes simulated values.
 Figure <a href="#fig:fig1">3.1</a> shows three types of (luminescence) detectors, distinguished by their capacity to record spatially resolved information.
 Regardless of the detector, recorded quantities are stored in the <code>&lt;curve&gt;</code> node
-separated by a comma. Example:</p>
-<pre class="bash"><code>&lt;curve&gt;59.5167,109.5164,149.7003,109.5170,156.2654&lt;/curve&gt;</code></pre>
+separated by white space. Example:</p>
+<pre class="bash"><code>&lt;curve&gt;59.5167 109.5164 149.7003 109.5170 156.2654&lt;/curve&gt;</code></pre>
 <p>Values in the node are real numbers (-1e-307 <span class="math inline">\(\leqslant x \leqslant\)</span> 1e+307; <span class="math inline">\(x \in \mathbb{R}\)</span>).
 Scientific ‘E’/‘e’ notations of numbers are explicitly allowed, example: 1e+2 for 100 or 1e-2 for 0.01.
 Decimal separator is a <code>.</code> (dot).</p>
@@ -1704,7 +1704,7 @@ relevance for the measurement of luminescence are suitable. Typical examples:</p
 </tr>
 <tr class="even">
 <td align="left">startDate</td>
-<td align="left"><code>date</code></td>
+<td align="left"><code>dateTime</code></td>
 <td align="left">no</td>
 <td align="left"><code>&quot;2021-07-14T22:59:35.0Z&quot;</code></td>
 <td align="left">ISO 8601-1:2019: <code>YYYY-MM-DDThh:mm:ss[.mmm]Z</code> recalculated to Zulu time</td>
@@ -1734,21 +1734,21 @@ relevance for the measurement of luminescence are suitable. Typical examples:</p
 <td align="left">xValues</td>
 <td align="left"><code>number</code></td>
 <td align="left">yes</td>
-<td align="left"><code>&quot;1.0,2.0,3.0&quot;</code></td>
+<td align="left"><code>&quot;1.0 2.0 3.0&quot;</code></td>
 <td align="left">x-coordinate values of the detector</td>
 </tr>
 <tr class="odd">
 <td align="left">yValues</td>
 <td align="left"><code>number</code></td>
 <td align="left">yes</td>
-<td align="left"><code>&quot;1.0,2.0,3.0&quot;</code></td>
+<td align="left"><code>&quot;1.0 2.0 3.0&quot;</code></td>
 <td align="left">y-coordinate values of detector</td>
 </tr>
 <tr class="even">
 <td align="left">tValues</td>
 <td align="left"><code>number</code></td>
 <td align="left">no</td>
-<td align="left"><code>&quot;1.0,2.0,3.0&quot;</code></td>
+<td align="left"><code>&quot;1.0 2.0 3.0&quot;</code></td>
 <td align="left">time values in seconds or fractions of it. Values must be positive</td>
 </tr>
 <tr class="odd">
@@ -1830,21 +1830,21 @@ relevance for the measurement of luminescence are suitable. Typical examples:</p
 others are only meaningfully in combination. For instance, providing information on the detection window is not meaningful for
 a heating element.</p>
 <pre class="bash"><code>{...}
-  &lt;curve component=&quot;heating element&quot; startDate=&quot;2021-02-14T225700.0Z&quot; curveType=&quot;predefined&quot; duaration=&quot;5&quot; 
-    offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1,2,3,4,5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
+  &lt;curve component=&quot;heating element&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; curveType=&quot;predefined&quot; duaration=&quot;5&quot; 
+    offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1 2 3 4 5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
     tLabel=&quot;time&quot; vLabel=&quot;temperature&quot; xUnit=&quot;&quot; yUnit=&quot;&quot; vUnit=&quot;K&quot; tUnit=&quot;s&quot;&gt;
-        293,303,313,323,333
+        293 303 313 323 333
   &lt;/curve&gt;
-  &lt;curve component=&quot;thermo couple&quot; startDate=&quot;2021-02-14T225700.0Z&quot; curveType=&quot;measured&quot; duaration=&quot;5&quot; 
-    offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1,2,3,4,5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
+  &lt;curve component=&quot;thermo couple&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; curveType=&quot;measured&quot; duaration=&quot;5&quot; 
+    offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1 2 3 4 5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
     vLabel=&quot;temperature&quot; tLabel=&quot;time&quot; xUnit=&quot;&quot; yUnit=&quot;&quot; vUnit=&quot;K&quot; tUnit=&quot;s&quot;&gt;
-        293,303,313,323,333
+        293 303 313 323 333
   &lt;/curve&gt;
-  &lt;curve component=&quot;EMI 9123QB15&quot; startDate=&quot;2021-02-14T225700.0Z&quot; curveType=&quot;measured&quot; duaration=&quot;5&quot; 
-    offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1,2,3,4,5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
+  &lt;curve component=&quot;EMI 9123QB15&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; curveType=&quot;measured&quot; duaration=&quot;5&quot; 
+    offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1 2 3 4 5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
     vLabel=&quot;luminescence&quot; tLabel=&quot;time&quot; xUnit=&quot;&quot; yUnit=&quot;&quot; vUnit=&quot;cts&quot; tUnit=&quot;s&quot; 
     detectionWindow=&quot;380 nm&quot; filter=&quot;Hoya U340 + Delta 365/40&quot;&gt;
-        20,25,32,41,46
+        20 25 32 41 46
   &lt;/curve&gt;
 {...}</code></pre>
 <p>One curve is related to one technical device. To define a accurate time window,
@@ -1853,7 +1853,7 @@ start of the parent <code>&lt;record&gt;</code> node.</p>
 </div>
 </div>
 <div id="the-record-level" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> The <code>&lt;record&gt;</code> level</h2>
+<h2><span class="header-section-number">3.2</span> The <code>&lt;record/&gt;</code> level</h2>
 <p>A <code>&lt;record&gt;</code> defines one process involving many components, hence <code>&lt;record&gt;</code> may
 contain <span class="math inline">\(1\leq n\leq Inf; n \in \mathbb{Z}\)</span> <code>&lt;curve&gt;</code> nodes. A record can also be understood
 as one step in a measurement sequence, e.g., a TL measurement. All curves within the record should have been
@@ -1881,14 +1881,14 @@ detected within the same time frame defined through the attributes <code>&lt;sta
 <tbody>
 <tr class="odd">
 <td align="left">startDate</td>
-<td align="left"><code>date</code></td>
+<td align="left"><code>dateTime</code></td>
 <td align="left">no</td>
 <td align="left"><code>&quot;2021-07-14T22:59:35.0Z&quot;</code></td>
 <td align="left">ISO 8601-1:2019: <code>YYYY-MM-DDThh:mm:ss[.mmm]Z</code> recalculated to Zulu time. Time when the record starts</td>
 </tr>
 <tr class="even">
 <td align="left">endDate</td>
-<td align="left"><code>date</code></td>
+<td align="left"><code>dateTime</code></td>
 <td align="left">no</td>
 <td align="left"><code>&quot;2021-07-14T22:59:35.0Z&quot;</code></td>
 <td align="left">ISO 8601-1:2019: <code>YYYY-MM-DDThh:mm:ss[.mmm]Z</code> recalculated to Zulu time. Time when this measurement step was finished</td>
@@ -1909,7 +1909,7 @@ detected within the same time frame defined through the attributes <code>&lt;sta
 </tr>
 <tr class="odd">
 <td align="left">sequenceStepNumber</td>
-<td align="left"><code>integer</code></td>
+<td align="left"><code>unsignedInt</code></td>
 <td align="left">yes</td>
 <td align="left"><code>5</code></td>
 <td align="left">index in the sequence</td>
@@ -2074,7 +2074,7 @@ for information stored in BIN/BINX-files. The field can be set to <code>NA</code
 <h3><span class="header-section-number">3.2.2</span> Example</h3>
 <p>The following examples consists of two records.</p>
 <pre class="bash"><code>{...}
-    &lt;record startDate=&quot;2021-02-14T22:59:35.0z&quot; endDate=&quot;2021-02-14T23:10:00.0z&quot;
+    &lt;record startDate=&quot;2021-02-14T22:59:35.0Z&quot; endDate=&quot;2021-02-14T23:10:00.0Z&quot;
        recordType=&quot;GSL&quot; description=&quot;green OSL CW&quot; sequenceStepNumber=&quot;1&quot; 
        sampleCondition=&quot;NA&quot;&gt;
       &lt;curve ...&gt;
@@ -2084,7 +2084,7 @@ for information stored in BIN/BINX-files. The field can be set to <code>NA</code
         {...}
       &lt;/curve&gt;
     &lt;/record&gt;
-    &lt;record startDate=&quot;2021-02-14T23:10:10.0z&quot; endDate=&quot;2021-02-14T23:20:00.0z&quot;
+    &lt;record startDate=&quot;2021-02-14T23:10:10.0Z&quot; endDate=&quot;2021-02-14T23:20:00.0Z&quot;
        recordType=&quot;bleach&quot; description=&quot;bleaching with solar simulator&quot; 
        sequenceStepNumber=&quot;2&quot; sampleCondition=&quot;NA&quot;&gt;
       &lt;curve ...&gt;
@@ -2095,7 +2095,7 @@ for information stored in BIN/BINX-files. The field can be set to <code>NA</code
 </div>
 </div>
 <div id="the-sequence-level" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> The <code>&lt;sequence&gt;</code> level</h2>
+<h2><span class="header-section-number">3.3</span> The <code>&lt;sequence/&gt;</code> level</h2>
 <p>A sequence describes multiple measurements sequentially used at <strong>one</strong> aliquot,
 for instance as cup/disc with multiple grains or a single grain. Hence, another
 aliquot from the <strong>same</strong> sample needs to be wrapped in a new <code>&lt;sequence&gt;</code> node.
@@ -2125,7 +2125,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.</p>
 <tbody>
 <tr class="odd">
 <td align="left">startDate</td>
-<td align="left"><code>Date</code></td>
+<td align="left"><code>dateTime</code></td>
 <td align="left">no</td>
 <td align="left"><code>&quot;2021-08-14T22:59:35.0Z</code></td>
 <td align="left">start date of the sequence (can be identical with first <code>&lt;record&gt;</code> and <code>&lt;curve&gt;</code> entry)</td>
@@ -2260,7 +2260,7 @@ level may contain an infinite number of sequences measured for one sample.</p>
 </tr>
 <tr class="even">
 <td align="left">doi</td>
-<td align="left"><code>string</code></td>
+<td align="left"><code>anyURI</code></td>
 <td align="left">yes</td>
 <td align="left"><code>&quot;10.1016/j.radmeas.2017.02.003&quot;</code></td>
 <td align="left">valid DOI with further information on the sample, if applicable</td>
@@ -2288,7 +2288,7 @@ level may contain an infinite number of sequences measured for one sample.</p>
 </div>
 </div>
 <div id="the-xlum-level" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> The <code>&lt;xlum&gt;</code> level</h2>
+<h2><span class="header-section-number">3.5</span> The <code>&lt;xlum/&gt;</code> level</h2>
 <p>The <code>&lt;xlum&gt;</code> is the format parent node and it can contain an infinite number
 of samples. Only this level allows to set a licence for the distribution
 and usage of the data. All data within a particular <code>&lt;xlum&gt;</code> are considered
@@ -2359,7 +2359,7 @@ to set different licences.</p>
 </tr>
 <tr class="odd">
 <td align="left">doi</td>
-<td align="left"><code>string</code></td>
+<td align="left"><code>anyURI</code></td>
 <td align="left">yes</td>
 <td align="left"><code>&quot;10.5281/zenodo.596252&quot;</code></td>
 <td align="left">A digital document identifier referencing the dataset already archive in a data repository</td>
@@ -2573,7 +2573,7 @@ to provide usable examples for the data format.</p>
   &lt;sequence ...&gt;
    &lt;record ...&gt;
     &lt;curve ...&gt;
-     12,23,23,23,13,23
+     12 23 23 23 13 23
     &lt;/curve&gt;
    &lt;/record&gt;
   &lt;/sequence&gt;
