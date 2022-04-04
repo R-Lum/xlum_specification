@@ -1732,23 +1732,23 @@ relevance for the measurement of luminescence are suitable. Typical examples:</p
 </tr>
 <tr class="even">
 <td align="left">xValues</td>
-<td align="left"><code>number</code></td>
-<td align="left">yes</td>
-<td align="left"><code>&quot;1.0 2.0 3.0&quot;</code></td>
-<td align="left">x-coordinate values of the detector</td>
+<td align="left"><code>list</code> <code>unsignedInt</code></td>
+<td align="left">no</td>
+<td align="left"><code>&quot;1 2 3&quot;</code></td>
+<td align="left">x-coordinate values of the detector; <code>0</code> indicates that that this parameter is not used</td>
 </tr>
 <tr class="odd">
 <td align="left">yValues</td>
-<td align="left"><code>number</code></td>
-<td align="left">yes</td>
-<td align="left"><code>&quot;1.0 2.0 3.0&quot;</code></td>
-<td align="left">y-coordinate values of detector</td>
+<td align="left"><code>list</code> <code>unsignedInt</code></td>
+<td align="left">no</td>
+<td align="left"><code>&quot;1 2 3&quot;</code></td>
+<td align="left">y-coordinate values of detector; <code>0</code> indicates that that this parameter is not used</td>
 </tr>
 <tr class="even">
 <td align="left">tValues</td>
-<td align="left"><code>number</code></td>
+<td align="left"><code>list</code> <code>double</code></td>
 <td align="left">no</td>
-<td align="left"><code>&quot;1.0 2.0 3.0&quot;</code></td>
+<td align="left"><code>&quot;1. 2.0 3.0&quot;</code></td>
 <td align="left">time values in seconds or fractions of it. Values must be positive</td>
 </tr>
 <tr class="odd">
@@ -2451,7 +2451,7 @@ nature to ease the sequential of data storage during the measurement process.</p
 </tr>
 <tr class="even">
 <td align="left">parentID</td>
-<td align="left"><code>number</code></td>
+<td align="left"><code>token</code></td>
 <td align="left">yes</td>
 <td align="left"><code>&quot;201007145551910&quot;</code></td>
 <td align="left">unique identifying the parent node, the super node has the ID <code>0</code>, this is usually not needed but may help to store data</td>
