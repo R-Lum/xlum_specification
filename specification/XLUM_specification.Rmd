@@ -207,7 +207,6 @@ detected within the same time frame defined through the attributes `<startDate>`
   |Identifier          | Type          |Allows `NA`? | Example        |Information  |
   |:-------------------|:--------------|:------------|:---------------|:------------|
   |startDate           | `dateTime`        |no           |`"2021-07-14T22:59:35.0Z"`     | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time. Time when the record starts |
-  |endDate             |`dateTime`         |no          |  `"2021-07-14T22:59:35.0Z"`     | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time. Time when this measurement step was finished |
   |recordType          |`string`       |no          |  `"TL"`                  |  valid values according the `recordType` table                 |
   |sequenceStepNumber  |`unsignedInt`      |yes         |  `5`                     |  index in the sequence     |
   |sampleCondition     |`string`       |yes         |  dose                    | valid values according to the table below |
