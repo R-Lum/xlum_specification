@@ -35,3 +35,6 @@ vignettes/*.pdf
 
 #exclude word doc
 manual/*.docx
+
+# HTML where not wanted
+README.html
