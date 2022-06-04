@@ -7,9 +7,9 @@ params:
 output:
   # word_document:
   #   toc: yes
-  # bookdown::pdf_document2:
-  #    toc: yes
-  #    number_sections: true
+  bookdown::pdf_document2:
+     toc: yes
+     number_sections: true
   bookdown::html_document2: 
      theme: simplex
      toc: yes
@@ -39,17 +39,16 @@ The levels and a short introduction is given in the table below. A detailed desc
 Nodes represent each level in the structure. **Only `<curve>` nodes contain physical quantities, such as luminescence data** all other nodes are parent nodes of `<curve>` 
 to structure the dataset and ship additional metadata. 
 
-The first level, `xlum` is a supernode to enable storage of luminescence data in arbitrary files following the XML scheme. As a side effect this 
-also allows custom file endings different from `*.xlum`.
+The first level, `xlum` is a supernode to enable storage of luminescence data in arbitrary files following the XML scheme. As a side effect this also allows custom file endings different from `*.xlum`.
 
 
   |Node name       | Number of samples   |Number of aliquots  | Number of records  | Number of data curves |
   |:---------------|:--------------------|:-------------------|:-------------------|:----------------------|
-  `<xlum>`         |$\inf$               |$\inf$              |$\inf$              |$\inf$  
-  `<sample>`       |1                    |$\inf$              |$\inf$              |$\inf$
-  `<sequence>`     |1                    |1                   |$\inf$              |$\inf$
-  `<record>`       |1                    |1                   |1                   |$\inf$
-  `<curve>`        |1                    |1                   |1                   | 1  
+  `<xlum/>`         |$\inf$               |$\inf$              |$\inf$              |$\inf$  
+  `<sample/>`       |1                    |$\inf$              |$\inf$              |$\inf$
+  `<sequence/>`     |1                    |1                   |$\inf$              |$\inf$
+  `<record/>`       |1                    |1                   |1                   |$\inf$
+  `<curve/>`        |1                    |1                   |1                   | 1  
 
   Table: Node overview
 
@@ -61,13 +60,13 @@ A node has a name, attributes, and data stored in it. The data stored in the att
 * Parser supporting the `XLUM` format must not crash when encountering non-specified node attributes. However, they may skip them.
 
 ```{r, engine='bash', eval = FALSE}
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xlum>
   <sample>
     <sequence>
       <record>
         <curve> 
-          1,2,...,n
+          1 2 ... n
         </curve>
       </record>
     </sequence>
@@ -79,28 +78,27 @@ A node has a name, attributes, and data stored in it. The data stored in the att
 
 ## The `<curve/>` level
 
-The `curve` level is the deepest node (leaf) and has no further sub-levels. 
+The `<curve/>` level is the deepest node (leaf) and has no further sub-levels. 
 A curve holds the predefined/simulated or measured output of one single 
 technical component. For example, a typical thermoluminescence measurement 
 may consist of one or many curves.
 
  1. **The three curve example**: (a) Time against temperature recorded by a thermocouple 
- (temperature sensor), (b) time against photon counts recorded by a photomultiplier tube, 
- (c) time against a predefined heating ramp.
+ (temperature sensor), (b) time against photon counts recorded by a photomultiplier tube, (c) time against a predefined heating ramp.
  2. **The one curve example**: Time against temperature. In this case temperature
  is a processed quantity, because measurements happen over a time instant. However, for
  compatibility reasons, this would be allowed although it is not preferred.
 
-In both cases, all mentioned `curve` nodes belong to one parent `record`. In case 1, 
+In both cases, all mentioned `<curve/>` nodes belong to one parent `<record/>`. In case 1, 
 the record contains one curve and three in case 2. Ideally, curves represent technical 
 components and not processed quantities. 
 
 ### Value storage
 
-Values in the `<curve>` node are stored white space separated. **Only quantities detected
+Numerical values in the `<curve/>` node are stored white space separated. **Only quantities detected
 by a detector/sensor are stored in this node.** This includes simulated values. 
 Figure \@ref(fig:fig1) shows three types of (luminescence) detectors, distinguished by their capacity to record spatially resolved information. 
-Regardless of the detector, recorded quantities are stored in the `<curve>` node 
+Regardless of the detector, recorded quantities are stored in the `<curve/>` node 
 separated by white space. Example: 
 
 ```{r, engine='bash', eval = FALSE}
@@ -206,7 +204,6 @@ detected within the same time frame defined through the attributes `<startDate>`
 
   |Identifier          | Type          |Allows `NA`? | Example        |Information  |
   |:-------------------|:--------------|:------------|:---------------|:------------|
-  |startDate           | `dateTime`        |no           |`"2021-07-14T22:59:35.0Z"`     | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time. Time when the record starts |
   |recordType          |`string`       |no          |  `"TL"`                  |  valid values according the `recordType` table                 |
   |sequenceStepNumber  |`unsignedInt`      |yes         |  `5`                     |  index in the sequence     |
   |sampleCondition     |`string`       |yes         |  dose                    | valid values according to the table below |
@@ -229,6 +226,7 @@ physical information a stored in the `<curve>` node.
   |`"camera"`            | camera, e.g. any kind of imaging other than spectrometry      |
   |`"TL"`                | thermoluminescence measurement                     | 
   |`"ITL"`               | Isothermal luminescence                  | 
+  |`"IRSL"`               | Infrared stimulated luminescence                 | 
   |`"TM-OSL"`            | thermally modulated luminescence                 |
   |`"RF"`                | radiofluorescence                                  |
   |`"UV-RF"`             | radiofluorescence with detection in the UV wavelength range    |
@@ -268,9 +266,7 @@ The following examples consists of two records.
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-    <record startDate="2021-02-14T22:59:35.0Z" endDate="2021-02-14T23:10:00.0Z"
-       recordType="GSL" description="green OSL CW" sequenceStepNumber="1" 
-       sampleCondition="NA">
+    <record recordType="GSL" sequenceStepNumber="1" sampleCondition="NA">
       <curve ...>
         {...}
       </curve>
@@ -278,9 +274,7 @@ The following examples consists of two records.
         {...}
       </curve>
     </record>
-    <record startDate="2021-02-14T23:10:10.0Z" endDate="2021-02-14T23:20:00.0Z"
-       recordType="bleach" description="bleaching with solar simulator" 
-       sequenceStepNumber="2" sampleCondition="NA">
+    <record recordType="bleach" sequenceStepNumber="2" sampleCondition="NA">
       <curve ...>
         {...}
       </curve>
@@ -301,7 +295,6 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.
 
   |Identifier     |Type         |  Allows `NA`?    |  Example                | Information        |
   |:------------- |:------------|:-----------------|:------------------------|:-------------------|
-  |startDate      |`dateTime`       |no                |`"2021-08-14T22:59:35.0Z`| start date of the sequence (can be identical with first `<record>` and `<curve>` entry)
   |position       |`numeric`    |no                |`"42"`                   | position of aliquot in the reader, can be `1` in case samples are changed manually |
   |name           |`string`     |yes               |`"SAR measurement"`      | name of the sequence |
   |fileName       |`string`     |yes               |`"SAR_OSL.seq"`          | sequence file so far applicable |
@@ -317,8 +310,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-<sequence starteDate="2021-08-14T22:59:35.0Z" position="1" name="SAR measuremt"
- fileName="Testsequence.seq" software="DeviceStudio, 2.37">
+<sequence position="1" name="SAR measuremt" fileName="Testsequence.seq" software="DeviceStudio, 2.37">
   <record ...>
     <curve ...>
       {...}
@@ -330,7 +322,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.
 {...}
 ```
 
-## The `<sample>` level
+## The `<sample/>` level
 
 The sample constitutes the top level for one particular sample. The sample 
 level may contain an infinite number of sequences measured for one sample.
@@ -459,7 +451,7 @@ to understand the data and the undertaken processing on the hardware level bette
   |channelsPerPulse  |`numeric`     |`"1000"`   | number of channels that are recorded in one curve      |
   |countsNormalized  |`numeric`     |`"1"`    |  if not 0, counts per channel are normalized to counts per second (helpful with uneven distributed channel times) |
   
-  Table: Additional metadata `<record>` node pulsing data
+  Table: Additional metadata `<record/>` node pulsing data
   
 Also the curves contain additional metadata
 
