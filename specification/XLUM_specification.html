@@ -1510,7 +1510,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">XLUM-file format Documentation</h1>
 <h4 class="author">Sebastian Kreutzer, Steve Grehl, Michael Höhne,…&lt;further authors&gt;</h4>
-<h4 class="date">version: 1.0 [2022-04-04]</h4>
+<h4 class="date">version: 1.0 [2022-05-20]</h4>
 
 </div>
 
@@ -1533,8 +1533,7 @@ tree with five nodes storing the data. Each level has its unique denotation.</p>
 <p>The levels and a short introduction is given in the table below. A detailed description can be found in the following sections.
 Nodes represent each level in the structure. <strong>Only <code>&lt;curve&gt;</code> nodes contain physical quantities, such as luminescence data</strong> all other nodes are parent nodes of <code>&lt;curve&gt;</code>
 to structure the dataset and ship additional metadata.</p>
-<p>The first level, <code>xlum</code> is a supernode to enable storage of luminescence data in arbitrary files following the XML scheme. As a side effect this
-also allows custom file endings different from <code>*.xlum</code>.</p>
+<p>The first level, <code>xlum</code> is a supernode to enable storage of luminescence data in arbitrary files following the XML scheme. As a side effect this also allows custom file endings different from <code>*.xlum</code>.</p>
 <table>
 <caption>Node overview</caption>
 <colgroup>
@@ -1555,35 +1554,35 @@ also allows custom file endings different from <code>*.xlum</code>.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>&lt;xlum&gt;</code></td>
+<td align="left"><code>&lt;xlum/&gt;</code></td>
 <td align="left"><span class="math inline">\(\inf\)</span></td>
 <td align="left"><span class="math inline">\(\inf\)</span></td>
 <td align="left"><span class="math inline">\(\inf\)</span></td>
 <td align="left"><span class="math inline">\(\inf\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><code>&lt;sample&gt;</code></td>
+<td align="left"><code>&lt;sample/&gt;</code></td>
 <td align="left">1</td>
 <td align="left"><span class="math inline">\(\inf\)</span></td>
 <td align="left"><span class="math inline">\(\inf\)</span></td>
 <td align="left"><span class="math inline">\(\inf\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>&lt;sequence&gt;</code></td>
+<td align="left"><code>&lt;sequence/&gt;</code></td>
 <td align="left">1</td>
 <td align="left">1</td>
 <td align="left"><span class="math inline">\(\inf\)</span></td>
 <td align="left"><span class="math inline">\(\inf\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><code>&lt;record&gt;</code></td>
+<td align="left"><code>&lt;record/&gt;</code></td>
 <td align="left">1</td>
 <td align="left">1</td>
 <td align="left">1</td>
 <td align="left"><span class="math inline">\(\inf\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>&lt;curve&gt;</code></td>
+<td align="left"><code>&lt;curve/&gt;</code></td>
 <td align="left">1</td>
 <td align="left">1</td>
 <td align="left">1</td>
@@ -1598,13 +1597,13 @@ also allows custom file endings different from <code>*.xlum</code>.</p>
 <li>This specification lists only mandatory attributes. Additional, custom attributes are explicitly supported.</li>
 <li>Parser supporting the <code>XLUM</code> format must not crash when encountering non-specified node attributes. However, they may skip them.</li>
 </ul>
-<pre class="bash"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre class="bash"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;xlum&gt;
   &lt;sample&gt;
     &lt;sequence&gt;
       &lt;record&gt;
         &lt;curve&gt; 
-          1,2,...,n
+          1 2 ... n
         &lt;/curve&gt;
       &lt;/record&gt;
     &lt;/sequence&gt;
@@ -1615,31 +1614,26 @@ also allows custom file endings different from <code>*.xlum</code>.</p>
 <h1><span class="header-section-number">3</span> Detailed description</h1>
 <div id="the-curve-level" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> The <code>&lt;curve/&gt;</code> level</h2>
-<p>The <code>curve</code> level is the deepest node (leaf) and has no further sub-levels.
+<p>The <code>&lt;curve/&gt;</code> level is the deepest node (leaf) and has no further sub-levels.
 A curve holds the predefined/simulated or measured output of one single
 technical component. For example, a typical thermoluminescence measurement
 may consist of one or many curves.</p>
 <ol style="list-style-type: decimal">
 <li><strong>The three curve example</strong>: (a) Time against temperature recorded by a thermocouple
-(temperature sensor), (b) time against photon counts recorded by a photomultiplier tube,</li>
-</ol>
-<ol start="3" style="list-style-type: lower-alpha">
-<li>time against a predefined heating ramp.</li>
-</ol>
-<ol start="2" style="list-style-type: decimal">
+(temperature sensor), (b) time against photon counts recorded by a photomultiplier tube, (c) time against a predefined heating ramp.</li>
 <li><strong>The one curve example</strong>: Time against temperature. In this case temperature
 is a processed quantity, because measurements happen over a time instant. However, for
 compatibility reasons, this would be allowed although it is not preferred.</li>
 </ol>
-<p>In both cases, all mentioned <code>curve</code> nodes belong to one parent <code>record</code>. In case 1,
+<p>In both cases, all mentioned <code>&lt;curve/&gt;</code> nodes belong to one parent <code>&lt;record/&gt;</code>. In case 1,
 the record contains one curve and three in case 2. Ideally, curves represent technical
 components and not processed quantities.</p>
 <div id="value-storage" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Value storage</h3>
-<p>Values in the <code>&lt;curve&gt;</code> node are stored white space separated. <strong>Only quantities detected
+<p>Numerical values in the <code>&lt;curve/&gt;</code> node are stored white space separated. <strong>Only quantities detected
 by a detector/sensor are stored in this node.</strong> This includes simulated values.
 Figure <a href="#fig:fig1">3.1</a> shows three types of (luminescence) detectors, distinguished by their capacity to record spatially resolved information.
-Regardless of the detector, recorded quantities are stored in the <code>&lt;curve&gt;</code> node
+Regardless of the detector, recorded quantities are stored in the <code>&lt;curve/&gt;</code> node
 separated by white space. Example:</p>
 <pre class="bash"><code>&lt;curve&gt;59.5167 109.5164 149.7003 109.5170 156.2654&lt;/curve&gt;</code></pre>
 <p>Values in the node are real numbers (-1e-307 <span class="math inline">\(\leqslant x \leqslant\)</span> 1e+307; <span class="math inline">\(x \in \mathbb{R}\)</span>).
@@ -1880,20 +1874,6 @@ detected within the same time frame defined through the attributes <code>&lt;sta
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">startDate</td>
-<td align="left"><code>dateTime</code></td>
-<td align="left">no</td>
-<td align="left"><code>&quot;2021-07-14T22:59:35.0Z&quot;</code></td>
-<td align="left">ISO 8601-1:2019: <code>YYYY-MM-DDThh:mm:ss[.mmm]Z</code> recalculated to Zulu time. Time when the record starts</td>
-</tr>
-<tr class="even">
-<td align="left">endDate</td>
-<td align="left"><code>dateTime</code></td>
-<td align="left">no</td>
-<td align="left"><code>&quot;2021-07-14T22:59:35.0Z&quot;</code></td>
-<td align="left">ISO 8601-1:2019: <code>YYYY-MM-DDThh:mm:ss[.mmm]Z</code> recalculated to Zulu time. Time when this measurement step was finished</td>
-</tr>
-<tr class="odd">
 <td align="left">recordType</td>
 <td align="left"><code>string</code></td>
 <td align="left">no</td>
@@ -1901,20 +1881,13 @@ detected within the same time frame defined through the attributes <code>&lt;sta
 <td align="left">valid values according the <code>recordType</code> table</td>
 </tr>
 <tr class="even">
-<td align="left">description</td>
-<td align="left"><code>string</code></td>
-<td align="left">yes</td>
-<td align="left"><code>&quot;green stimulated luminescence&quot;</code></td>
-<td align="left">allows a longer description of the record</td>
-</tr>
-<tr class="odd">
 <td align="left">sequenceStepNumber</td>
 <td align="left"><code>unsignedInt</code></td>
 <td align="left">yes</td>
 <td align="left"><code>5</code></td>
 <td align="left">index in the sequence</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">sampleCondition</td>
 <td align="left"><code>string</code></td>
 <td align="left">yes</td>
@@ -2074,9 +2047,7 @@ for information stored in BIN/BINX-files. The field can be set to <code>NA</code
 <h3><span class="header-section-number">3.2.2</span> Example</h3>
 <p>The following examples consists of two records.</p>
 <pre class="bash"><code>{...}
-    &lt;record startDate=&quot;2021-02-14T22:59:35.0Z&quot; endDate=&quot;2021-02-14T23:10:00.0Z&quot;
-       recordType=&quot;GSL&quot; description=&quot;green OSL CW&quot; sequenceStepNumber=&quot;1&quot; 
-       sampleCondition=&quot;NA&quot;&gt;
+    &lt;record recordType=&quot;GSL&quot; sequenceStepNumber=&quot;1&quot; sampleCondition=&quot;NA&quot;&gt;
       &lt;curve ...&gt;
         {...}
       &lt;/curve&gt;
@@ -2084,9 +2055,7 @@ for information stored in BIN/BINX-files. The field can be set to <code>NA</code
         {...}
       &lt;/curve&gt;
     &lt;/record&gt;
-    &lt;record startDate=&quot;2021-02-14T23:10:10.0Z&quot; endDate=&quot;2021-02-14T23:20:00.0Z&quot;
-       recordType=&quot;bleach&quot; description=&quot;bleaching with solar simulator&quot; 
-       sequenceStepNumber=&quot;2&quot; sampleCondition=&quot;NA&quot;&gt;
+    &lt;record recordType=&quot;bleach&quot; sequenceStepNumber=&quot;2&quot; sampleCondition=&quot;NA&quot;&gt;
       &lt;curve ...&gt;
         {...}
       &lt;/curve&gt;
@@ -2124,55 +2093,48 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">startDate</td>
-<td align="left"><code>dateTime</code></td>
-<td align="left">no</td>
-<td align="left"><code>&quot;2021-08-14T22:59:35.0Z</code></td>
-<td align="left">start date of the sequence (can be identical with first <code>&lt;record&gt;</code> and <code>&lt;curve&gt;</code> entry)</td>
-</tr>
-<tr class="even">
 <td align="left">position</td>
 <td align="left"><code>numeric</code></td>
 <td align="left">no</td>
 <td align="left"><code>&quot;42&quot;</code></td>
 <td align="left">position of aliquot in the reader, can be <code>1</code> in case samples are changed manually</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">name</td>
 <td align="left"><code>string</code></td>
 <td align="left">yes</td>
 <td align="left"><code>&quot;SAR measurement&quot;</code></td>
 <td align="left">name of the sequence</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">fileName</td>
 <td align="left"><code>string</code></td>
 <td align="left">yes</td>
 <td align="left"><code>&quot;SAR_OSL.seq&quot;</code></td>
 <td align="left">sequence file so far applicable</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">software</td>
 <td align="left"><code>string</code></td>
 <td align="left">yes</td>
 <td align="left"><code>&quot;Sequence Editor 4.4&quot;</code></td>
 <td align="left">software used to write the sequence if applicable</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">readerName</td>
 <td align="left"><code>string</code></td>
 <td align="left">yes</td>
 <td align="left"><code>&quot;Risø OSL/TL&quot;</code></td>
 <td align="left">name of the luminescence reader employed for the measurement</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">readerSN</td>
 <td align="left"><code>string</code></td>
 <td align="left">yes</td>
 <td align="left"><code>&quot;234-23&quot;</code></td>
 <td align="left">reader serial number</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">readerFW</td>
 <td align="left"><code>string</code></td>
 <td align="left">yes</td>
@@ -2185,8 +2147,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.</p>
 <div id="example-2" class="section level3" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Example</h3>
 <pre class="bash"><code>{...}
-&lt;sequence starteDate=&quot;2021-08-14T22:59:35.0Z&quot; position=&quot;1&quot; name=&quot;SAR measuremt&quot;
- fileName=&quot;Testsequence.seq&quot; software=&quot;DeviceStudio, 2.37&quot;&gt;
+&lt;sequence position=&quot;1&quot; name=&quot;SAR measuremt&quot; fileName=&quot;Testsequence.seq&quot; software=&quot;DeviceStudio, 2.37&quot;&gt;
   &lt;record ...&gt;
     &lt;curve ...&gt;
       {...}
@@ -2199,7 +2160,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.</p>
 </div>
 </div>
 <div id="the-sample-level" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> The <code>&lt;sample&gt;</code> level</h2>
+<h2><span class="header-section-number">3.4</span> The <code>&lt;sample/&gt;</code> level</h2>
 <p>The sample constitutes the top level for one particular sample. The sample
 level may contain an infinite number of sequences measured for one sample.</p>
 <div id="attributes-2" class="section level3" number="3.4.1">
@@ -2481,7 +2442,7 @@ times of <span class="math inline">\(10^{-6} \leq \tau \leq 10^{-3}\)</span> s. 
 one for each (x) pulse(-s). The <code>&lt;record&gt;</code> node contains some additional metadata that may help
 to understand the data and the undertaken processing on the hardware level better.</p>
 <table>
-<caption>Additional metadata <code>&lt;record&gt;</code> node pulsing data</caption>
+<caption>Additional metadata <code>&lt;record/&gt;</code> node pulsing data</caption>
 <colgroup>
 <col width="27%" />
 <col width="21%" />
