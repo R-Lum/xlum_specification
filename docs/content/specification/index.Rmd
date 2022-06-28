@@ -2,6 +2,7 @@
 title: "XLUM-file format Documentation"
 author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne"
 date: "version: 1.0 [`r Sys.Date()`]"
+type: "landing_page"
 params: 
   output_format: "all"
 output:
@@ -116,9 +117,11 @@ For consistency reasons, the value in the node span an array with dimensions
 defined through the node attributes `xValues`, `yValues` and `tValues` (see Fig. \@ref(fig:fig1)).
 
 ```{r fig1, echo=FALSE, fig.align='center', fig.cap="The three cases for data storage depending on the detector. The black solid arrows indicate how the array is constructed from the values stored in the node."}
-knitr::include_graphics("img/Curve_Level_Storage.png", auto_pdf = TRUE, dpi = 300)
+try(knitr::include_graphics("img/Curve_Level_Storage.png", auto_pdf = TRUE, dpi = 300), 
+    silent = TRUE)
+try(knitr::include_graphics("specification//img/Curve_Level_Storage.png", auto_pdf = TRUE, dpi = 300), silent = TRUE)
 ```
-
+ 
 1. The simplest form is a detector that records no spatial information. For instance,
 a photomultiplier tube only knows about count recorded over time. Alternatively, the
 detector can be any sensor, measuring, e.g., temperature, pressure or current. 

@@ -10,7 +10,6 @@ ignoreFiles:
   - \.Rmd$
   - \.Rmarkdown$
   - _cache$
-  - \.DS_Store$
   - \.knit\.md$
   - \.utf8\.md$
 permalinks:
@@ -47,4 +46,12 @@ markup:
   defaultMarkdownHandler: goldmark
   goldmark:
     renderer:
-      unsafe: yes
+      unsafe: true
+  highlight:
+    anchorLineNos: true
+    lineNos: true
+    style: monokai
+  tableOfContents:
+    endLevel: 3
+    ordered: false
+    startLevel: 2

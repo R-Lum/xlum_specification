@@ -2,11 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://r-lum.github.io/xlum_specification/about/</loc>
+    <lastmod>2022-06-27T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://r-lum.github.io/xlum_specification/categories/</loc>
   </url><url>
     <loc>https://r-lum.github.io/xlum_specification/tags/</loc>
   </url><url>
-    <loc>https://r-lum.github.io/xlum_specification/</loc>
+    <loc>https://r-lum.github.io/xlum_specification/specification/</loc>
   </url><url>
     <loc>https://r-lum.github.io/xlum_specification/</loc>
   </url>
