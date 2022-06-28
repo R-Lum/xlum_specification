@@ -41,3 +41,6 @@ manual/*.docx
 
 # HTML where not wanted
 README.html
+
+# additional paths to ignore
+/archive/
