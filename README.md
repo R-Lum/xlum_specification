@@ -1,9 +1,6 @@
 # XLUM
 
-Specification of the XLUM format to exchange and archive luminescence data
-
-**This repository will be moved out and become public after
-the format specification is submitted for publication**
+Specification of the XLUM format to exchange and archive luminescence data.
 
 ## Contributors 
 

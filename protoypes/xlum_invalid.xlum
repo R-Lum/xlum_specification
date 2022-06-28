@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xlum xmlns:xlum="http://xlum.r-luminescence.org" lang="en" formatVersion="1.0" flavour="string" author="string" license="CC BY 4.0" doi="">
+  <sample name="string" mineral="string" latitude="52.416944" longitude="4.066389" altitude="70" doi="" comment="string" state="string" parentID="string">
+    <sequence starteDate="1978-06-26T16:10:51.0Z" position="5440" name="string" fileName="string" software="string" readerName="string" readerSN="string" readerFW="string" comment="string" state="string" parentID="string">
+      <record startDate="2011-05-18T14:10:18.0Z" endDate="1972-08-19T14:57:00.0Z" recordType="atmosphereExchange">
+      </record>
+    </sequence>
+  </sample>
+</xlum>
