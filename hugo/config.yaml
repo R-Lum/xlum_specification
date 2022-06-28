@@ -1,4 +1,4 @@
-baseurl: /
+baseurl: https://r-lum.github.io/xlum_specifications
 languageCode: en-us
 title: XLUM-specification
 theme: hugo-lithium
