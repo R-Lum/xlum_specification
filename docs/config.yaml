@@ -21,7 +21,7 @@ menu:
       url: https://raw.githubusercontent.com/R-Lum/xlum_specification/master/xsd_schema/xlum_schema.xsd
       weight: 3000
     - name: About
-      url: /about/
+      url: /about
       weight: 9000
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
