@@ -14,8 +14,15 @@ permalinks:
   post: /:year/:month/:day/:slug/
 menu:
   main:
+    - name: GitHub
+      url: https://github.com/R-Lum/xlum_specification
+      weight: 3000
+    - name: XSD-Schema
+      url: https://raw.githubusercontent.com/R-Lum/xlum_specification/master/xsd_schema/xlum_schema.xsd
+      weight: 3000
     - name: About
       url: /about/
+      weight: 9000
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 3.2.2
