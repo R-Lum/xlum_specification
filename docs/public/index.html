@@ -1,116 +1,153 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Hugo 0.100.1" />
-
-
-<title>XLUM-specification - XLUM-specification</title>
-<meta property="og:title" content="XLUM-specification - XLUM-specification">
-
-
-  <link href='https://r-lum.github.io/xlum_specification/favicon.ico' rel='icon' type='image/x-icon'/>
-
-
-
-  
-
-
-
-
-
-<link href="/xlum_specification/index.xml" rel="alternate" type="application/rss+xml" title="XLUM-specification" />
-
-
-
-<link rel="stylesheet" href="/xlum_specification/css/fonts.css" media="all">
-<link rel="stylesheet" href="/xlum_specification/css/main.css" media="all">
-
-
-
-  </head>
-  <body>
-    <div class="wrapper">
-      <header class="header">
-        <nav class="nav">
-  <a href="/xlum_specification/" class="nav-logo">
-    <img src="/xlum_specification/images/logo.png"
-         width="50"
-         height="50"
-         alt="Logo">
-  </a>
-
-  <ul class="nav-links">
-    
-    <li><a href="/xlum_specification/about/">About</a></li>
-    
-  </ul>
-</nav>
-
-      </header>
-
-
-<main class="content" role="main">
-
-  
-  <div class="archive">
-    
-    
-    
-    
-    
-    <h2 class="archive-title">2020</h2>
-    
-    <article class="archive-item">
-      <a href="/xlum_specification/2020/12/01/hello-r-markdown/" class="archive-item-link">Hello R Markdown</a>
-      <span class="archive-item-date">
-        2020-12-01
-      </span>
-    </article>
-    
-    
-    <h2 class="archive-title">2016</h2>
-    
-    <article class="archive-item">
-      <a href="/xlum_specification/2016/12/30/a-plain-markdown-post/" class="archive-item-link">A Plain Markdown Post</a>
-      <span class="archive-item-date">
-        2016-12-30
-      </span>
-    </article>
-    
-    
-    <h2 class="archive-title">2015</h2>
-    
-    <article class="archive-item">
-      <a href="/xlum_specification/2015/01/01/lorem-ipsum/" class="archive-item-link">Lorem Ipsum</a>
-      <span class="archive-item-date">
-        2015-01-01
-      </span>
-    </article>
-    
-    
-  </div>
-
-</main>
-
-      <footer class="footer">
-        <ul class="footer-links">
-          <li>
-            <a href="/xlum_specification/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
-          </li>
-          <li>
-            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/xlum_specification/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
-          </li>
-        </ul>
-      </footer>
-
-    </div>
-    
-
-    
-
-    
-  </body>
-</html>
-
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.100.1"><title>XLUM-file format Documentation - XLUM-specification</title><meta property="og:title" content="XLUM-file format Documentation - XLUM-specification"><link href=https://r-lum.github.io/xlum_specification/favicon.ico rel=icon type=image/x-icon><link href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/github.min.css rel=stylesheet type=text/css><link rel=stylesheet href=/xlum_specification/css/fonts.css media=all><link rel=stylesheet href=/xlum_specification/css/main.css media=all></head><body><div class=wrapper><header class=header><nav class=nav><a href=/xlum_specification/ class=nav-logo><img src=/xlum_specification/images/logo.png width=50 height=50 alt=Logo></a><ul class=nav-links><li><a href=/xlum_specification/about/>About</a></li></ul></nav></header><main class=content role=main><article class=article><h1 class=article-title>XLUM-file format Documentation</h1><div class=article-content><div id=motivation-and-principles class="section level1"><h1>Motivation and principles</h1><p>This document details the <code>XLUM</code> format, an XML based file format for long-term data preservation and exchange of luminescence data. The format is readable by humans and machines, and the data can be easily checked with any text reader on any major operating system. This design allows a platform-independent operation. The following documentation provides essential information on the file <code>XLUM</code> format and accounts for the needs for individual flexible data analysis, even with self-written software applications.</p><p>Three simple design principles underpin the format specification:</p><ul><li>Stored are data recorded over <strong>time</strong> or time derived instances,</li><li>stored are data on a technical component level,</li><li>data stored in a file are self-consistent.</li></ul></div><div id=general-description class="section level1"><h1>General description</h1><p>The <code>XLUM</code>-format is an <a href=https://www.w3.org/xml>XML</a> derivative. The base data structure is a
+tree with five nodes storing the data. Each level has its unique denotation.</p><p>The levels and a short introduction is given in the table below. A detailed description can be found in the following sections.
+Nodes represent each level in the structure. <strong>Only <code>&lt;curve></code> nodes contain physical quantities, such as luminescence data</strong> all other nodes are parent nodes of <code>&lt;curve></code>
+to structure the dataset and ship additional metadata.</p><p>The first level, <code>xlum</code> is a root node to enable storage of luminescence data in arbitrary files following the XML scheme. As a side effect this also allows custom file endings different from <code>*.xlum</code>.</p><table><caption>Node overview</caption><col width=16%><col width=21%><col width=20%><col width=20%><col width=23%><thead><tr class=header><th align=left>Node name</th><th align=left>Number of samples</th><th align=left>Number of aliquots</th><th align=left>Number of records</th><th align=left>Number of data curves</th></tr></thead><tbody><tr class=odd><td align=left><code>&lt;xlum/></code></td><td align=left><span class="math inline">\(\inf\)</span></td><td align=left><span class="math inline">\(\inf\)</span></td><td align=left><span class="math inline">\(\inf\)</span></td><td align=left><span class="math inline">\(\inf\)</span></td></tr><tr class=even><td align=left><code>&lt;sample/></code></td><td align=left>1</td><td align=left><span class="math inline">\(\inf\)</span></td><td align=left><span class="math inline">\(\inf\)</span></td><td align=left><span class="math inline">\(\inf\)</span></td></tr><tr class=odd><td align=left><code>&lt;sequence/></code></td><td align=left>1</td><td align=left>1</td><td align=left><span class="math inline">\(\inf\)</span></td><td align=left><span class="math inline">\(\inf\)</span></td></tr><tr class=even><td align=left><code>&lt;record/></code></td><td align=left>1</td><td align=left>1</td><td align=left>1</td><td align=left><span class="math inline">\(\inf\)</span></td></tr><tr class=odd><td align=left><code>&lt;curve/></code></td><td align=left>1</td><td align=left>1</td><td align=left>1</td><td align=left>1</td></tr></tbody></table><p>A node has a name, attributes, and data stored in it. The data stored in the attributes describe the state of this level. The stored data in the node describes the process(es) assigned to the node. A minimal example is shown in the listing. The documentation provides an overview starting with the leaf node description and going up to the root from there. Further notes:</p><ul><li>The format version bases on <a href=http://www.w3.org/TR/2008/REC-xml-20081126/>XML version 1.0 (Fith Edition)</a></li><li>File encoding should always be UTF-8</li><li>This specification lists only mandatory attributes. Additional, custom attributes are explicitly supported.</li><li>Parser supporting the <code>XLUM</code> format must not crash when encountering non-specified node attributes. However, they may skip them.</li></ul><pre class=bash><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;xlum&gt;
+  &lt;sample&gt;
+    &lt;sequence&gt;
+      &lt;record&gt;
+        &lt;curve&gt; 
+          1 2 ... n
+        &lt;/curve&gt;
+      &lt;/record&gt;
+    &lt;/sequence&gt;
+  &lt;/sample&gt;
+&lt;/xlum&gt;</code></pre></div><div id=detailed-description class="section level1"><h1>Detailed description</h1><div id=the-curve-level class="section level2"><h2>The <code>&lt;curve/></code> level</h2><p>The <code>&lt;curve/></code> level is the deepest node (leaf) and has no further sub-levels.
+A curve holds the predefined/simulated or measured output of one single
+technical component. For example, a typical thermoluminescence measurement
+may consist of one or many curves.</p><ol style=list-style-type:decimal><li><strong>The three curve example</strong>: (a) Time against temperature recorded by a thermocouple
+(temperature sensor), (b) time against photon counts recorded by a photomultiplier tube, (c) time against a predefined heating ramp.</li><li><strong>The one curve example</strong>: Time against temperature. In this case temperature
+is a processed quantity, because measurements happen over a time instant. However, for
+compatibility reasons, this would be allowed although it is not preferred.</li></ol><p>In both cases, all mentioned <code>&lt;curve/></code> nodes belong to one parent <code>&lt;record/></code>. In case 1,
+the record contains one curve and three in case 2. Ideally, curves represent technical
+components and not processed quantities.</p><div id=value-storage class="section level3"><h3>Value storage</h3><p>Numerical values in the <code>&lt;curve/></code> node are stored white space separated. <strong>Only quantities detected
+by a detector/sensor are stored in this node.</strong> This includes simulated values.
+Figure <a href=#fig:fig1>1</a> shows three types of (luminescence) detectors, distinguished by their capacity to record spatially resolved information.
+Regardless of the detector, recorded quantities are stored in the <code>&lt;curve/></code> node
+separated by white space. Example:</p><pre class=bash><code>&lt;curve&gt;59.5167 109.5164 149.7003 109.5170 156.2654&lt;/curve&gt;</code></pre><p>Values in the node are real numbers (-1e-307 <span class="math inline">\(\leqslant x \leqslant\)</span> 1e+307; <span class="math inline">\(x \in \mathbb{R}\)</span>).
+Scientific ‘E’/‘e’ notations of numbers are explicitly allowed, example: 1e+2 for 100 or 1e-2 for 0.01.
+Decimal separator is a <code>.</code> (dot).</p><p>For consistency reasons, the value in the node span an array with dimensions
+defined through the node attributes <code>xValues</code>, <code>yValues</code> and <code>tValues</code> (see Fig. <a href=#fig:fig1>1</a>).</p><div class=figure style=text-align:center><span style=display:block id=fig:fig1></span>
+<img src=img/Curve_Level_Storage.png alt="The three cases for data storage depending on the detector. The black solid arrows indicate how the array is constructed from the values stored in the node." width=384><p class=caption>Figure 1: The three cases for data storage depending on the detector. The black solid arrows indicate how the array is constructed from the values stored in the node.</p></div><ol style=list-style-type:decimal><li><p>The simplest form is a detector that records no spatial information. For instance,
+a photomultiplier tube only knows about count recorded over time. Alternatively, the
+detector can be any sensor, measuring, e.g., temperature, pressure or current.</p></li><li><p>A spectrometer (here a camera in front of a spectrograph) is another type of
+detector with spatial information, here wavelengths split by the spectrograph
+hitting different pixel areas of the detector.</p></li><li><p>The most complex from is a detector that records events (e.g., luminescence),
+spatially resolved. Such as a camera.</p></li></ol><p>In the examples and the Fig.<a href=#fig:fig1>1</a> the detectors detect luminescence,
+however, any type of sensor, electronic component recording information of
+relevance for the measurement of luminescence are suitable. Typical examples:</p><ul><li>Temperature sensor (thermocouple), recording the temperature of the heating element</li><li>Photo diode, monitoring the optical power density at the sample position</li><li>Resistor, measuring the current of a LED</li><li>Pressure sensor, monitoring the atmosphere in the measurement chamber</li><li>Inductive sensor, monitoring closing and opening of a shutter</li></ul></div><div id=node-attributes class="section level3"><h3>Node attributes</h3><table><caption>Specified curve attributes. Attributes in <code>[]</code> are optional, hence <code>NA</code> is not allowed.</caption><col width=19%><col width=13%><col width=11%><col width=29%><col width=25%><thead><tr class=header><th align=left>Identifier</th><th align=left>Type</th><th align=left>Allows <code>NA</code>?</th><th align=left>Example</th><th align=left>Information</th></tr></thead><tbody><tr class=odd><td align=left>component</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"EMI 9235QB15"</code></td><td align=left>name of the technical component. <code>NA</code> allowed only for <code>"predefined"</code></td></tr><tr class=even><td align=left>startDate</td><td align=left><code>dateTime</code></td><td align=left>no</td><td align=left><code>"2021-07-14T22:59:35.0Z"</code></td><td align=left>ISO 8601-1:2019: <code>YYYY-MM-DDThh:mm:ss[.mmm]Z</code> recalculated to Zulu time</td></tr><tr class=odd><td align=left>curveType</td><td align=left><code>string</code></td><td align=left>no</td><td align=left><code>"predefined"</code></td><td align=left>Values allowed are only <code>"predefined"</code> or <code>"measured"</code></td></tr><tr class=even><td align=left>duration</td><td align=left><code>number</code></td><td align=left>no</td><td align=left><code>"20.000"</code></td><td align=left>Duration of the detection in seconds or a fraction of it</td></tr><tr class=odd><td align=left>offset</td><td align=left><code>number</code></td><td align=left>no</td><td align=left><code>"10.000"</code></td><td align=left>Before the detection starts in seconds or a fraction of it</td></tr><tr class=even><td align=left>xValues</td><td align=left><code>list</code> <code>unsignedInt</code></td><td align=left>no</td><td align=left><code>"1 2 3"</code></td><td align=left>x-coordinate values of the detector; <code>0</code> indicates that that this parameter is not used</td></tr><tr class=odd><td align=left>yValues</td><td align=left><code>list</code> <code>unsignedInt</code></td><td align=left>no</td><td align=left><code>"1 2 3"</code></td><td align=left>y-coordinate values of detector; <code>0</code> indicates that that this parameter is not used</td></tr><tr class=even><td align=left>tValues</td><td align=left><code>list</code> <code>double</code></td><td align=left>no</td><td align=left><code>"1. 2.0 3.0"</code></td><td align=left>time values in seconds or fractions of it. Values must be positive</td></tr><tr class=odd><td align=left>vLabel</td><td align=left><code>string</code></td><td align=left>no</td><td align=left><code>"Luminescence"</code></td><td align=left>Measured physical quantity</td></tr><tr class=even><td align=left>xLabel</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"pixel"</code></td><td align=left>label of the x-coordinate values</td></tr><tr class=odd><td align=left>yLabel</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"pixel"</code></td><td align=left>label of the y-coordinate values</td></tr><tr class=even><td align=left>tLabel</td><td align=left><code>string</code></td><td align=left>no</td><td align=left><code>"time"</code></td><td align=left>label of t-values, usually ‘time’</td></tr><tr class=odd><td align=left>vUnit</td><td align=left><code>string</code></td><td align=left>no</td><td align=left><code>"cts"</code></td><td align=left>label of the v-values, for luminescence usually photon counts</td></tr><tr class=even><td align=left>xUnit</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"nm"</code></td><td align=left>SI unit or equivalent for x-values</td></tr><tr class=odd><td align=left>yUnit</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"px"</code></td><td align=left>SI unit or equivalent for y-values</td></tr><tr class=even><td align=left>tUnit</td><td align=left><code>string</code></td><td align=left>no</td><td align=left><code>"s"</code></td><td align=left>SI unit or equivalent for t-values</td></tr><tr class=odd><td align=left>detectionWindow</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"375"</code></td><td align=left>Centre wavelength if applicable. can be set to <code>NA</code></td></tr><tr class=even><td align=left>filter</td><td align=left><code>list</code> (<code>string</code>)</td><td align=left>yes</td><td align=left><code>"Hoya U340; Delta BP 365/50EX"</code></td><td align=left>Filter names separated by <code>;</code></td></tr></tbody></table></div><div id=example class="section level3"><h3>Example</h3><p>In order to define a suitable standard only a few attributes are required. A few of them are useful for every kind of component,
+others are only meaningfully in combination. For instance, providing information on the detection window is not meaningful for
+a heating element.</p><pre class=bash><code>{...}
+  &lt;curve component=&quot;heating element&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; curveType=&quot;predefined&quot; duaration=&quot;5&quot; 
+    offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1 2 3 4 5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
+    tLabel=&quot;time&quot; vLabel=&quot;temperature&quot; xUnit=&quot;&quot; yUnit=&quot;&quot; vUnit=&quot;K&quot; tUnit=&quot;s&quot;&gt;
+        293 303 313 323 333
+  &lt;/curve&gt;
+  &lt;curve component=&quot;thermo couple&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; curveType=&quot;measured&quot; duaration=&quot;5&quot; 
+    offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1 2 3 4 5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
+    vLabel=&quot;temperature&quot; tLabel=&quot;time&quot; xUnit=&quot;&quot; yUnit=&quot;&quot; vUnit=&quot;K&quot; tUnit=&quot;s&quot;&gt;
+        293 303 313 323 333
+  &lt;/curve&gt;
+  &lt;curve component=&quot;EMI 9123QB15&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; curveType=&quot;measured&quot; duaration=&quot;5&quot; 
+    offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1 2 3 4 5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
+    vLabel=&quot;luminescence&quot; tLabel=&quot;time&quot; xUnit=&quot;&quot; yUnit=&quot;&quot; vUnit=&quot;cts&quot; tUnit=&quot;s&quot; 
+    detectionWindow=&quot;380 nm&quot; filter=&quot;Hoya U340 + Delta 365/40&quot;&gt;
+        20 25 32 41 46
+  &lt;/curve&gt;
+{...}</code></pre><p>One curve is related to one technical device. To define a accurate time window,
+the parameters <em>duration</em> and <em>offset</em> should be used. These parameters are related to the
+start of the parent <code>&lt;record></code> node.</p></div></div><div id=the-record-level class="section level2"><h2>The <code>&lt;record/></code> level</h2><p>A <code>&lt;record></code> defines one process involving many components, hence <code>&lt;record></code> may
+contain <span class="math inline">\(1\leq n\leq Inf; n \in \mathbb{Z}\)</span> <code>&lt;curve></code> nodes. A record can also be understood
+as one step in a measurement sequence, e.g., a TL measurement. All curves within the record should have been
+detected within the same time frame defined through the attributes <code>&lt;startDate></code> and <code>&lt;endDate></code>.</p><div id=attributes class="section level3"><h3>Attributes</h3><table><caption>Allowed attributes for <code>&lt;record></code> node.</caption><col width=25%><col width=19%><col width=16%><col width=20%><col width=16%><thead><tr class=header><th align=left>Identifier</th><th align=left>Type</th><th align=left>Allows <code>NA</code>?</th><th align=left>Example</th><th align=left>Information</th></tr></thead><tbody><tr class=odd><td align=left>recordType</td><td align=left><code>string</code></td><td align=left>no</td><td align=left><code>"TL"</code></td><td align=left>valid values according the <code>recordType</code> table</td></tr><tr class=even><td align=left>sequenceStepNumber</td><td align=left><code>unsignedInt</code></td><td align=left>yes</td><td align=left><code>5</code></td><td align=left>index in the sequence</td></tr><tr class=odd><td align=left>sampleCondition</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left>dose</td><td align=left>valid values according to the table below</td></tr></tbody></table><p>The <code>recordType</code> names are not carved in stone, but should be chosen to best describe a record in one
+word or using an accepted abbreviation (e.g., OSL for optically stimulated luminescence).
+However, it is important to keep in mind that the <code>recordType</code> makes <strong>no</strong> claim on the technical
+components involved, but is solely set to ease the understanding of the record. The hard
+physical information a stored in the <code>&lt;curve></code> node.</p><table><caption>Valid <code>recordTypes</code></caption><col width=34%><col width=65%><thead><tr class=header><th align=left><code>recordType</code></th><th align=left>Information</th></tr></thead><tbody><tr class=odd><td align=left><code>"bleaching"</code></td><td align=left>any kind of bleaching</td></tr><tr class=even><td align=left><code>"irradiation"</code></td><td align=left>irradiation with ionising source</td></tr><tr class=odd><td align=left><code>"atmosphereExchange"</code></td><td align=left>atmosphere exchange</td></tr><tr class=even><td align=left><code>"heating"</code></td><td align=left>any kind for heating without signal detection</td></tr><tr class=odd><td align=left><code>"spectrometer"</code></td><td align=left>spectrometer</td></tr><tr class=even><td align=left><code>"camera"</code></td><td align=left>camera, e.g. any kind of imaging other than spectrometry</td></tr><tr class=odd><td align=left><code>"TL"</code></td><td align=left>thermoluminescence measurement</td></tr><tr class=even><td align=left><code>"ITL"</code></td><td align=left>Isothermal luminescence</td></tr><tr class=odd><td align=left><code>"IRSL"</code></td><td align=left>Infrared stimulated luminescence</td></tr><tr class=even><td align=left><code>"TM-OSL"</code></td><td align=left>thermally modulated luminescence</td></tr><tr class=odd><td align=left><code>"RF"</code></td><td align=left>radiofluorescence</td></tr><tr class=even><td align=left><code>"UV-RF"</code></td><td align=left>radiofluorescence with detection in the UV wavelength range</td></tr><tr class=odd><td align=left><code>"IR-RF"</code></td><td align=left>radiofluorescence with detection in the infrared wavelength range</td></tr><tr class=even><td align=left><code>"IR-PL"</code></td><td align=left>infrared photoluminescence</td></tr><tr class=odd><td align=left><code>"OSL"</code></td><td align=left>optically stimulated luminescence</td></tr><tr class=even><td align=left><code>"GSL"</code></td><td align=left>green optically stimulated luminescence</td></tr><tr class=odd><td align=left><code>"VSL"</code></td><td align=left>violet optically stimulated luminescence</td></tr><tr class=even><td align=left><code>"YSL"</code></td><td align=left>yellow optically stimulated luminescence</td></tr><tr class=odd><td align=left><code>"POSL"</code></td><td align=left>pulsed optical stimulated luminescence</td></tr><tr class=even><td align=left><code>"pause"</code></td><td align=left>pause</td></tr><tr class=odd><td align=left><code>"custom"</code></td><td align=left>any undefined or custom record type not listed above</td></tr></tbody></table><p>valid entries for <code>sampleConditions</code> are:</p><table><caption>Valid values for <code>sampleConditions</code></caption><thead><tr class=header><th align=left><code>sampleCondition</code></th><th align=left>Information</th></tr></thead><tbody><tr class=odd><td align=left><code>"Natural"</code></td><td align=left>Natural</td></tr><tr class=even><td align=left><code>"Natural+Dose"</code></td><td align=left>Natural+Dose</td></tr><tr class=odd><td align=left><code>"Bleach"</code></td><td align=left>Bleach</td></tr><tr class=even><td align=left><code>"Bleach+Dose"</code></td><td align=left>Bleach+Dose</td></tr><tr class=odd><td align=left><code>"Nat.(Bleach)"</code></td><td align=left>Nat.(Bleach)</td></tr><tr class=even><td align=left><code>"Nat.+Dose(Bleach)"</code></td><td align=left>Nat.+Dose(Bleach)</td></tr><tr class=odd><td align=left><code>"Dose"</code></td><td align=left>Dose</td></tr><tr class=even><td align=left><code>"Background"</code></td><td align=left>Background</td></tr></tbody></table><p><em>Please note that the attribute <code>sampleCondition</code> is of informative nature, accounting
+for information stored in BIN/BINX-files. The field can be set to <code>NA</code>.</em></p></div><div id=example-1 class="section level3"><h3>Example</h3><p>The following examples consists of two records.</p><pre class=bash><code>{...}
+    &lt;record recordType=&quot;GSL&quot; sequenceStepNumber=&quot;1&quot; sampleCondition=&quot;NA&quot;&gt;
+      &lt;curve ...&gt;
+        {...}
+      &lt;/curve&gt;
+      &lt;curve ...&gt;
+        {...}
+      &lt;/curve&gt;
+    &lt;/record&gt;
+    &lt;record recordType=&quot;bleach&quot; sequenceStepNumber=&quot;2&quot; sampleCondition=&quot;NA&quot;&gt;
+      &lt;curve ...&gt;
+        {...}
+      &lt;/curve&gt;
+    &lt;/record&gt;
+{...}</code></pre></div></div><div id=the-sequence-level class="section level2"><h2>The <code>&lt;sequence/></code> level</h2><p>A sequence describes multiple measurements sequentially used at <strong>one</strong> aliquot,
+for instance as cup/disc with multiple grains or a single grain. Hence, another
+aliquot from the <strong>same</strong> sample needs to be wrapped in a new <code>&lt;sequence></code> node.
+Naturally the information stored an that level can be very verbose, but are limited to<br>a few required attributes only. In the luminescence context a sequence can fit, e.g.,
+a SAR protocol, but also a succession of protocols measured on one aliquot.</p><div id=attributes-1 class="section level3"><h3>Attributes</h3><table><caption>Mandatory attributes <code>&lt;sequence></code> node</caption><col width=15%><col width=14%><col width=20%><col width=27%><col width=22%><thead><tr class=header><th align=left>Identifier</th><th align=left>Type</th><th align=left>Allows <code>NA</code>?</th><th align=left>Example</th><th align=left>Information</th></tr></thead><tbody><tr class=odd><td align=left>position</td><td align=left><code>numeric</code></td><td align=left>no</td><td align=left><code>"42"</code></td><td align=left>position of aliquot in the reader, can be <code>1</code> in case samples are changed manually</td></tr><tr class=even><td align=left>name</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"SAR measurement"</code></td><td align=left>name of the sequence</td></tr><tr class=odd><td align=left>fileName</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"SAR_OSL.seq"</code></td><td align=left>sequence file so far applicable</td></tr><tr class=even><td align=left>software</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"Sequence Editor 4.4"</code></td><td align=left>software used to write the sequence if applicable</td></tr><tr class=odd><td align=left>readerName</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"Risø OSL/TL"</code></td><td align=left>name of the luminescence reader employed for the measurement</td></tr><tr class=even><td align=left>readerSN</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"234-23"</code></td><td align=left>reader serial number</td></tr><tr class=odd><td align=left>readerFW</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"reader OSL 12.3"</code></td><td align=left>reader firmware version</td></tr></tbody></table></div><div id=example-2 class="section level3"><h3>Example</h3><pre class=bash><code>{...}
+&lt;sequence position=&quot;1&quot; name=&quot;SAR measuremt&quot; fileName=&quot;Testsequence.seq&quot; software=&quot;DeviceStudio, 2.37&quot;&gt;
+  &lt;record ...&gt;
+    &lt;curve ...&gt;
+      {...}
+    &lt;/curve&gt;
+    {...}
+  &lt;/record&gt;
+  {...}
+&lt;/sequence&gt;
+{...}</code></pre></div></div><div id=the-sample-level class="section level2"><h2>The <code>&lt;sample/></code> level</h2><p>The sample constitutes the top level for one particular sample. The sample
+level may contain an infinite number of sequences measured for one sample.</p><div id=attributes-2 class="section level3"><h3>Attributes</h3><table><caption>Mandatory attributes <code>&lt;sample></code> node</caption><col width=16%><col width=18%><col width=13%><col width=30%><col width=20%><thead><tr class=header><th align=left>Identifier</th><th align=left>Data type</th><th align=left>Allows <code>NA</code>?</th><th align=left>Example</th><th align=left>Information</th></tr></thead><tbody><tr class=odd><td align=left>name</td><td align=left><code>number</code></td><td align=left>yes</td><td align=left><code>"LUM-21321"</code></td><td align=left>unique sample identifier</td></tr><tr class=even><td align=left>mineral</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"quartz"</code></td><td align=left>dominant mineral composition of the sample</td></tr><tr class=odd><td align=left>latitude</td><td align=left><code>numeric</code></td><td align=left>yes</td><td align=left><code>"52.4091392"</code></td><td align=left>latitude in decimal degrees of the sample origin</td></tr><tr class=even><td align=left>longitude</td><td align=left><code>numeric</code></td><td align=left>yes</td><td align=left><code>"-4.0702446"</code></td><td align=left>longitude in decimal degrees of the sample origin</td></tr><tr class=odd><td align=left>altitude</td><td align=left><code>numeric</code></td><td align=left>yes</td><td align=left><code>"50"</code></td><td align=left>altitude in m above see level</td></tr><tr class=even><td align=left>doi</td><td align=left><code>anyURI</code></td><td align=left>yes</td><td align=left><code>"10.1016/j.radmeas.2017.02.003"</code></td><td align=left>valid DOI with further information on the sample, if applicable</td></tr></tbody></table></div><div id=example-3 class="section level3"><h3>Example</h3><pre class=bash><code>{...}
+  &lt;sample name=&quot;LUM-21321&quot; mineral=&quot;quartz&quot; latitude=&quot;52.4091392&quot; longitude=&quot;-4.0702446&quot;
+   altitude=&quot;50&quot; doi=&quot;10.1016/j.radmeas.2017.02.003&quot;&gt;
+    &lt;sequence ...&gt;
+      &lt;record ...&gt;
+       &lt;curve ...&gt;
+        {...}
+       &lt;/curve&gt;
+       {...}
+      &lt;/record&gt;
+      {...}
+    &lt;/sequence&gt;
+    {...}
+  &lt;/sample&gt;
+{...}</code></pre></div></div><div id=the-xlum-level class="section level2"><h2>The <code>&lt;xlum/></code> level</h2><p>The <code>&lt;xlum></code> is the format parent node and it can contain an infinite number
+of samples. Only this level allows to set a licence for the distribution
+and usage of the data. All data within a particular <code>&lt;xlum></code> are considered
+distributed under the licence. You have to create new instances of the <code>&lt;xlum></code>
+to set different licences.</p><div id=attributes-3 class="section level3"><h3>Attributes</h3><table><caption>Mandatory attributes of <code>&lt;xlum></code> node</caption><col width=16%><col width=18%><col width=12%><col width=34%><col width=18%><thead><tr class=header><th align=left>Identifier</th><th align=left>Type</th><th align=left>Allows <code>NA</code>?</th><th align=left>Example</th><th align=left>Information</th></tr></thead><tbody><tr class=odd><td align=left>xmlns</td><td align=left><code>namespace</code></td><td align=left>no</td><td align=left><em>predefined</em></td><td align=left>Format specific namespace</td></tr><tr class=even><td align=left>lang</td><td align=left><code>string</code></td><td align=left>no</td><td align=left><em>predefined</em></td><td align=left>ISO 639-1 language code, must not be changed</td></tr><tr class=odd><td align=left>version</td><td align=left><code>numeric</code></td><td align=left>no</td><td align=left><code>"1.0"</code></td><td align=left>the <code>xlum</code> format version number relevant</td></tr><tr class=even><td align=left>flavour</td><td align=left><code>string</code></td><td align=left>no</td><td align=left><code>"generic"</code></td><td align=left>allows to specify a particular flavour of the format</td></tr><tr class=odd><td align=left>author</td><td align=left><code>list(string)</code></td><td align=left>yes</td><td align=left><code>"Max Planck; Marie Curie"</code></td><td align=left>names of the author(s) of this dataset</td></tr><tr class=even><td align=left>license</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"CC BY 4.0"</code></td><td align=left>license for the distribution of the dataset.</td></tr><tr class=odd><td align=left>doi</td><td align=left><code>anyURI</code></td><td align=left>yes</td><td align=left><code>"10.5281/zenodo.596252"</code></td><td align=left>A digital document identifier referencing the dataset already archive in a data repository</td></tr></tbody></table><table><caption>Allowed <code>licence</code> types</caption><col width=27%><col width=19%><col width=27%><col width=25%><thead><tr class=header><th align=left><code>licence</code></th><th align=left>Licence name</th><th align=left>Reference</th><th align=left>Comment</th></tr></thead><tbody><tr class=odd><td align=left><code>"CC BY 4.0"</code></td><td align=left>Creative commons</td><td align=left><a href=https://creativecommons.org class=uri>https://creativecommons.org</a></td><td align=left>all flavours of the creative commons license scheme</td></tr><tr class=even><td align=left><code>"Copyright"</code></td><td align=left>Copyright protected</td><td align=left>-</td><td align=left>data are copyright protected and cannot be used or distributed without the creator’s agreement</td></tr></tbody></table></div><div id=example-4 class="section level3"><h3>Example</h3><pre class=bash><code>{...}
+&lt;xlum xmlns:xlum=&quot;xlum.org&quot; lang=&quot;en&quot; formatVersion=&quot;1.0&quot; flavour=&quot;generic&quot; author=&quot;Marie Curie; Max Planck&quot; 
+  license=&quot;CC BY 4.0&quot; doi=&quot;NA&quot;&gt;
+  &lt;sample ...&gt;
+    &lt;sequence ...&gt;
+      &lt;record ...&gt;
+        &lt;curve ...&gt;
+         {...}
+        &lt;/curve&gt;
+        {...}
+      &lt;/record&gt;
+    &lt;/sequence&gt;
+    {...}
+  &lt;/sample&gt;
+  {...}
+&lt;/xlum&gt;
+{...}</code></pre></div></div><div id=general-parameters-all-nodes class="section level2"><h2>General parameters (all nodes)</h2><p>A few nodes are available on all node levels except the super node <code>&lt;xlum></code>. There are mainly of technical
+nature to ease the sequential of data storage during the measurement process.</p><table><caption>Attributes valid in all nodes</caption><col width=15%><col width=17%><col width=23%><col width=24%><col width=18%><thead><tr class=header><th align=left>Identifier</th><th align=left>Data type</th><th align=left>Allows <code>NA</code>?</th><th align=left>Example</th><th align=left>Information</th></tr></thead><tbody><tr class=odd><td align=left>state</td><td align=left><code>string</code></td><td align=left>yes</td><td align=left><code>"recording"</code></td><td align=left>defines the state of the node; only used by equipment manufactures</td></tr><tr class=even><td align=left>parentID</td><td align=left><code>token</code></td><td align=left>yes</td><td align=left><code>"201007145551910"</code></td><td align=left>unique identifying the parent node, the super node has the ID <code>0</code>, this is usually not needed but may help to store data</td></tr><tr class=odd><td align=left>comment</td><td align=left><code>String</code></td><td align=left>yes</td><td align=left><code>"what a wonderful sample"</code></td><td align=left>comment field</td></tr></tbody></table></div></div><div id=special-cases class="section level1"><h1>Special cases</h1><p>This section provides suggestions for attributes for particular types of measurements.
+These attributes are not compulsory, but may be used for the sake of consistency.</p><p>Either way, these metadata must not be required to store and analyse the data!</p><div id=pulsing-data class="section level2"><h2>Pulsing data</h2><p>In measurements with pulsed light stimulation data processing usually requires
+summations of photon counts on the hardware level, because it is neither meaningful
+nor feasible to store every single count in separate curves for photon arrival
+times of <span class="math inline">\(10^{-6} \leq \tau \leq 10^{-3}\)</span> s. Hence, multiple detector <code>&lt;curve></code> data may be stored per <code>&lt;record></code>,
+one for each (x) pulse(-s). The <code>&lt;record></code> node contains some additional metadata that may help
+to understand the data and the undertaken processing on the hardware level better.</p><table><caption>Additional metadata <code>&lt;record/></code> node pulsing data</caption><col width=27%><col width=21%><col width=16%><col width=34%><thead><tr class=header><th align=left>Identifier</th><th align=left>Data type</th><th align=left>Example</th><th align=left>Information</th></tr></thead><tbody><tr class=odd><td align=left>onTime</td><td align=left><code>numeric</code></td><td align=left><code>"1E-01"</code></td><td align=left>on time of stimulation per pulse, [s]</td></tr><tr class=even><td align=left>offTime</td><td align=left><code>numeric</code></td><td align=left><code>"1E-01"</code></td><td align=left>on time of stimulation per pulse, [s]</td></tr><tr class=odd><td align=left>nPulses</td><td align=left><code>numeric</code></td><td align=left><code>"10"</code></td><td align=left>number of stimulation pulses total</td></tr><tr class=even><td align=left>summations</td><td align=left><code>numeric</code></td><td align=left><code>"2"</code></td><td align=left>how many consecutive pulse records are summed (e.g. 10 pulses, 2 summations -> 5 records)</td></tr><tr class=odd><td align=left>channelsPerPulse</td><td align=left><code>numeric</code></td><td align=left><code>"1000"</code></td><td align=left>number of channels that are recorded in one curve</td></tr><tr class=even><td align=left>countsNormalized</td><td align=left><code>numeric</code></td><td align=left><code>"1"</code></td><td align=left>if not 0, counts per channel are normalized to counts per second (helpful with uneven distributed channel times)</td></tr></tbody></table><p>Also the curves contain additional metadata</p><table><caption>Additional metadata <code>&lt;curve></code> node pulsing data</caption><col width=23%><col width=14%><col width=13%><col width=48%><thead><tr class=header><th align=left>Identifier</th><th align=left>Data type</th><th align=left>Example</th><th align=left>Information</th></tr></thead><tbody><tr class=odd><td align=left>pulseID</td><td align=left><code>numeric</code></td><td align=left><code>"1"</code></td><td align=left>current pulse number</td></tr></tbody></table></div></div><div id=pratical-examples class="section level1"><h1>Pratical examples</h1><p>This section contains detailed examples for particular curve types in order
+to provide usable examples for the data format.</p><pre class=bash><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;xlum lang=&quot;en&quot; version=&quot;1.0&quot; flavour=&quot;xlum&quot; doiRef=&quot;&quot;&gt;
+ &lt;sample ...&gt;
+  &lt;sequence ...&gt;
+   &lt;record ...&gt;
+    &lt;curve ...&gt;
+     12 23 23 23 13 23
+    &lt;/curve&gt;
+   &lt;/record&gt;
+  &lt;/sequence&gt;
+ &lt;/sample&gt;
+&lt;/xlum&gt;</code></pre></div></div></article></main><footer class=footer><ul class=footer-links><li><a href=/xlum_specification/index.xml type=application/rss+xml target=_blank>RSS feed</a></li><li><a href=https://gohugo.io/ class=footer-links-kudos>Made with <img src=/xlum_specification/images/hugo-logo.png alt="Img link to Hugo website" width=22 height=22></a></li></ul></footer></div><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js></script>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/r.min.js></script>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/yaml.min.js></script>
+<script>hljs.configure({languages:[]}),hljs.initHighlightingOnLoad()</script><script src=/xlum_specification/js/math-code.js></script>
+<script async src=//cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/MathJax.js></script></body></html>
