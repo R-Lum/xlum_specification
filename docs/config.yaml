@@ -1,4 +1,4 @@
-baseurl: https://r-lum.github.io/xlum_specifications
+baseurl: https://github.com/R-Lum/xlum_specification
 languageCode: en-us
 title: XLUM-specification
 theme: hugo-lithium
@@ -18,7 +18,7 @@ menu:
       url: /about/
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
-  MathJaxVersion: 2.7.5
+  MathJaxVersion: 3.2.2
   description: A website built through Hugo and blogdown.
   favicon: favicon.ico
   highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
@@ -26,7 +26,7 @@ params:
     - r
     - yaml
   highlightjsTheme: github
-  highlightjsVersion: 9.12.0
+  highlightjsVersion: 11.5.1
   logo:
     alt: Logo
     height: 50
