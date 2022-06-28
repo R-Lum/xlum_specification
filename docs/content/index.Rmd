@@ -2,9 +2,21 @@
 title: "XLUM-file format Documentation"
 author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne"
 date: "version: 1.0 [`r Sys.Date()`]"
-output: 
-  html_document: 
-    fig_caption: yes
+params: 
+  output_format: "all"
+output:
+  # word_document:
+  #   toc: yes
+  bookdown::pdf_document2:
+     toc: yes
+     number_sections: true
+  bookdown::html_document2: 
+     theme: simplex
+     toc: yes
+     number_sections: true
+     toc_float:
+       collapsed: yes
+       smooth_scroll: yes
 ---
 
 ```{r setup, include=FALSE}

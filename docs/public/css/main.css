@@ -250,6 +250,10 @@ img {
   margin-left: 2px;
 }
 
+th, td {
+  border-bottom: 1px solid #ddd;
+}
+
 @media (min-width: 600px) {
   .header {
     padding: 25px 0;
