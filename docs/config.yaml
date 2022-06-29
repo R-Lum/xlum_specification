@@ -16,15 +16,22 @@ permalinks:
   post: /:year/:month/:day/:slug/
 menu:
   main:
+    - name: XLUM specification
+      url: /specification/
+      weight: 1
+      pre: "<i class=\"bi bi-journal-text\"></i>"
+    - name: XSD-Schema
+      url: /xsd-schema/
+      weight: 1000
+      pre: "<i class=\"bi bi bi-body-text\"></i>"
     - name: GitHub
       url: https://github.com/R-Lum/xlum_specification
-      weight: 1000
-    - name: XSD-Schema
-      url: https://raw.githubusercontent.com/R-Lum/xlum_specification/master/xsd_schema/xlum_schema.xsd
       weight: 3000
+      pre: "<i class=\"bi bi-arrow-up-right-square\"></i>"
     - name: About
       url: /about/
       weight: 9000
+      pre: "<i class=\"bi bi bi-question-square\"></i>"
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 3.2.2
@@ -35,7 +42,9 @@ params:
     - r
     - yaml
     - xml
-  highlightjsTheme: github
+    - bash
+    - sh
+  highlightjsTheme: xcode
   highlightjsVersion: 11.5.1
   logo:
     alt: Logo

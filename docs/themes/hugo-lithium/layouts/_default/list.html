@@ -1,6 +1,9 @@
 {{ partial "header.html" . }}
 
 <main class="content" role="main">
+  {{ if .IsHome }}
+    <meta http-equiv='refresh' content='0; URL=specification/'>
+  {{ end }}
 
   {{ if .Content }}
   <article class="article">

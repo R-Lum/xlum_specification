@@ -1,0 +1,10 @@
+---
+title: "XLUM XSD-schema"
+date: "2022-06-27"
+draft: false
+---
+ 
+```
+`r paste(readLines("https://raw.githubusercontent.com/R-Lum/xlum_specification/master/xsd_schema/xlum_schema.xsd"), 
+      collapse = "\n")` 
+```
