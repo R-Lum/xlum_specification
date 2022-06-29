@@ -24,14 +24,14 @@ menu:
       url: /xsd-schema/
       weight: 1000
       pre: "<i class=\"bi bi bi-body-text\"></i>"
-    - name: GitHub
-      url: https://github.com/R-Lum/xlum_specification
-      weight: 3000
-      pre: "<i class=\"bi bi-arrow-up-right-square\"></i>"
     - name: About
       url: /about/
-      weight: 9000
+      weight: 3000
       pre: "<i class=\"bi bi bi-question-square\"></i>"
+    - name: GitHub
+      url: https://github.com/R-Lum/xlum_specification
+      weight: 9000
+      pre: "<i class=\"bi bi-arrow-up-right-square\"></i>"
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 3.2.2

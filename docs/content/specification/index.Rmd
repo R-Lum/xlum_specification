@@ -1,7 +1,7 @@
 ---
 title: "XLUM-file format Documentation"
 author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne"
-date: "version: 1.0 [`r Sys.Date()`]"
+version: "version: 1.0 [`r Sys.Date()`]"
 type: "landing_page"
 params: 
   output_format: "all"

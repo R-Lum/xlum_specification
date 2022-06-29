@@ -2,6 +2,10 @@
 <main class="content" role="main">
   <article class="article">
     <h1 class="article-title">{{ .Title }}</h1>
+    <hr>
+    {{ if .Params.version }}
+      {{ .Params.version }}
+    {{ end }}
     <div class="article-content">
         {{ .Content }}
     </div>
