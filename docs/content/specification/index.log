@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.20)  30 JUN 2022 16:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.20)  30 JUN 2022 17:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -298,6 +298,23 @@ Package graphics Info: Driver file: pdftex.def on input line 107.
 )
 \Gin@req@height=\dimen180
 \Gin@req@width=\dimen181
+) (/usr/local/texlive/2022/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2022/05/18 v4.0.3 Extensive control of page headers and foote
+rs
+\f@nch@headwidth=\skip63
+\f@nch@O@elh=\skip64
+\f@nch@O@erh=\skip65
+\f@nch@O@olh=\skip66
+\f@nch@O@orh=\skip67
+\f@nch@O@elf=\skip68
+\f@nch@O@erf=\skip69
+\f@nch@O@olf=\skip70
+\f@nch@O@orf=\skip71
+) (/usr/local/texlive/2022/texmf-dist/tex/latex/titling/titling.sty
+Package: titling 2009/09/04 v2.1d maketitle typesetting
+\thanksmarkwidth=\skip72
+\thanksmargin=\skip73
+\droptitle=\skip74
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/bookmark/bookmark.sty
 Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
 (/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/hyperref.sty
@@ -411,7 +428,7 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 86.
 )
-\Hy@SectionHShift=\skip63
+\Hy@SectionHShift=\skip75
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
 File: bkm-pdftex.def 2020-11-06 v1.29 bookmark driver for pdfTeX (HO)
 \BKM@id=\count303
@@ -424,36 +441,36 @@ File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
 ) (./index.aux)
 \openout1 = `index.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Info: Redefining \microtypecontext on input line 120.
-Package microtype Info: Applying patch `item' on input line 120.
-Package microtype Info: Applying patch `toc' on input line 120.
-Package microtype Info: Applying patch `eqnum' on input line 120.
-Package microtype Info: Applying patch `footnote' on input line 120.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Info: Redefining \microtypecontext on input line 127.
+Package microtype Info: Applying patch `item' on input line 127.
+Package microtype Info: Applying patch `toc' on input line 127.
+Package microtype Info: Applying patch `eqnum' on input line 127.
+Package microtype Info: Applying patch `footnote' on input line 127.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 120.
+LaTeX Info: Redefining \showhyphens on input line 127.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -515,47 +532,55 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 120.
+Package hyperref Info: Link coloring OFF on input line 127.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-22.
+29.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-22.
+29.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-122.
+129.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-122.
+129.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 122.
+(Font)              <12> on input line 129.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 122.
+(Font)              <8> on input line 129.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 122.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 122
+(Font)              <6> on input line 129.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 129
 .
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 122
+LaTeX Font Info:    Trying to load font information for U+msb on input line 129
 .
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-) (./index.toc
+)
+<../../themes/hugo-lithium/static/images/logo.png, id=4, 82.80937pt x 89.58469p
+t>
+File: ../../themes/hugo-lithium/static/images/logo.png Graphic file (type png)
+<use ../../themes/hugo-lithium/static/images/logo.png>
+Package pdftex.def Info: ../../themes/hugo-lithium/static/images/logo.png  used
+ on input line 129.
+(pdftex.def)             Requested size: 28.45174pt x 30.77962pt.
+(./index.toc
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
 .
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/t1lmtt.fd
@@ -571,72 +596,77 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 \tf@toc=\write4
 \openout4 = `index.toc'.
 
+[1
+
+{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <../../t
+hemes/hugo-lithium/static/images/logo.png>]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-37.
+46.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 151.
-[1
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 160.
+[2
 
-{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 234.
-[2]
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 243.
+
 
 pdfTeX warning: pdflatex (file ./img/Curve_Level_Storage.pdf): PDF inclusion: f
 ound PDF version <1.7>, but at most version <1.5> allowed
-<img/Curve_Level_Storage.pdf, id=60, 392.46625pt x 776.9025pt>
+<img/Curve_Level_Storage.pdf, id=59, 392.46625pt x 776.9025pt>
 File: img/Curve_Level_Storage.pdf Graphic file (type pdf)
 <use img/Curve_Level_Storage.pdf>
-Package pdftex.def Info: img/Curve_Level_Storage.pdf  used on input line 292.
+Package pdftex.def Info: img/Curve_Level_Storage.pdf  used on input line 301.
 (pdftex.def)             Requested size: 328.58545pt x 650.44797pt.
 
-LaTeX Warning: Float too large for page by 35.96239pt on input line 297.
+LaTeX Warning: Float too large for page by 35.96239pt on input line 306.
 
-
-Overfull \hbox (29.83812pt too wide) in paragraph at lines 371--372
+[3] [4 <./img/Curve_Level_Storage.pdf>]
+Overfull \hbox (29.83812pt too wide) in paragraph at lines 380--381
 \T1/lmtt/m/n/10 YYYY-MM-DDThh:mm:ss[.mmm]Z 
  []
 
-[3] [4] [5 <./img/Curve_Level_Storage.pdf>] [6] [7] [8]
-Overfull \hbox (33.56389pt too wide) in paragraph at lines 715--715
+[5] [6] [7] [8]
+Overfull \hbox (33.56389pt too wide) in paragraph at lines 729--729
 []|\T1/lmtt/m/n/10 "10.1016/j.radmeas.2017.02.003"|  
  []
 
-[9] [10] [11] [12] (./index.aux) ) 
+[9] [10] [11] [12] [13] (./index.aux) ) 
 Here is how much of TeX's memory you used:
- 14364 strings out of 478300
- 228513 string characters out of 5845125
- 577611 words of memory out of 5000000
- 32100 multiletter control sequences out of 15000+600000
- 525806 words of font info for 133 fonts, out of 8000000 for 9000
+ 14640 strings out of 478300
+ 232977 string characters out of 5845125
+ 578565 words of memory out of 5000000
+ 32358 multiletter control sequences out of 15000+600000
+ 529388 words of font info for 137 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,7n,81p,1002b,460s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/usr/local/texlive/2022/texmf-dist/fonts/enc
-/dvips/lm/lm-rm.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-m
-athsy.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/us
-r/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/te
-xlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</usr/local/texlive/2022/te
-xmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2022/texmf-dist/f
-onts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1
-/public/lm/lmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm
-/lmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr12.pfb>
-</usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local
-/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/202
-2/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2022/texmf-di
-st/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/t
-ype1/public/lm/lmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public
-/lm/lmtk10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtt10
-.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></us
-r/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.
-pfb>
-Output written on index.pdf (12 pages, 1317339 bytes).
+ 74i,11n,81p,1002b,460s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/usr/local/texlive/2022/texmf-dist/font
+s/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm
+/lm-mathsy.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
+}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/loc
+al/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</usr/local/texlive/20
+22/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2022/texmf-d
+ist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/
+type1/public/lm/lmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/publ
+ic/lm/lmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr12
+.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/
+local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texliv
+e/2022/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2022/tex
+mf-dist/fonts/type1/public/lm/lmro10.pfb></usr/local/texlive/2022/texmf-dist/fo
+nts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/
+public/lm/lmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/l
+mtk10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
+</usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></usr/loc
+al/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtto10.pfb></usr/local/texliv
+e/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/te
+xlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on index.pdf (13 pages, 1388296 bytes).
 PDF statistics:
- 313 PDF objects out of 1000 (max. 8388607)
- 253 compressed objects within 3 object streams
- 78 named destinations out of 1000 (max. 500000)
- 30822 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 332 PDF objects out of 1000 (max. 8388607)
+ 265 compressed objects within 3 object streams
+ 79 named destinations out of 1000 (max. 500000)
+ 32875 words of extra memory for PDF output out of 35830 (max. 10000000)
 

@@ -2,18 +2,31 @@
 title: "XLUM-file Format Documentation"
 author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne"
 version: "version: 1.0 [`r Sys.Date()`]"
+date: "version: 1.0 [`r Sys.Date()`]"
 output:
   bookdown::pdf_document2:
      toc: yes
      number_sections: true
+     papersize: a4
   blogdown::html_page:
     toc: yes
     number_sections: true 
+header-includes: 
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \fancyfoot[L]{CC BY 4.0}
+  - \fancyfoot[R]{XLUM specification}
+  - \usepackage{titling}
+  - \predate{\begin{center}\large}
+  - \postdate{\\
+       \vspace{1em}
+       \includegraphics[width=10mm]{../../themes/hugo-lithium/static/images/logo.png}\end{center}}
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 ```
+\clearpage{}
 
 # Motivation and principles   
 
@@ -171,20 +184,24 @@ a heating element.
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-  <curve component="heating element" startDate="2021-02-14T22:57:00.0Z" curveType="predefined" duaration="5" 
-    offset="0" xValues="NA" yValues="NA" tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
+  <curve component="heating element" startDate="2021-02-14T22:57:00.0Z" 
+    curveType="predefined" duaration="5" 
+    offset="0" xValues="NA" yValues="NA" 
+    tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
     tLabel="time" vLabel="temperature" xUnit="NA" yUnit="NA" vUnit="K" tUnit="s">
         293 303 313 323 333
   </curve>
-  <curve component="thermo couple" startDate="2021-02-14T22:57:00.0Z" curveType="measured" duaration="5" 
+  <curve component="thermo couple" startDate="2021-02-14T22:57:00.0Z" 
+    curveType="measured" duaration="5" 
     offset="0" xValues="NA" yValues="NA" tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
     vLabel="temperature" tLabel="time" xUnit="NA" yUnit="NA" vUnit="K" tUnit="s">
         293 303 313 323 333
   </curve>
-  <curve component="EMI 9123QB15" startDate="2021-02-14T22:57:00.0Z" curveType="measured" duaration="5" 
-    offset="0" xValues="NA" yValues="NA" tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
-    vLabel="luminescence" tLabel="time" xUnit="NA" yUnit="NA" vUnit="cts" tUnit="s" 
-    detectionWindow="380 nm" filter="Hoya U340 + Delta 365/40">
+  <curve component="EMI 9123QB15" startDate="2021-02-14T22:57:00.0Z" 
+    curveType="measured" duaration="5" offset="0" xValues="NA" yValues="NA" 
+    tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
+    vLabel="luminescence" tLabel="time" xUnit="NA" yUnit="NA" vUnit="cts" 
+    tUnit="s" detectionWindow="380 nm" filter="Hoya U340 + Delta 365/40">
         20 25 32 41 46
   </curve>
 {...}
@@ -192,7 +209,7 @@ a heating element.
 
 One curve is related to one technical device. To define a accurate time window, 
 the parameters *duration* and *offset* should be used. These parameters are related to the 
-start of the parent `<record>` node.
+start of the parent `<record/>` node.
 
 ## The `<record/>` level
 
@@ -312,7 +329,8 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-<sequence position="1" name="SAR measurment" fileName="Testsequence.seq" software="DeviceStudio, 2.37">
+<sequence position="1" name="SAR measurment" 
+  fileName="Testsequence.seq" software="DeviceStudio, 2.37">
   <record ...>
     <curve ...>
       {...}
@@ -398,7 +416,8 @@ Table: Allowed `license` types
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-<xlum xmlns:xlum="xlum.org" lang="en" formatVersion="1.0" flavour="generic" author="Marie Curie; Max Planck" 
+<xlum xmlns:xlum="xlum.org" lang="en" 
+  formatVersion="1.0" flavour="generic" author="Marie Curie; Max Planck" 
   license="CC BY 4.0" doi="NA">
   <sample ...>
     <sequence ...>

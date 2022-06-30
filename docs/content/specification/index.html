@@ -2,14 +2,33 @@
 title: "XLUM-file Format Documentation"
 author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne"
 version: "version: 1.0 [2022-06-30]"
+date: "version: 1.0 [2022-06-30]"
 output:
   bookdown::pdf_document2:
      toc: yes
      number_sections: true
+     papersize: a4
   blogdown::html_page:
     toc: yes
     number_sections: true 
+header-includes: 
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \fancyfoot[L]{CC BY 4.0}
+  - \fancyfoot[R]{XLUM specification}
+  - \usepackage{titling}
+  - \predate{\begin{center}\large}
+  - \postdate{\\
+       \vspace{1em}
+       \includegraphics[width=10mm]{../../themes/hugo-lithium/static/images/logo.png}\end{center}}
 ---
+
+
+
+
+
+
+
 
 
 <div id="TOC">
@@ -368,26 +387,30 @@ relevance for the measurement of luminescence are suitable. Typical examples:</p
 others are only meaningfully in combination. For instance, providing information on the detection window is not meaningful for
 a heating element.</p>
 <pre class="bash"><code>{...}
-  &lt;curve component=&quot;heating element&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; curveType=&quot;predefined&quot; duaration=&quot;5&quot; 
-    offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1 2 3 4 5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
+  &lt;curve component=&quot;heating element&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; 
+    curveType=&quot;predefined&quot; duaration=&quot;5&quot; 
+    offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; 
+    tValues=&quot;1 2 3 4 5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
     tLabel=&quot;time&quot; vLabel=&quot;temperature&quot; xUnit=&quot;NA&quot; yUnit=&quot;NA&quot; vUnit=&quot;K&quot; tUnit=&quot;s&quot;&gt;
         293 303 313 323 333
   &lt;/curve&gt;
-  &lt;curve component=&quot;thermo couple&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; curveType=&quot;measured&quot; duaration=&quot;5&quot; 
+  &lt;curve component=&quot;thermo couple&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; 
+    curveType=&quot;measured&quot; duaration=&quot;5&quot; 
     offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1 2 3 4 5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
     vLabel=&quot;temperature&quot; tLabel=&quot;time&quot; xUnit=&quot;NA&quot; yUnit=&quot;NA&quot; vUnit=&quot;K&quot; tUnit=&quot;s&quot;&gt;
         293 303 313 323 333
   &lt;/curve&gt;
-  &lt;curve component=&quot;EMI 9123QB15&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; curveType=&quot;measured&quot; duaration=&quot;5&quot; 
-    offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1 2 3 4 5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
-    vLabel=&quot;luminescence&quot; tLabel=&quot;time&quot; xUnit=&quot;NA&quot; yUnit=&quot;NA&quot; vUnit=&quot;cts&quot; tUnit=&quot;s&quot; 
-    detectionWindow=&quot;380 nm&quot; filter=&quot;Hoya U340 + Delta 365/40&quot;&gt;
+  &lt;curve component=&quot;EMI 9123QB15&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; 
+    curveType=&quot;measured&quot; duaration=&quot;5&quot; offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; 
+    tValues=&quot;1 2 3 4 5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
+    vLabel=&quot;luminescence&quot; tLabel=&quot;time&quot; xUnit=&quot;NA&quot; yUnit=&quot;NA&quot; vUnit=&quot;cts&quot; 
+    tUnit=&quot;s&quot; detectionWindow=&quot;380 nm&quot; filter=&quot;Hoya U340 + Delta 365/40&quot;&gt;
         20 25 32 41 46
   &lt;/curve&gt;
 {...}</code></pre>
 <p>One curve is related to one technical device. To define a accurate time window,
 the parameters <em>duration</em> and <em>offset</em> should be used. These parameters are related to the
-start of the parent <code>&lt;record&gt;</code> node.</p>
+start of the parent <code>&lt;record/&gt;</code> node.</p>
 </div>
 </div>
 <div id="the-record-level" class="section level2" number="3.2">
@@ -703,7 +726,8 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.</p>
 <div id="example-2" class="section level3" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Example</h3>
 <pre class="bash"><code>{...}
-&lt;sequence position=&quot;1&quot; name=&quot;SAR measurment&quot; fileName=&quot;Testsequence.seq&quot; software=&quot;DeviceStudio, 2.37&quot;&gt;
+&lt;sequence position=&quot;1&quot; name=&quot;SAR measurment&quot; 
+  fileName=&quot;Testsequence.seq&quot; software=&quot;DeviceStudio, 2.37&quot;&gt;
   &lt;record ...&gt;
     &lt;curve ...&gt;
       {...}
@@ -924,7 +948,8 @@ to set different licenses.</p>
 <div id="example-4" class="section level3" number="3.5.2">
 <h3><span class="header-section-number">3.5.2</span> Example</h3>
 <pre class="bash"><code>{...}
-&lt;xlum xmlns:xlum=&quot;xlum.org&quot; lang=&quot;en&quot; formatVersion=&quot;1.0&quot; flavour=&quot;generic&quot; author=&quot;Marie Curie; Max Planck&quot; 
+&lt;xlum xmlns:xlum=&quot;xlum.org&quot; lang=&quot;en&quot; 
+  formatVersion=&quot;1.0&quot; flavour=&quot;generic&quot; author=&quot;Marie Curie; Max Planck&quot; 
   license=&quot;CC BY 4.0&quot; doi=&quot;NA&quot;&gt;
   &lt;sample ...&gt;
     &lt;sequence ...&gt;
