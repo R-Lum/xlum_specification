@@ -1,10 +1,17 @@
 {{ partial "header.html" . }}
 <main class="content" role="main">
   <article class="article">
-    <h1 class="article-title">{{ .Title }}</h1>
+    <h1 class="article-title">
+      {{ .Title }}
+    </h1>
     <hr>
     {{ if .Params.version }}
       {{ .Params.version }}
+    <div align="right" class="article-content">
+      <a href="specification/index.pdf" download="XLUM_specification.pdf">
+        <i class="bi bi-file-earmark-pdf"></i>&nbsp; download as PDF
+      </a>
+    </div>
     {{ end }}
     <div class="article-content">
         {{ .Content }}

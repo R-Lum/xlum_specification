@@ -1,30 +1,21 @@
 ---
-title: "XLUM-file format Documentation"
+title: "XLUM-file Format Documentation"
 author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne"
 version: "version: 1.0 [`r Sys.Date()`]"
-type: "landing_page"
-params: 
-  output_format: "all"
 output:
-  # word_document:
-  #   toc: yes
   bookdown::pdf_document2:
      toc: yes
      number_sections: true
-  bookdown::html_document2: 
-     theme: simplex
-     toc: yes
-     number_sections: true
-     toc_float:
-       collapsed: yes
-       smooth_scroll: yes
+  blogdown::html_page:
+    toc: yes
+    number_sections: true 
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-# Motivation and principles  
+# Motivation and principles   
 
 This document details the `XLUM` format, an XML based file format for long-term data preservation and exchange of luminescence data. The format is readable by humans and machines, and the data can be easily checked with any text reader on any major operating system. This design allows a platform-independent operation. The following documentation provides essential information on the file `XLUM` format  and accounts for the needs for individual flexible data analysis, even with self-written software applications.
 
