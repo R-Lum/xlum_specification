@@ -37,7 +37,7 @@ Three simple design principles underpin the format specification:
 # General description
 
 The `XLUM`-format is an [XML](https://www.w3.org/xml) derivative. The base data structure is a 
-tree with five nodes storing the data. Each level has its unique denotation.
+tree with five nodes types storing the data. Each level has its unique denotation.
 
 The levels and a short introduction is given in the table below. A detailed description can be found in the following sections. 
 Nodes represent each level in the structure. **Only `<curve>` nodes contain physical quantities, such as luminescence data** all other nodes are parent nodes of `<curve>` 
@@ -111,7 +111,12 @@ separated by white space. Example:
 
 Values in the node are real numbers (-1e-307 $\leqslant x \leqslant$ 1e+307; $x \in \mathbb{R}$).
 Scientific 'E'/'e' notations of numbers are explicitly allowed, example: 1e+2 for 100 or 1e-2 for 0.01.
-Decimal separator is a `.` (dot).
+Decimal separator is a `.` (dot). **Other separators, for instance to separate groups of numbers
+are not allowed** to avoid decimal delimiter problems. Examples:  
+
+* 10000.00 -> OK
+* 10 000.00 -> NOT OK
+* 10,000.00 -> NOT OK
 
 For consistency reasons, the value in the node span an array with dimensions 
 defined through the node attributes `xValues`, `yValues` and `tValues` (see Fig. \@ref(fig:fig1)).
@@ -177,17 +182,17 @@ a heating element.
 {...}
   <curve component="heating element" startDate="2021-02-14T22:57:00.0Z" curveType="predefined" duaration="5" 
     offset="0" xValues="NA" yValues="NA" tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
-    tLabel="time" vLabel="temperature" xUnit="" yUnit="" vUnit="K" tUnit="s">
+    tLabel="time" vLabel="temperature" xUnit="NA" yUnit="NA" vUnit="K" tUnit="s">
         293 303 313 323 333
   </curve>
   <curve component="thermo couple" startDate="2021-02-14T22:57:00.0Z" curveType="measured" duaration="5" 
     offset="0" xValues="NA" yValues="NA" tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
-    vLabel="temperature" tLabel="time" xUnit="" yUnit="" vUnit="K" tUnit="s">
+    vLabel="temperature" tLabel="time" xUnit="NA" yUnit="NA" vUnit="K" tUnit="s">
         293 303 313 323 333
   </curve>
   <curve component="EMI 9123QB15" startDate="2021-02-14T22:57:00.0Z" curveType="measured" duaration="5" 
     offset="0" xValues="NA" yValues="NA" tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
-    vLabel="luminescence" tLabel="time" xUnit="" yUnit="" vUnit="cts" tUnit="s" 
+    vLabel="luminescence" tLabel="time" xUnit="NA" yUnit="NA" vUnit="cts" tUnit="s" 
     detectionWindow="380 nm" filter="Hoya U340 + Delta 365/40">
         20 25 32 41 46
   </curve>
@@ -203,7 +208,7 @@ start of the parent `<record>` node.
 A `<record>` defines one process involving many components, hence `<record>` may 
 contain $1\leq n\leq Inf; n \in \mathbb{Z}$ `<curve>` nodes.  A record can also be understood 
 as one step in a measurement sequence, e.g., a TL measurement. All curves within the record should have been 
-detected within the same time frame defined through the attributes `<startDate>` and `<endDate>`.
+detected within the same time frame defined through the attributes `<startDate>` and the duration of the step.
 
 ### Attributes
 
@@ -237,7 +242,8 @@ physical information a stored in the `<curve>` node.
   |`"UV-RF"`             | radiofluorescence with detection in the UV wavelength range    |
   |`"IR-RF"`             | radiofluorescence with detection in the infrared wavelength range    |
   |`"IR-PL"`             | infrared photoluminescence    |
-  |`"OSL"`               | optically stimulated luminescence                    |
+  |`"OSL"`               | optically stimulated luminescence (wavelength unspecified)|
+  |`"BSL"`               | blue optically stimulated luminescence                    |
   |`"GSL"`               | green optically stimulated luminescence                    |
   |`"VSL"`               | violet optically stimulated luminescence                    |
   |`"YSL"`               | yellow optically stimulated luminescence                    |
@@ -251,13 +257,13 @@ valid entries for  `sampleConditions` are:
 
   |`sampleCondition`   |  Information        |
   |:-------------------|:--------------------|
-  |`"Natural"`            | Natural          |
-  |`"Natural+Dose"`       |Natural+Dose     |
-  |`"Bleach"`             |  Bleach  |
-  |`"Bleach+Dose"`        |  Bleach+Dose  |
-  |`"Nat.(Bleach)"`       |  Nat.(Bleach)  |
-  |`"Nat.+Dose(Bleach)"`  |  Nat.+Dose(Bleach) |
-  |`"Dose"`               |  Dose  |
+  |`"Natural"`            | Natural luminescence signal   |
+  |`"Natural+Dose"`       | Natural luminescence signal with additive dose  |
+  |`"Bleach"`             |  Artificially depleted luminescence   |
+  |`"Bleach+Dose"`        |  Artificially depleted luminescence with an additive dose |
+  |`"Nat.(Bleach)"`       |  Naturally depleted luminescence |
+  |`"Nat.+Dose(Bleach)"`  |  Naturally depleted luminescence with dose |
+  |`"Dose"`               |  Artificially irradiated sample  |
   |`"Background"`         |  Background |
   
   Table: Valid values for `sampleConditions`
@@ -279,7 +285,7 @@ The following examples consists of two records.
         {...}
       </curve>
     </record>
-    <record recordType="bleach" sequenceStepNumber="2" sampleCondition="NA">
+    <record recordType="bleaching" sequenceStepNumber="2" sampleCondition="NA">
       <curve ...>
         {...}
       </curve>
@@ -291,7 +297,7 @@ The following examples consists of two records.
 
 A sequence describes multiple measurements sequentially used at **one** aliquot, 
 for instance as cup/disc with multiple grains or a single grain. Hence, another
-aliquot from the **same** sample needs to be wrapped in a new `<sequence>` node. 
+aliquot from the **same** sample and the sample sequence needs to be wrapped in a new `<sequence/>` node. 
 Naturally the information stored an that level can be very verbose, but are limited to  
 a few required attributes only. In the luminescence context a sequence can fit, e.g., 
 a SAR protocol, but also a succession of protocols measured on one aliquot.
@@ -300,7 +306,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.
 
   |Identifier     |Type         |  Allows `NA`?    |  Example                | Information        |
   |:------------- |:------------|:-----------------|:------------------------|:-------------------|
-  |position       |`numeric`    |no                |`"42"`                   | position of aliquot in the reader, can be `1` in case samples are changed manually |
+  |position       |`numeric`    |no                |`"42"`                   | position of aliquot in the reader, can be `0` in case samples are changed manually, i.e. the equipment has only one single measurement position |
   |name           |`string`     |yes               |`"SAR measurement"`      | name of the sequence |
   |fileName       |`string`     |yes               |`"SAR_OSL.seq"`          | sequence file so far applicable |
   |software       |`string`     |yes               |`"Sequence Editor 4.4"`  | software used to write the sequence if applicable |
@@ -315,7 +321,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-<sequence position="1" name="SAR measuremt" fileName="Testsequence.seq" software="DeviceStudio, 2.37">
+<sequence position="1" name="SAR measurment" fileName="Testsequence.seq" software="DeviceStudio, 2.37">
   <record ...>
     <curve ...>
       {...}
@@ -368,10 +374,10 @@ level may contain an infinite number of sequences measured for one sample.
 ## The `<xlum/>` level 
 
 The `<xlum>` is the format parent node and it can contain an infinite number
-of samples. Only this level allows to set a licence for the distribution 
+of samples. Only this level allows to set a license for the distribution 
 and usage of the data. All data within a particular `<xlum>` are considered
-distributed under the licence. You have to create new instances of the `<xlum>` 
-to set different licences. 
+distributed under the license. You have to create new instances of the `<xlum>` 
+to set different licenses. 
 
 ### Attributes
 
@@ -380,7 +386,7 @@ to set different licences.
   xmlns         |`namespace`    |no       | *predefined*               | Format specific namespace
   lang          |`string`      |no        | *predefined*              | ISO 639-1 language code, must not be changed
   version       |`numeric`      |no        |`"1.0"`                     | the `xlum` format version number relevant |
-  flavour       |`string`       |no        |`"generic"`                 | allows to specify a particular flavour of the format
+  flavour       |`string`       |no        |`"generic"`                 | allows to specify a particular flavour of the format, for instance for particular equipment
   author        |`list(string)` |yes       |`"Max Planck; Marie Curie"` | names of the author(s) of this dataset
   license       |`string`       |yes       |`"CC BY 4.0"`               | license for the distribution of the dataset.
   doi           |`anyURI`       |yes       |`"10.5281/zenodo.596252"`   | A digital document identifier referencing the dataset already archive in a data repository
@@ -388,12 +394,13 @@ to set different licences.
   Table: Mandatory attributes of `<xlum>` node
   
 
-|`licence`            | Licence name  |Reference            |Comment            |
+|`license`            | License name  |Reference            |Comment            |
 |:--------------------|:--------------|:--------------------|:------------------|
-`"CC BY 4.0"`         |Creative commons| https://creativecommons.org | all flavours of the creative commons license scheme
-`"Copyright"`         |Copyright protected | -            | data are copyright protected and cannot be used or distributed without the creator's agreement 
+`"CC BY"`         |Creative commons| https://creativecommons.org | all flavours of the creative commons license scheme (e.g., CC BY-SA, CC BY-NC)
+`"CC0"`         |Creative Commons Public Domain Dedication | https://creativecommons.org | you give up the copyright on your data and make it public domain. Please note this cannot be revoked!
+`"Copyright"`         |Copyright protected | -            | Data are copyright protected and cannot be used or distributed without the creator's agreement 
 
-Table: Allowed `licence` types 
+Table: Allowed `license` types 
 
 
 ### Example
@@ -420,13 +427,13 @@ Table: Allowed `licence` types
 
 ## General parameters (all nodes)
 
-A few nodes are available on all node levels except the super node `<xlum>`. There are mainly of technical 
+A few attributes are available on all node levels except the root node `<xlum>`. There are mainly of technical 
 nature to ease the sequential of data storage during the measurement process.
 
   |Identifier    |Data type       |Allows `NA`?         |Example               |Information      |
   |:-------------|:---------------|:--------------------|:---------------------|:----------------|
   |state        |`string`         |yes                  |`"recording"`         |defines the state of the node; only used by equipment manufactures 
-  |parentID     |`token`         |yes                  |`"201007145551910"`   |unique identifying the parent node, the super node has the ID `0`, this is usually not needed but may help to store data |
+  |parentID     |`token`         |yes                  |`"201007145551910"`   |unique identifying the parent node, the root node has the ID `0`, this is usually not needed but may help to store data |
   |comment      |`String`         |yes                  |`"what a wonderful sample"`| comment field |
   
   Table: Attributes valid in all nodes
@@ -438,14 +445,15 @@ These attributes are not compulsory, but may be used for the sake of consistency
 
 Either way, these metadata must not be required to store and analyse the data!
 
-## Pulsing data
+## Pulsing data (optional)
 
 In measurements with pulsed light stimulation data processing usually requires 
 summations of photon counts on the hardware level, because it is neither meaningful 
 nor feasible to store every single count in separate curves for photon arrival 
-times of $10^{-6} \leq \tau \leq 10^{-3}$ s. Hence, multiple detector `<curve>` data may be stored per `<record>`, 
-one for each (x) pulse(-s). The `<record>` node  contains some additional metadata that may help 
-to understand the data and the undertaken processing on the hardware level better.
+times of $10^{-6} \leq \tau \leq 10^{-3}$ s. Hence, multiple detector `<curve/>` data may be stored per `<record/>`, 
+one for each (x) pulse(-s). The `<record/>` node  contains some additional metadata that may help 
+to understand the data and the undertaken processing on the hardware level better. All attributes
+are optional.
 
   |Identifier        | Data type    |Example    |Information            |
   |:-----------------|:-------------|:----------|:----------------------|
@@ -454,7 +462,7 @@ to understand the data and the undertaken processing on the hardware level bette
   |nPulses           |`numeric`     |`"10"`     | number of stimulation pulses total     |
   |summations        |`numeric`     |`"2"`     | how many consecutive pulse records are summed (e.g. 10 pulses, 2 summations -> 5 records) |
   |channelsPerPulse  |`numeric`     |`"1000"`   | number of channels that are recorded in one curve      |
-  |countsNormalized  |`numeric`     |`"1"`    |  if not 0, counts per channel are normalized to counts per second (helpful with uneven distributed channel times) |
+  |countsNormalised  |`numeric`     |`"1"`    |  if not 0, counts per channel are normalized to counts per second (helpful with uneven distributed channel times) |
   
   Table: Additional metadata `<record/>` node pulsing data
   

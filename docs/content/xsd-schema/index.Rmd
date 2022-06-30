@@ -5,6 +5,6 @@ draft: false
 ---
  
 ```
-`r paste(readLines("https://raw.githubusercontent.com/R-Lum/xlum_specification/master/xsd_schema/xlum_schema.xsd"), 
+`r paste(readLines("../../../xsd_schema/xlum_schema.xsd"), 
       collapse = "\n")` 
 ```

@@ -13,8 +13,7 @@
       
       <guid>https://r-lum.github.io/xlum_specification/about/</guid>
       <description>XLUM Specification of the XLUM format to exchange and archive luminescence data.
-Contributors NAME GitHub ID ROLE AFFILIATION Sebastian Kreutzer RLumSK creator, maintainer Geography &amp;amp; Earth Sciences, Aberystwyth University, GB (present: Institute of Geography, Heidelberg University, DE) Steve Grehl SteveGrehl creator, author HUK-Coburg, Coburg, Germany Michael Höhne - creator, author Freiberg Instruments GmbH, DE External bindings XLUM has the following external bindings and support
-BINDING TRHOUGH LINK RESPONSIBLE R R package &#39;xlum&#39; https://github.</description>
+Contributors     NAME GitHub ID ROLE AFFILIATION    Sebastian Kreutzer RLumSK creator, maintainer Geography &amp;amp; Earth Sciences, Aberystwyth University, GB (present: Institute of Geography, Heidelberg University, DE)  Steve Grehl SteveGrehl creator, author HUK-Coburg, Coburg, Germany  Michael Höhne - creator, author Freiberg Instruments GmbH, DE     External bindings XLUM has the following external bindings and support</description>
     </item>
     
     <item>

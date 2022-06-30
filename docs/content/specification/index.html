@@ -1,7 +1,7 @@
 ---
 title: "XLUM-file format Documentation"
 author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne"
-version: "version: 1.0 [2022-06-29]"
+version: "version: 1.0 [2022-06-30]"
 type: "landing_page"
 params: 
   output_format: "all"
@@ -35,7 +35,7 @@ output:
 <div id="general-description" class="section level1">
 <h1>General description</h1>
 <p>The <code>XLUM</code>-format is an <a href="https://www.w3.org/xml">XML</a> derivative. The base data structure is a
-tree with five nodes storing the data. Each level has its unique denotation.</p>
+tree with five nodes types storing the data. Each level has its unique denotation.</p>
 <p>The levels and a short introduction is given in the table below. A detailed description can be found in the following sections.
 Nodes represent each level in the structure. <strong>Only <code>&lt;curve&gt;</code> nodes contain physical quantities, such as luminescence data</strong> all other nodes are parent nodes of <code>&lt;curve&gt;</code>
 to structure the dataset and ship additional metadata.</p>
@@ -144,7 +144,13 @@ separated by white space. Example:</p>
 <pre class="bash"><code>&lt;curve&gt;59.5167 109.5164 149.7003 109.5170 156.2654&lt;/curve&gt;</code></pre>
 <p>Values in the node are real numbers (-1e-307 <span class="math inline">\(\leqslant x \leqslant\)</span> 1e+307; <span class="math inline">\(x \in \mathbb{R}\)</span>).
 Scientific ‘E’/‘e’ notations of numbers are explicitly allowed, example: 1e+2 for 100 or 1e-2 for 0.01.
-Decimal separator is a <code>.</code> (dot).</p>
+Decimal separator is a <code>.</code> (dot). <strong>Other separators, for instance to separate groups of numbers
+are not allowed</strong> to avoid decimal delimiter problems. Examples:</p>
+<ul>
+<li>10000.00 -&gt; OK</li>
+<li>10 000.00 -&gt; NOT OK</li>
+<li>10,000.00 -&gt; NOT OK</li>
+</ul>
 <p>For consistency reasons, the value in the node span an array with dimensions
 defined through the node attributes <code>xValues</code>, <code>yValues</code> and <code>tValues</code> (see Fig. <a href="#fig:fig1">1</a>).</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig1"></span>
@@ -332,17 +338,17 @@ a heating element.</p>
 <pre class="bash"><code>{...}
   &lt;curve component=&quot;heating element&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; curveType=&quot;predefined&quot; duaration=&quot;5&quot; 
     offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1 2 3 4 5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
-    tLabel=&quot;time&quot; vLabel=&quot;temperature&quot; xUnit=&quot;&quot; yUnit=&quot;&quot; vUnit=&quot;K&quot; tUnit=&quot;s&quot;&gt;
+    tLabel=&quot;time&quot; vLabel=&quot;temperature&quot; xUnit=&quot;NA&quot; yUnit=&quot;NA&quot; vUnit=&quot;K&quot; tUnit=&quot;s&quot;&gt;
         293 303 313 323 333
   &lt;/curve&gt;
   &lt;curve component=&quot;thermo couple&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; curveType=&quot;measured&quot; duaration=&quot;5&quot; 
     offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1 2 3 4 5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
-    vLabel=&quot;temperature&quot; tLabel=&quot;time&quot; xUnit=&quot;&quot; yUnit=&quot;&quot; vUnit=&quot;K&quot; tUnit=&quot;s&quot;&gt;
+    vLabel=&quot;temperature&quot; tLabel=&quot;time&quot; xUnit=&quot;NA&quot; yUnit=&quot;NA&quot; vUnit=&quot;K&quot; tUnit=&quot;s&quot;&gt;
         293 303 313 323 333
   &lt;/curve&gt;
   &lt;curve component=&quot;EMI 9123QB15&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; curveType=&quot;measured&quot; duaration=&quot;5&quot; 
     offset=&quot;0&quot; xValues=&quot;NA&quot; yValues=&quot;NA&quot; tValues=&quot;1 2 3 4 5&quot; xLabel=&quot;NA&quot; yLabel=&quot;NA&quot;
-    vLabel=&quot;luminescence&quot; tLabel=&quot;time&quot; xUnit=&quot;&quot; yUnit=&quot;&quot; vUnit=&quot;cts&quot; tUnit=&quot;s&quot; 
+    vLabel=&quot;luminescence&quot; tLabel=&quot;time&quot; xUnit=&quot;NA&quot; yUnit=&quot;NA&quot; vUnit=&quot;cts&quot; tUnit=&quot;s&quot; 
     detectionWindow=&quot;380 nm&quot; filter=&quot;Hoya U340 + Delta 365/40&quot;&gt;
         20 25 32 41 46
   &lt;/curve&gt;
@@ -357,7 +363,7 @@ start of the parent <code>&lt;record&gt;</code> node.</p>
 <p>A <code>&lt;record&gt;</code> defines one process involving many components, hence <code>&lt;record&gt;</code> may
 contain <span class="math inline">\(1\leq n\leq Inf; n \in \mathbb{Z}\)</span> <code>&lt;curve&gt;</code> nodes. A record can also be understood
 as one step in a measurement sequence, e.g., a TL measurement. All curves within the record should have been
-detected within the same time frame defined through the attributes <code>&lt;startDate&gt;</code> and <code>&lt;endDate&gt;</code>.</p>
+detected within the same time frame defined through the attributes <code>&lt;startDate&gt;</code> and the duration of the step.</p>
 <div id="attributes" class="section level3">
 <h3>Attributes</h3>
 <table>
@@ -478,29 +484,33 @@ physical information a stored in the <code>&lt;curve&gt;</code> node.</p>
 </tr>
 <tr class="odd">
 <td align="left"><code>"OSL"</code></td>
-<td align="left">optically stimulated luminescence</td>
+<td align="left">optically stimulated luminescence (wavelength unspecified)</td>
 </tr>
 <tr class="even">
+<td align="left"><code>"BSL"</code></td>
+<td align="left">blue optically stimulated luminescence</td>
+</tr>
+<tr class="odd">
 <td align="left"><code>"GSL"</code></td>
 <td align="left">green optically stimulated luminescence</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>"VSL"</code></td>
 <td align="left">violet optically stimulated luminescence</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>"YSL"</code></td>
 <td align="left">yellow optically stimulated luminescence</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>"POSL"</code></td>
 <td align="left">pulsed optical stimulated luminescence</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>"pause"</code></td>
 <td align="left">pause</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>"custom"</code></td>
 <td align="left">any undefined or custom record type not listed above</td>
 </tr>
@@ -509,6 +519,10 @@ physical information a stored in the <code>&lt;curve&gt;</code> node.</p>
 <p>valid entries for <code>sampleConditions</code> are:</p>
 <table>
 <caption>Valid values for <code>sampleConditions</code></caption>
+<colgroup>
+<col width="48%" />
+<col width="51%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left"><code>sampleCondition</code></th>
@@ -518,31 +532,31 @@ physical information a stored in the <code>&lt;curve&gt;</code> node.</p>
 <tbody>
 <tr class="odd">
 <td align="left"><code>"Natural"</code></td>
-<td align="left">Natural</td>
+<td align="left">Natural luminescence signal</td>
 </tr>
 <tr class="even">
 <td align="left"><code>"Natural+Dose"</code></td>
-<td align="left">Natural+Dose</td>
+<td align="left">Natural luminescence signal with additive dose</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>"Bleach"</code></td>
-<td align="left">Bleach</td>
+<td align="left">Artificially depleted luminescence</td>
 </tr>
 <tr class="even">
 <td align="left"><code>"Bleach+Dose"</code></td>
-<td align="left">Bleach+Dose</td>
+<td align="left">Artificially depleted luminescence with an additive dose</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>"Nat.(Bleach)"</code></td>
-<td align="left">Nat.(Bleach)</td>
+<td align="left">Naturally depleted luminescence</td>
 </tr>
 <tr class="even">
 <td align="left"><code>"Nat.+Dose(Bleach)"</code></td>
-<td align="left">Nat.+Dose(Bleach)</td>
+<td align="left">Naturally depleted luminescence with dose</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>"Dose"</code></td>
-<td align="left">Dose</td>
+<td align="left">Artificially irradiated sample</td>
 </tr>
 <tr class="even">
 <td align="left"><code>"Background"</code></td>
@@ -565,7 +579,7 @@ for information stored in BIN/BINX-files. The field can be set to <code>NA</code
         {...}
       &lt;/curve&gt;
     &lt;/record&gt;
-    &lt;record recordType=&quot;bleach&quot; sequenceStepNumber=&quot;2&quot; sampleCondition=&quot;NA&quot;&gt;
+    &lt;record recordType=&quot;bleaching&quot; sequenceStepNumber=&quot;2&quot; sampleCondition=&quot;NA&quot;&gt;
       &lt;curve ...&gt;
         {...}
       &lt;/curve&gt;
@@ -577,7 +591,7 @@ for information stored in BIN/BINX-files. The field can be set to <code>NA</code
 <h2>The <code>&lt;sequence/&gt;</code> level</h2>
 <p>A sequence describes multiple measurements sequentially used at <strong>one</strong> aliquot,
 for instance as cup/disc with multiple grains or a single grain. Hence, another
-aliquot from the <strong>same</strong> sample needs to be wrapped in a new <code>&lt;sequence&gt;</code> node.
+aliquot from the <strong>same</strong> sample and the sample sequence needs to be wrapped in a new <code>&lt;sequence/&gt;</code> node.
 Naturally the information stored an that level can be very verbose, but are limited to<br />
 a few required attributes only. In the luminescence context a sequence can fit, e.g.,
 a SAR protocol, but also a succession of protocols measured on one aliquot.</p>
@@ -607,7 +621,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.</p>
 <td align="left"><code>numeric</code></td>
 <td align="left">no</td>
 <td align="left"><code>"42"</code></td>
-<td align="left">position of aliquot in the reader, can be <code>1</code> in case samples are changed manually</td>
+<td align="left">position of aliquot in the reader, can be <code>0</code> in case samples are changed manually, i.e. the equipment has only one single measurement position</td>
 </tr>
 <tr class="even">
 <td align="left">name</td>
@@ -657,7 +671,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.</p>
 <div id="example-2" class="section level3">
 <h3>Example</h3>
 <pre class="bash"><code>{...}
-&lt;sequence position=&quot;1&quot; name=&quot;SAR measuremt&quot; fileName=&quot;Testsequence.seq&quot; software=&quot;DeviceStudio, 2.37&quot;&gt;
+&lt;sequence position=&quot;1&quot; name=&quot;SAR measurment&quot; fileName=&quot;Testsequence.seq&quot; software=&quot;DeviceStudio, 2.37&quot;&gt;
   &lt;record ...&gt;
     &lt;curve ...&gt;
       {...}
@@ -761,10 +775,10 @@ level may contain an infinite number of sequences measured for one sample.</p>
 <div id="the-xlum-level" class="section level2">
 <h2>The <code>&lt;xlum/&gt;</code> level</h2>
 <p>The <code>&lt;xlum&gt;</code> is the format parent node and it can contain an infinite number
-of samples. Only this level allows to set a licence for the distribution
+of samples. Only this level allows to set a license for the distribution
 and usage of the data. All data within a particular <code>&lt;xlum&gt;</code> are considered
-distributed under the licence. You have to create new instances of the <code>&lt;xlum&gt;</code>
-to set different licences.</p>
+distributed under the license. You have to create new instances of the <code>&lt;xlum&gt;</code>
+to set different licenses.</p>
 <div id="attributes-3" class="section level3">
 <h3>Attributes</h3>
 <table>
@@ -812,7 +826,7 @@ to set different licences.</p>
 <td align="left"><code>string</code></td>
 <td align="left">no</td>
 <td align="left"><code>"generic"</code></td>
-<td align="left">allows to specify a particular flavour of the format</td>
+<td align="left">allows to specify a particular flavour of the format, for instance for particular equipment</td>
 </tr>
 <tr class="odd">
 <td align="left">author</td>
@@ -838,7 +852,7 @@ to set different licences.</p>
 </tbody>
 </table>
 <table>
-<caption>Allowed <code>licence</code> types</caption>
+<caption>Allowed <code>license</code> types</caption>
 <colgroup>
 <col width="27%" />
 <col width="19%" />
@@ -847,24 +861,30 @@ to set different licences.</p>
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left"><code>licence</code></th>
-<th align="left">Licence name</th>
+<th align="left"><code>license</code></th>
+<th align="left">License name</th>
 <th align="left">Reference</th>
 <th align="left">Comment</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>"CC BY 4.0"</code></td>
+<td align="left"><code>"CC BY"</code></td>
 <td align="left">Creative commons</td>
 <td align="left"><a href="https://creativecommons.org" class="uri">https://creativecommons.org</a></td>
-<td align="left">all flavours of the creative commons license scheme</td>
+<td align="left">all flavours of the creative commons license scheme (e.g., CC BY-SA, CC BY-NC)</td>
 </tr>
 <tr class="even">
+<td align="left"><code>"CC0"</code></td>
+<td align="left">Creative Commons Public Domain Dedication</td>
+<td align="left"><a href="https://creativecommons.org" class="uri">https://creativecommons.org</a></td>
+<td align="left">you give up the copyright on your data and make it public domain. Please note this cannot be revoked!</td>
+</tr>
+<tr class="odd">
 <td align="left"><code>"Copyright"</code></td>
 <td align="left">Copyright protected</td>
 <td align="left">-</td>
-<td align="left">data are copyright protected and cannot be used or distributed without the creator’s agreement</td>
+<td align="left">Data are copyright protected and cannot be used or distributed without the creator’s agreement</td>
 </tr>
 </tbody>
 </table>
@@ -892,7 +912,7 @@ to set different licences.</p>
 </div>
 <div id="general-parameters-all-nodes" class="section level2">
 <h2>General parameters (all nodes)</h2>
-<p>A few nodes are available on all node levels except the super node <code>&lt;xlum&gt;</code>. There are mainly of technical
+<p>A few attributes are available on all node levels except the root node <code>&lt;xlum&gt;</code>. There are mainly of technical
 nature to ease the sequential of data storage during the measurement process.</p>
 <table>
 <caption>Attributes valid in all nodes</caption>
@@ -925,7 +945,7 @@ nature to ease the sequential of data storage during the measurement process.</p
 <td align="left"><code>token</code></td>
 <td align="left">yes</td>
 <td align="left"><code>"201007145551910"</code></td>
-<td align="left">unique identifying the parent node, the super node has the ID <code>0</code>, this is usually not needed but may help to store data</td>
+<td align="left">unique identifying the parent node, the root node has the ID <code>0</code>, this is usually not needed but may help to store data</td>
 </tr>
 <tr class="odd">
 <td align="left">comment</td>
@@ -943,14 +963,15 @@ nature to ease the sequential of data storage during the measurement process.</p
 <p>This section provides suggestions for attributes for particular types of measurements.
 These attributes are not compulsory, but may be used for the sake of consistency.</p>
 <p>Either way, these metadata must not be required to store and analyse the data!</p>
-<div id="pulsing-data" class="section level2">
-<h2>Pulsing data</h2>
+<div id="pulsing-data-optional" class="section level2">
+<h2>Pulsing data (optional)</h2>
 <p>In measurements with pulsed light stimulation data processing usually requires
 summations of photon counts on the hardware level, because it is neither meaningful
 nor feasible to store every single count in separate curves for photon arrival
-times of <span class="math inline">\(10^{-6} \leq \tau \leq 10^{-3}\)</span> s. Hence, multiple detector <code>&lt;curve&gt;</code> data may be stored per <code>&lt;record&gt;</code>,
-one for each (x) pulse(-s). The <code>&lt;record&gt;</code> node contains some additional metadata that may help
-to understand the data and the undertaken processing on the hardware level better.</p>
+times of <span class="math inline">\(10^{-6} \leq \tau \leq 10^{-3}\)</span> s. Hence, multiple detector <code>&lt;curve/&gt;</code> data may be stored per <code>&lt;record/&gt;</code>,
+one for each (x) pulse(-s). The <code>&lt;record/&gt;</code> node contains some additional metadata that may help
+to understand the data and the undertaken processing on the hardware level better. All attributes
+are optional.</p>
 <table>
 <caption>Additional metadata <code>&lt;record/&gt;</code> node pulsing data</caption>
 <colgroup>
@@ -999,7 +1020,7 @@ to understand the data and the undertaken processing on the hardware level bette
 <td align="left">number of channels that are recorded in one curve</td>
 </tr>
 <tr class="even">
-<td align="left">countsNormalized</td>
+<td align="left">countsNormalised</td>
 <td align="left"><code>numeric</code></td>
 <td align="left"><code>"1"</code></td>
 <td align="left">if not 0, counts per channel are normalized to counts per second (helpful with uneven distributed channel times)</td>
