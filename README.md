@@ -14,7 +14,7 @@ Michael Höhne | - | creator, author | Freiberg Instruments GmbH, DE
 
 XLUM has the following external bindings and support
 
-| BINDING   | TRHOUGH | LINK    |RESPONSIBLE
+| BINDING   | THROUGH | LINK    |RESPONSIBLE
 | ----------|---------| --------|------------
 [R](https://www.r-project.org) | R package `'xlum'` |https://github.com/R-Lum/xlum | [RLumSK](https://github.com/RLumSK)
 [Python](https://www.python.org) | `'xlum-python'` | https://github.com/SteveGrehl/xlum-python | [SteveGrehl](https://github.com/SteveGrehl)
