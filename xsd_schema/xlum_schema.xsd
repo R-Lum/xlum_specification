@@ -132,7 +132,7 @@
       </xs:attribute>
       <xs:attribute type="xs:string" name="comment" use="optional"/>
       <xs:attribute type="xs:string" name="state" use="optional"/>
-      <xs:attribute type="xs:token" name="parentID" use="optional/>
+      <xs:attribute type="xs:token" name="parentID" use="optional"/>
       <xs:attribute type="xs:double" name="onTime" use="optional"/>
       <xs:attribute type="xs:double" name="offTime" use="optional"/>
       <xs:attribute type="xs:unsignedInt" name="nPulses" use="optional"/>
