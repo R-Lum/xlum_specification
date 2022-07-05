@@ -20,7 +20,7 @@ menu:
       url: /specification/
       weight: 1
       pre: "<i class=\"bi bi-journal-text\"></i>"
-    - name: XSD-Schema
+    - name: Latest XSD-Schema
       url: /xsd-schema/
       weight: 1000
       pre: "<i class=\"bi bi bi-body-text\"></i>"
