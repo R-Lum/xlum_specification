@@ -1,8 +1,8 @@
 ---
 title: "XLUM-file Format Documentation"
 author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne"
-version: "version: 1.0 [2022-06-30]"
-date: "version: 1.0 [2022-06-30]"
+version: "version: 1.0 [2022-07-06]"
+date: "version: 1.0 [2022-07-06]"
 output:
   bookdown::pdf_document2:
      toc: yes
@@ -149,7 +149,7 @@ to structure the dataset and ship additional metadata.</p>
 </table>
 <p>A node has a name, attributes, and data stored in it. The data stored in the attributes describe the state of this level. The stored data in the node describes the process(es) assigned to the node. A minimal example is shown in the listing. The documentation provides an overview starting with the leaf node description and going up to the root from there. Further notes:</p>
 <ul>
-<li>The format version bases on <a href="http://www.w3.org/TR/2008/REC-xml-20081126/">XML version 1.0 (Fith Edition)</a></li>
+<li>The format version bases on <a href="http://www.w3.org/TR/2008/REC-xml-20081126/">XML version 1.0 (Fifth Edition)</a></li>
 <li>File encoding should always be UTF-8</li>
 <li>This specification lists only mandatory attributes. Additional, custom attributes are explicitly supported.</li>
 <li>Parser supporting the <code>XLUM</code> format must not crash when encountering non-specified node attributes. However, they may skip them.</li>
@@ -202,6 +202,10 @@ are not allowed</strong> to avoid decimal delimiter problems. Examples:</p>
 <li>10 000.00 -&gt; NOT OK</li>
 <li>10,000.00 -&gt; NOT OK</li>
 </ul>
+<p>To reduce the size of the file, for instance for image data, the string in <code>&lt;curve/&gt;</code> can be stored using <a href="https://en.wikipedia.org/wiki/Base64">base64</a> encoding. It is up to the parser to decide whether the string
+was encoded or not! Encoding in other places (attributes) is not supported and must not be expected by
+the parser.</p>
+<p><em>Please note that the XSD document does not specify binary encoding considers all values in <code>&lt;curve/&gt;</code> strings (which can be encoded).</em></p>
 <p>For consistency reasons, the value in the node span an array with dimensions
 defined through the node attributes <code>xValues</code>, <code>yValues</code> and <code>tValues</code> (see Fig. <a href="#fig:fig1">3.1</a>).</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig1"></span>

@@ -121,6 +121,12 @@ are not allowed** to avoid decimal delimiter problems. Examples:
 * 10000.00 -> OK
 * 10 000.00 -> NOT OK
 * 10,000.00 -> NOT OK
+ 
+To reduce the size of the file, for instance for image data, the string in `<curve/>` can be stored using [base64](https://en.wikipedia.org/wiki/Base64) encoding. It is up to the parser to decide whether the string 
+was encoded or not! Encoding in other places (attributes) is not supported and must not be expected by 
+the parser. 
+
+*Please note that the XSD document does not specify binary encoding considers all values in `<curve/>` strings (which can be encoded).*
 
 For consistency reasons, the value in the node span an array with dimensions 
 defined through the node attributes `xValues`, `yValues` and `tValues` (see Fig. \@ref(fig:fig1)).
