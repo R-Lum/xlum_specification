@@ -554,7 +554,7 @@ versions 03 to 08.
 |26|`BG`              |implicit           |can be expressed as `<curve/>`       |
 |27|`SHIFT`           |implicit           |part of curve information            |
 |28|`TAG`             |NONE               |non-relevant internal metadata       |
-|29|`LTYPE`           |`recordType`       |                                     |
+|29|`LTYPE`           |`recordType`       |in `<record/>` node                  |
 |30|`LIGHTSOURCE`     |implicit           |can be added in comment fields       |
 |31|`LPOWER`          |implicit           |can be expressed as `<curve/>`       |
 |32|`LIGHTPOWER`      |implicit           |can be expressed as `<curve/>`       | 
