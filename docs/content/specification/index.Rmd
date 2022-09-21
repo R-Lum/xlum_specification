@@ -510,3 +510,101 @@ to provide usable examples for the data format.
  </sample>
 </xlum>
 ```
+
+# Appendix
+
+## BIN/BINX to XLUM metadata argument matching
+
+The BIN/BINX files consist of a metadata header block and a data block. Some of 
+the metadata serve the sole purpose of describing the structure of the data block 
+others return the specific status of equipment, but are non-relevant for the data analysis. 
+
+Most information is covered by the XLUM format by design and hence find their 
+expression implicitly. The following argument list is a master list containing
+**all** possible arguments in BIN/BINX files. Not all BIN/BINX
+file versions support all arguments. Covered here are BIN/BINX files between 
+version 03 to 08.
+
+|# |BIN/BINX argument |Expression in XLUM |Remarks                              |
+|--|------------------|-------------------|-------------------------------------|               
+|01|`VERSION`         |NONE               |number of BIN/BINX file version      |
+|02|`PREVIOUS`        |implicit           |covered through XLUM structure       |
+|03|`NPOINTS`         |implicit           |can be calculated from data          |
+|04|`RECTYPE`         |NONE               |non-relevant internal metadata       |
+|05|`RUN`             |implicit           |structure through order in `<sequence/>` |           
+|06|`SET`             |implicit           |structure through order in `<sequence/>` |  
+|07|`POSITION`        |`position`         |in `<sequence/>` node                |
+|08|`GRAIN`           |implicit           |a grain is considered a sample       |
+|09|`GRAINNUMBER`     |implicit           |a grain is considered a sample       |
+|10|`CRUVENO`         |implicit           |through structure                    |
+|11|`XCOORD`          |NONE               |considered non-relevant              |
+|12|`YCOORD`          |NONE               |considered non-relevant              |
+|13|`SAMPLE`          |`name`             |in `<sample/>` node                  |
+|14|`COMMENT`         |`comment`          |allowed argument in every node       |
+|15|`SYSTEMID`        |`readerSN`         |in `<sequence/>` node                |
+|16|`FNAME`           |`fileName`         |in `<sequence/>` node                |
+|17|`USER`            |`author`           |in `<xlum/>` node                    |
+|18|`TIME`            |`startDate`        |in `<curve/>` node (ISO 8601-1:2019) |
+|19|`DATE`            |`startDate`        |in `<curve/>` node (ISO 8601-1:2019) |
+|20|`DTYPE`           |`sampleCondition`  |in `<curve/>` node                   |
+|21|`BL_TIME`         |implicit           |can be expressed as `<curve/>`       |
+|22|`BL_UNIT`         |implicit           |expressed in `<curve/>` metadata     |
+|23|`NORM1`           |implicit           |should be part of `<curve/>` representation |
+|24|`NORM2`           |implicit           |should be part of `<curve/>` representation |
+|25|`NORM3`           |implicit           |should be part of `<curve/>` representation |
+|26|`BG`              |implicit           |can be expressed as `<curve/>`       |
+|27|`SHIFT`           |implicit           |part of curve information            |
+|28|`TAG`             |NONE               |non-relevant internal metadata       |
+|29|`LTYPE`           |`recordType`       |                                     |
+|30|`LIGHTSOURCE`     |implicit           |can be added in comment fields       |
+|31|`LPOWER`          |implicit           |can be expressed as `<curve/>`       |
+|32|`LIGHTPOWER`      |implicit           |can be expressed as `<curve/>`       | 
+|33|`LOW`             |implicit           |not needed, part of `<curve/>`       |
+|34|`HIGH`            |implicit           |not needed, part of `<curve/>`       |
+|35|`RATE`            |implicit           |not needed, part of `<curve/>`       |
+|36|`TEMPERATURE`     |implicit           |expressed as `<curve/>`              |
+|37|`MEASTEMP`        |implicit           |expressed as `<curve/>`              |
+|38|`AN_TEMP`         |implicit           |expressed as `<curve/>`              |
+|39|`AN_TIME`         |implicit           |expressed as `<curve/>`              |
+|40|`TOLDELAY`        |implicit           |expressed as `<curve/>`              |
+|41|`TOLON`           |implicit           |expressed as `<curve/>`              |
+|42|`TOLOFF`          |implicit           |expressed as `<curve/>`              |
+|43|`IRR_TIME`        |implicit           |expressed as `<curve/>`              |
+|44|`IRR_TYPE`        |NONE               |can be added as comment              |
+|45|`IRR_UNIT`        |`tUnit`            |in `<curve/`> node                   |
+|46|`IRR_DOSERATE`    |NONE               |either as curve or comment           |
+|47|`IRR_DOSERATEERR` |NONE               |only as comment possible             |
+|48|`TIMESINCEIRR`    |implicit           |calculated from time stamps          |
+|49|`TIMETICK`        |implicit           |derived from `onTIME` and `offTIME`  |
+|50|`ONTIME`          |`onTIME`           |in `<record/>` node                  |
+|51|`OFFTIME`         |`offTIME`          |in `<record/>` node                  |
+|52|`STIMEPERIOD`     |implicit           |through `nPulses` in `<record/>` node|
+|53|`GATE_ENABLED`    |NONE               |considered non-relevant              |
+|54|`ENABLE_FLAGS`    |NONE               |considered non-relevant              |
+|55|`GATE_START`      |NONE               |considered non-relevant              |
+|56|`GATE_STOP`       |NONE               |considered non-relevant              |
+|57|`PTENABLED`       |NONE               |considered non-relevant              |
+|58|`DTENABLED`       |NONE               |considered non-relevant              |
+|59|`DEADTIME`        |NONE               |considered non-relevant              |
+|60|`MAXLPOWER`       |implicit           |represented as `<curve/>`            |
+|61|`XRF_ACQTIME`     |implicit           |represented as `<curve/>`            |
+|62|`XRF_HV`          |implicit           |represented as `<curve/>`            |
+|63|`XRF_CURR`        |implicit           |represented as `<curve/>`            |
+|64|`XRF_DEADTIMEEF`  |NONE               |possible as comment                  |
+|65|`DETECTOR_ID`     |`component`        |in `<curve/>` node                   |
+|66|`LOWERFILTER_ID`  |`filter`           |in `<curve/>` node                   |
+|67|`LOWERFILTER_ID`  |`filter`           |in `<curve/>` node                   |
+|68|`ENOISEFACTOR`    |NONE               |usage unknown                        |
+|69|`MARKPOS_X1`      |implicit           |can be expressed as `<curve/>` or comment |
+|70|`MARKPOS_Y1`      |implicit           |can be expressed as `<curve/>` or comment |
+|71|`MARKPOS_X2`      |implicit           |can be expressed as `<curve/>` or comment |
+|72|`MARKPOS_Y2`      |implicit           |can be expressed as `<curve/>` or comment |
+|73|`MARKPOS_X3`      |implicit           |can be expressed as `<curve/>` or comment |
+|74|`MARKPOS_Y3`      |implicit           |can be expressed as `<curve/>` or comment |
+|75|`EXTR_START`      |NONE               |usage unknown                             |
+|76|`EXTR_END`        |NONE               |usage unknown                             |
+|77|`SEQUENCE`        |`name`             |in `<sequence/>` node                     |
+
+
+
+
