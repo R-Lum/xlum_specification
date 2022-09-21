@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.20)  6 JUL 2022 16:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.20)  21 SEP 2022 22:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -616,7 +616,7 @@ LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
 
 pdfTeX warning: pdflatex (file ./img/Curve_Level_Storage.pdf): PDF inclusion: f
 ound PDF version <1.7>, but at most version <1.5> allowed
-<img/Curve_Level_Storage.pdf, id=60, 392.46625pt x 776.9025pt>
+<img/Curve_Level_Storage.pdf, id=64, 392.46625pt x 776.9025pt>
 File: img/Curve_Level_Storage.pdf Graphic file (type pdf)
 <use img/Curve_Level_Storage.pdf>
 Package pdftex.def Info: img/Curve_Level_Storage.pdf  used on input line 307.
@@ -634,39 +634,39 @@ Overfull \hbox (33.56389pt too wide) in paragraph at lines 735--735
 []|\T1/lmtt/m/n/10 "10.1016/j.radmeas.2017.02.003"|  
  []
 
-[9] [10] [11] [12] [13] (./index.aux) ) 
+[9] [10] [11] [12] [13] [14] [15] (./index.aux) ) 
 Here is how much of TeX's memory you used:
- 14644 strings out of 478300
- 233021 string characters out of 5845125
- 578565 words of memory out of 5000000
- 32358 multiletter control sequences out of 15000+600000
- 529601 words of font info for 139 fonts, out of 8000000 for 9000
+ 14660 strings out of 478300
+ 233249 string characters out of 5845125
+ 615746 words of memory out of 5000000
+ 32363 multiletter control sequences out of 15000+600000
+ 529778 words of font info for 141 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,11n,81p,1002b,460s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/usr/local/texlive/2022/texmf-dist/font
-s/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm
-/lm-mathsy.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
-}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/loc
-al/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</usr/local/texlive/20
-22/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2022/texmf-d
-ist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/
-type1/public/lm/lmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/publ
-ic/lm/lmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr12
-.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/
-local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texliv
-e/2022/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2022/tex
-mf-dist/fonts/type1/public/lm/lmro10.pfb></usr/local/texlive/2022/texmf-dist/fo
-nts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/
-public/lm/lmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/l
-mtk10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-</usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></usr/loc
-al/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtto10.pfb></usr/local/texliv
-e/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/te
-xlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on index.pdf (13 pages, 1391002 bytes).
+{/usr/local/texlive/2022/texmf
+-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2022/texmf-dist/fonts/en
+c/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm
+/lm-ec.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
+}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</usr/local/
+texlive/2022/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/20
+22/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2022/texmf-d
+ist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/
+type1/public/lm/lmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/publi
+c/lm/lmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr17.
+pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/lo
+cal/texlive/2022/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texliv
+e/2022/texmf-dist/fonts/type1/public/lm/lmro10.pfb></usr/local/texlive/2022/tex
+mf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2022/texmf-dist/fo
+nts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/p
+ublic/lm/lmtk10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/l
+mtt10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtti10.pfb
+></usr/local/texlive/2022/texmf-dist/fonts/type1/public/lm/lmtto10.pfb></usr/lo
+cal/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></us
+r/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on index.pdf (15 pages, 1399076 bytes).
 PDF statistics:
- 333 PDF objects out of 1000 (max. 8388607)
- 266 compressed objects within 3 object streams
- 79 named destinations out of 1000 (max. 500000)
- 32875 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 356 PDF objects out of 1000 (max. 8388607)
+ 287 compressed objects within 3 object streams
+ 86 named destinations out of 1000 (max. 500000)
+ 32891 words of extra memory for PDF output out of 35830 (max. 10000000)
 
