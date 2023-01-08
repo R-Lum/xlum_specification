@@ -1,6 +1,6 @@
 # XLUM
 
-Specification of the XLUM format to exchange and archive luminescence data.
+Specification of the [XLUM format to exchange and archive luminescence data](https://r-lum.github.io/xlum_specification/specification).
 
 [![DOI](https://zenodo.org/badge/71261763.svg)](https://zenodo.org/badge/latestdoi/71261763)
 
@@ -20,7 +20,7 @@ XLUM has the following external bindings and support
 | BINDING   | THROUGH | LINK    |RESPONSIBLE
 | ----------|---------| --------|------------
 [R](https://www.r-project.org) | R package `'xlum'` |https://github.com/R-Lum/xlum | [RLumSK](https://github.com/RLumSK)
-[Python](https://www.python.org) | `'xlum-python'` | https://github.com/SteveGrehl/xlum-python | [SteveGrehl](https://github.com/SteveGrehl)
+[Python](https://www.python.org) | Python package `'xlum'` | https://github.com/SteveGrehl/xlum-python | [SteveGrehl](https://github.com/SteveGrehl)
 
 ## Funding
 
