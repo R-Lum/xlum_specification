@@ -146,8 +146,7 @@ hitting different pixel areas of the detector.
 3. The most complex from is a detector that records events (e.g., luminescence), 
 spatially resolved. Such as a camera. 
 
-In the examples and the Fig.\@ref(fig:fig1) the detectors detect luminescence, 
-however, any type of sensor, electronic component recording information of
+In the examples and Fig.\@ref(fig:fig1) the detectors detect luminescence. However, any type of sensor, electronic component recording information of
 relevance for the measurement of luminescence are suitable. Typical examples:
 
 * Temperature sensor (thermocouple), recording the temperature of the heating element
@@ -184,7 +183,7 @@ relevance for the measurement of luminescence are suitable. Typical examples:
 ### Example 
 
 In order to define a suitable standard only a few attributes are required. A few of them are useful for every kind of component, 
-others are only meaningfully in combination. For instance, providing information on the detection window is not meaningful for 
+others are only meaningful in combination. For instance, providing information on the detection window is not meaningful for 
 a heating element. 
 
 ```{r, engine='bash', eval = FALSE}
