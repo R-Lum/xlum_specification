@@ -9,7 +9,7 @@ Specification of the [XLUM format to exchange and archive luminescence data](htt
 
 | NAME      | GitHub ID   |  ROLE  |   AFFILIATION    
 |-----------|-------------|--------|-------------------|
-Sebastian Kreutzer | [RLumSK](https://github.com/RLumSK) | creator, maintainer | Geography & Earth Sciences, Aberystwyth University, GB *(present: Institute of Geography, Heidelberg University, DE)*
+Sebastian Kreutzer | [RLumSK](https://github.com/RLumSK) | creator, maintainer | Geography & Earth Sciences, Aberystwyth University, GB *(present: Institute of Geography, Ruprecht-Karl University of Heidelberg, DE)*
 Steve Grehl | [SteveGrehl](https://github.com/SteveGrehl) | creator, author | HUK-Coburg, Coburg, DE
 Michael Höhne | - | creator, author | Freiberg Instruments GmbH, DE 
 
