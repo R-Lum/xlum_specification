@@ -91,11 +91,10 @@ A curve holds the predefined/simulated or measured output of one single
 technical component. For example, a typical thermoluminescence measurement 
 may consist of one or many curves.
 
- 1. **The three curve example**: (a) Time against temperature recorded by a thermocouple 
- (temperature sensor), (b) time against photon counts recorded by a photomultiplier tube, (c) time against a predefined heating ramp.
- 2. **The one curve example**: Time against temperature. In this case temperature
- is a processed quantity, because measurements happen over a time instant. However, for
- compatibility reasons, this would be allowed although it is not preferred.
+1. **The one curve example**: Time against temperature. In this case temperature
+ is a processed quantity, because measurements happen over a time instant. However, for compatibility reasons, this would be allowed although it is not preferred.
+
+2. **The three curve example**: (a) Time against temperature recorded by a thermocouple (temperature sensor), (b) time against photon counts recorded by a photomultiplier tube, (c) time against a predefined heating ramp.
 
 In both cases, all mentioned `<curve/>` nodes belong to one parent `<record/>`. In case 1, 
 the record contains one curve and three in case 2. Ideally, curves represent technical 
