@@ -125,7 +125,7 @@ To reduce the size of the file, for instance for image data, the string in `<cur
 was encoded or not! Encoding in other places (attributes) is not supported and must not be expected by 
 the parser. 
 
-*Please note that the XSD document does not specify binary encoding considers all values in `<curve/>` strings (which can be encoded).*
+*Please note that the XSD document does not specify binary encoding because it considers all values in `<curve/>` strings (which can represent encoded values).*
 
 For consistency reasons, the value in the node span an array with dimensions 
 defined through the node attributes `xValues`, `yValues` and `tValues` (see Fig. \@ref(fig:fig1)).
