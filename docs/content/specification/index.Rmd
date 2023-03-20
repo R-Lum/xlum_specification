@@ -601,22 +601,81 @@ versions 03 to 08.
 ## Freiberg Instruments XSYG argument matching
 
 The XYSG file format by Freiberg Instruments is already an XML-based file format
-and can be somewhat considered as the predecessor of the XLUM format. The format
-was developed in February 2013 but never formally published. Main differences
-are: 
+. It can be somewhat considered the predecessor of the XLUM format. The structure
+was developed in February 2013 but never formally published, and attributes are not 
+necessarily followed. The main differences are: 
 
-* The XSYG file format consists of only four node instead of five like. Parent node `xlum`
+* The XSYG file format consists of only four nodes instead of five. Parent node `xlum`
 exists only for the XLUM format
 * Nodes start with a capital letter (e.g., `<Sample>`, instead of `<sample>` in XLUM)
-* The individual curves values are stored as a pair-list with values separated by a semicolon `;`, in the `<Curve>` node, i.e., `x0 , y0 ; x1 , y1 ; x2 , y2 ; x3 , y3`. XLUM uses attributes instead, and values are stored separated through white space
-* For spectrometer data the XSYG format defines an alternative storage format of values in the `<Curve>` node of form `1.0 ,[554|555|559|553|556|550| {...}`. Contrary, XLUM maintains a consistent storage format.
-* The chosen date format was not ISO conform 
+* The individual curves values are stored as a pair-list with values separated by a semicolon `;`, in the `<Curve>` node, i.e., `x0 , y0 ; x1 , y1 ; x2 , y2 ; x3 , y3`. XLUM uses attributes instead, and values are stored separately through white space
+* For spectrometer data, the XSYG format defines an alternative storage format of values in the `<Curve>` node of form `1.0 ,[554|555|559|553|556|550| {...}`. Contrary, XLUM maintains a consistent storage format.
+* The chosen date format was not ISO conform yyyyMMddhhmmss instead of ISO 8601-1:2019: YYYY-MM-DDThh:mm:ss[.mmm]Z recalculated to Zulu time.
 
-In the following, the argument matching is listed per node.
+In the following, the XYSG to XLUM argument matching is listed node-wise.
 
-### `<Curve />` vs `<curve />`
+### `<Curve/>` vs `<curve/>`
 
-
-|# |Argument          |Expression in XLUM |Remarks                              |
+|# |XSYG attribute     |Expression in XLUM |Remarks                              |
 |--|------------------|-------------------|-------------------------------------|               
-|01|`VERSION`         |NONE               |number of BIN/BINX file version      |
+|01|`startDate`       |`startDate`        |note the format difference |
+|02|`duration`        |`duration`         |                                     |
+|03|`curveType`       |`duration`         |                                     |
+|04|`stimulator`      |`component`        |                                     |
+|05|`detector`        |`component`        |                                     |
+|06|`curveDscripter`  |`xLabel`, `yLabel`, `tLabel`, `vLabel`, `xUnit`, `yUnit`, `tUnit`, `vUnit` | needs to be split and matched separately             |
+|07|`offset`          |implicit         |  can be encode through the `tValues`           |
+|08|`detectionWindow` |`detectionWindow`  |                                     |
+|09|`filterIDs`        |NONE|   purely manufacture related ID         |
+|10|`filterNames`        |`filter`         | filter names separated by `;`                               |
+
+### `<Record/>` vs `<record/>`
+
+|# |XSYG attribute     |Expression in XLUM |Remarks                              |
+|--|------------------|-------------------|-------------------------------------|               
+|01|`startDate`       |`startDate`        |note the format difference |
+|02|`endDate`        |implicit         | can be calculated from other attributes                   |
+|03|`recordType`       |`recordType`         |                                     |
+|04|`name`        |NONE         | encoded through `recordType` + `comment`                        |
+|05|`sequenceStepNumber`        |`sequenceStepNumber`  |                                     |
+|06|`metaIrrType`      |implicit        | encode through `component` in `<curve/>`                                    |
+|07|`metaIrrDuration`        |implicit        | through `<curve/>` node                  |
+|08|`sampleCondition`        |`sampleCondition`          |                                     |
+
+### `<Sequence/>` vs `<sequence/>`
+
+|# |XSYG attribute     |Expression in XLUM |Remarks                              |
+|--|------------------|-------------------|-------------------------------------|               
+|01|`position`       |`position`          | |
+|02|`creationDate`        |implicit         | through `startDate` of `<record/>` and `<curve/>` |
+|03|`name`       |`name`            |                                     |
+|04|`protocol`        |implicit         | in `name`                                     |
+|05|`mineral`        |NONE         | value to be entered in `<sample/>` node                                     |
+
+### `<Sample/>` vs `<sample/>`
+
+|# |XSYG attribute     |Expression in XLUM |Remarks                              |
+|--|------------------|-------------------|-------------------------------------|               
+|01|`name`       |`name`        | |
+|02|`user`        |NONE        | Author can be entered in `<xlum/>` node                          |
+|03|`startDate`  |implicit  |through values in other `<curve/>` and `<record/>` nodes
+|04|`sampleCarrier`       |NONE        |entry in general attribute `comment` possible                   |
+|05|`lexsygID`        |implicit        |entry in attributes in `<sequence/>` node attributes       |
+|06|`lexStudioVersion`|implicit        |entry in attributes in `<sequence/>` node attributes                                   |
+|07|`firmwareVersion`        |implicit       |entry in attributes in `<sequence/>` node attributes     
+|08|`os`        |NONE  |however, entry in `comment` attribute possible  
+
+### General attributes
+
+|# |XSYG attribute     |Expression in XLUM |Remarks                              |
+|--|------------------|-------------------|-------------------------------------|               
+|01|`state`           |`state`            |                                     |
+|02|`partentID`       |`partentID`        |                                     |
+|03|`comment`         |`comment`          |                                     |
+
+## SUERC PSL argument matching
+
+PSL files are produced by portable luminescence readers produced by the 
+Scottish Universities Environmental Research Centre (SUERC). PSL files 
+are loosely structured ASCII files without format descriptions. The listed
+arguments are extracted from those files, and the matching is non-exhaustive. 
