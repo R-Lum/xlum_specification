@@ -677,5 +677,50 @@ In the following, the XYSG to XLUM argument matching is listed node-wise.
 
 PSL files are produced by portable luminescence readers produced by the 
 Scottish Universities Environmental Research Centre (SUERC). PSL files 
-are loosely structured ASCII files without format descriptions. The listed
-arguments are extracted from those files, and the matching is non-exhaustive. 
+are loosely structured ASCII files without format descriptions. 
+
+Measured values are stored in essentially five columns (three columns, but
+total count and count values per cycle include uncertainties), example:
+
+```
+Time (s)        Total Count           Counts per Cycle  
+--------   ---------------------   ---------------------
+   1              0 +/-    4              0 +/-    4
+   2             -2 +/-    6             -2 +/-    4
+   3             12 +/-    8             14 +/-    5
+```
+
+These values can be represented in the XLUM format using `<curve/>` nodes, 
+one `<curve/>` for the counts per cycle and another for the uncertainties. 
+This solution is safer than adding uncertainties as attributes and more consistent
+because the uncertainties must have been estimated using a component. 
+
+Columns under "Total Count" represent cumulative data that can be recalculated from 
+the values under "Counts per Cycle" should not be stored explicitly in XLUM.
+
+Additionally, PSL provides arguments that can be extracted from those files. 
+The matching listed below is non-exhaustive and represents the current state-of-knowledge
+about the PSL format.
+
+
+|# |PSL metadata      |Expression in XLUM |Remarks                              |
+|--|------------------|-------------------|-------------------------------------|               
+|01|`Run Name`        |implicit           |through `comment`                    |
+|02|`Sample no`       |`name`             |through `name` in `<sample/>` node   |
+|03|`Sequence name`   |`name`             |through `name` in `<sequence/>` node |
+|04|`Filename`        |`fileName`         |in `<sequence/>` node                |
+|05|`Dark Count`      |implicit           |as `<curve/>` node                   |
+|06|`Light Count`     |implicit           |as `<curve/>` node                   |
+|07|`Dark Count Correction`|NONE          |this is a logical attribute, which can part of `comment` if needed in the `<curve/>` node         |
+|08|`Offset Subract`  |NONE               |this can be part of `comment` in `<curve/>` node   |
+|09|`Datafile Path`   |NONE               |not considered relevant              |
+|10|`Summary Path`    |NONE               |not considered relevant              |
+|11|`Run Sequence`    |implicit           |through `name` in `<sequence/>` node |
+|12| Timestamp        |`startDate`        |in `<curve/>` node, please note the different format   |
+|13|`Measurement`     |`recordType`       |in `<record/>` node                  |
+|14|`Stim`            |`recordType`       |in `<record/>` node                  |
+|15|`On/Off(us)`      |`onTime`, `offTime`   |in `<curve/>` node        |
+|16|`Cycle(ms), No`   |`nPulses`        |in `<curve/>` node                    |
+
+*Please note: as for the data formats above, in principle, all arguments can be carried over directly. However, for the sake of consistency, the matching should be applied.* 
+
