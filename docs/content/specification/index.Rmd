@@ -226,7 +226,7 @@ detected within the same time frame defined through the attributes `<startDate>`
 
   |Identifier          | Type          |Allows `NA`? | Example        |Information  |
   |:-------------------|:--------------|:------------|:---------------|:------------|
-  |recordType          |`string`       |no          |  `"TL"`                  |  valid values according the `recordType` table                 |
+  |recordType          |`string`       |no          |  `"TL"`                  |  valid values according to the `recordType` table                 |
   |sequenceStepNumber  |`unsignedInt`      |yes         |  `5`                     |  index in the sequence     |
   |sampleCondition     |`string`       |yes         |  dose                    | valid values according to the table below |
   
@@ -236,47 +236,47 @@ The `recordType` names are not carved in stone, but should be chosen to best des
 word or using an accepted abbreviation (e.g., OSL for optically stimulated luminescence). 
 However, it is important to keep in mind that the `recordType` makes **no** claim on the technical 
 components involved, but is solely set to ease the understanding of the record. The hard 
-physical information a stored in the `<curve>` node.
+physical information is stored in the `<curve>` node.
 
   |`recordType`          | Information      |
   |:---------------------|:----------------------------------------|
   |`"bleaching"`         | any kind of bleaching                   |
   |`"irradiation"`       | irradiation with ionising source        |
   |`"atmosphereExchange"`| atmosphere exchange                     |
-  |`"heating"`           | any kind for heating without signal detection       |
+  |`"heating"`           | heating without signal detection       |
   |`"spectrometer"`      | spectrometer                            |
   |`"camera"`            | camera, e.g. any kind of imaging other than spectrometry      |
   |`"TL"`                | thermoluminescence measurement                     | 
-  |`"ITL"`               | Isothermal luminescence                  | 
-  |`"IRSL"`               | Infrared stimulated luminescence                 | 
-  |`"TM-OSL"`            | thermally modulated luminescence                 |
+  |`"ITL"`               | isothermal luminescence                  | 
+  |`"IRSL"`              | infrared stimulated luminescence                 | 
+  |`"TM-OSL"`            | thermally modulated optically stimmulated luminescence                 |
   |`"RF"`                | radiofluorescence                                  |
   |`"UV-RF"`             | radiofluorescence with detection in the UV wavelength range    |
   |`"IR-RF"`             | radiofluorescence with detection in the infrared wavelength range    |
   |`"IR-PL"`             | infrared photoluminescence    |
   |`"OSL"`               | optically stimulated luminescence (wavelength unspecified)|
-  |`"BSL"`               | blue optically stimulated luminescence                    |
-  |`"GSL"`               | green optically stimulated luminescence                    |
-  |`"VSL"`               | violet optically stimulated luminescence                    |
-  |`"YSL"`               | yellow optically stimulated luminescence                    |
+  |`"BSL"`               | blue-light optically stimulated luminescence                    |
+  |`"GSL"`               | green-light optically stimulated luminescence                    |
+  |`"VSL"`               | violet-light optically stimulated luminescence                    |
+  |`"YSL"`               | yellow-light optically stimulated luminescence                    |
   |`"POSL"`              | pulsed optical stimulated luminescence               |
   |`"pause"`             | pause     |
   |`"custom"`            | any undefined or custom record type  not listed above   |
   
   Table: Valid `recordTypes`
 
-valid entries for  `sampleConditions` are:
+Valid entries for for  `sampleConditions` are given in the following table:
 
   |`sampleCondition`   |  Information        |
   |:-------------------|:--------------------|
-  |`"Natural"`            | Natural luminescence signal   |
-  |`"Natural+Dose"`       | Natural luminescence signal with additive dose  |
-  |`"Bleach"`             |  Artificially depleted luminescence   |
-  |`"Bleach+Dose"`        |  Artificially depleted luminescence with an additive dose |
-  |`"Nat.(Bleach)"`       |  Naturally depleted luminescence |
-  |`"Nat.+Dose(Bleach)"`  |  Naturally depleted luminescence with dose |
-  |`"Dose"`               |  Artificially irradiated sample  |
-  |`"Background"`         |  Background |
+  |`"Natural"`            | natural luminescence signal   |
+  |`"Natural+Dose"`       | natural luminescence signal with additive dose  |
+  |`"Bleach"`             |  artificially depleted luminescence   |
+  |`"Bleach+Dose"`        |  artificially depleted luminescence with an additive dose |
+  |`"Nat.(Bleach)"`       |  artificially bleached natural luminescence signal |
+  |`"Nat.+Dose(Bleach)"`  |  artificially bleached natural luminescence with added dose |
+  |`"Dose"`               |  artificially irradiated sample  |
+  |`"Background"`         |  background |
   
   Table: Valid values for `sampleConditions`
   
@@ -402,7 +402,7 @@ to set different licenses.
   flavour       |`string`       |no        |`"generic"`                 | allows to specify a particular flavour of the format, for instance for particular equipment
   author        |`list(string)` |yes       |`"Max Planck; Marie Curie"` | names of the author(s) of this dataset
   license       |`string`       |yes       |`"CC BY 4.0"`               | license for the distribution of the dataset.
-  doi           |`anyURI`       |yes       |`"10.5281/zenodo.596252"`   | A digital document identifier referencing the dataset already archive in a data repository
+  doi           |`anyURI`       |yes       |`"10.5281/zenodo.596252"`   | A digital document identifier referencing the dataset already archived in a data repository
 
   Table: Mandatory attributes of `<xlum>` node
   
@@ -441,13 +441,12 @@ Table: Allowed `license` types
 
 ## General parameters (all nodes)
 
-A few attributes are available on all node levels except the root node `<xlum>`. There are mainly of technical 
-nature to ease the sequential of data storage during the measurement process.
+A few attributes are available on all node levels except the root node `<xlum>`. These attributes are mainly of technical nature to ease the sequential data storage during the measurement process (such as `parentID`).
 
   |Identifier    |Data type       |Allows `NA`?         |Example               |Information      |
   |:-------------|:---------------|:--------------------|:---------------------|:----------------|
   |state        |`string`         |yes                  |`"recording"`         |defines the state of the node; only used by equipment manufactures 
-  |parentID     |`token`         |yes                  |`"201007145551910"`   |unique identifying the parent node, the root node has the ID `0`, this is usually not needed but may help to store data |
+  |parentID     |`token`         |yes                  |`"201007145551910"`   |uniquely identifying the parent node, the root node has the ID `0`, this is usually not needed but may help to store data |
   |comment      |`String`         |yes                  |`"what a wonderful sample"`| comment field |
   
   Table: Attributes valid in all nodes
@@ -455,19 +454,13 @@ nature to ease the sequential of data storage during the measurement process.
 # Special cases
 
 This section provides suggestions for attributes for particular types of measurements. 
-These attributes are not compulsory, but may be used for the sake of consistency. 
+These attributes are not compulsory, but if needed should be used for the sake of consistency. 
 
-Either way, these metadata must not be required to store and analyse the data!
+Please note: these metadata are not required to store and analyse the data!
 
 ## Pulsing data (optional)
 
-In measurements with pulsed light stimulation data processing usually requires 
-summations of photon counts on the hardware level, because it is neither meaningful 
-nor feasible to store every single count in separate curves for photon arrival 
-times of $10^{-6} \leq \tau \leq 10^{-3}$ s. Hence, multiple detector `<curve/>` data may be stored per `<record/>`, 
-one for each (x) pulse(-s). The `<record/>` node  contains some additional metadata that may help 
-to understand the data and the undertaken processing on the hardware level better. All attributes
-are optional.
+In measurements with pulsed light stimulation, data processing usually requires summations of photon counts on the hardware level using so-called field-programmable gate arrays (FPGA). It is neither meaningful nor feasible to store single counts in separate curves for photon arrival times of $10^{-6} \leq \tau \leq 10^{-3}$ s. Hence, multiple detectors `<curve/>` data may be stored per `<record/>`, one for each (x) pulse(-s). In those cases, the `<record/>` node contains additional metadata that may help understand the data and pre-processing by the hardware level better. All attributes are optional.
 
   |Identifier        | Data type    |Example    |Information            |
   |:-----------------|:-------------|:----------|:----------------------|
@@ -489,7 +482,7 @@ Also the curves contain additional metadata
   Table: Additional metadata `<curve>` node pulsing data
   
 
-# Pratical examples
+# Practical examples
 
 This section contains detailed examples for particular curve types in order 
 to provide usable examples for the data format. 
@@ -513,8 +506,8 @@ to provide usable examples for the data format.
 
 ## Risø BIN/BINX to XLUM metadata argument matching
 
-The Risø BIN/BINX files consist of a [metadata header block and a data block](https://r-luminescence.org/tutorials/binx2r/). Some of
-the metadata serves the sole purpose of describing the structure of the data block 
+Risø BIN/BINX files consist of a [metadata header block and a data block](https://r-luminescence.org/tutorials/binx2r/). Some of
+the metadata serves the sole purpose of describing the structure of the data block, 
 others return the specific equipment status but are non-relevant for the data analysis. 
 
 Most BIN/BINX metadata is covered by the XLUM format by design and hence finds their expression implicitly. The following argument list contains
@@ -527,13 +520,13 @@ versions 03 to 08.
 |01|`VERSION`         |NONE               |number of BIN/BINX file version      |
 |02|`PREVIOUS`        |implicit           |covered through XLUM structure       |
 |03|`NPOINTS`         |implicit           |can be calculated from data          |
-|04|`RECTYPE`         |NONE               |non-relevant internal metadata       |
+|04|`RECTYPE`         |NONE               |file format internal metadata        |
 |05|`RUN`             |implicit           |structure through order in `<sequence/>` |           
 |06|`SET`             |implicit           |structure through order in `<sequence/>` |  
 |07|`POSITION`        |`position`         |in `<sequence/>` node                |
 |08|`GRAIN`           |implicit           |a grain is considered a sample       |
 |09|`GRAINNUMBER`     |implicit           |a grain is considered a sample       |
-|10|`CRUVENO`         |implicit           |through structure                    |
+|10|`CURVENO`         |implicit           |through structure                    |
 |11|`XCOORD`          |NONE               |considered non-relevant              |
 |12|`YCOORD`          |NONE               |considered non-relevant              |
 |13|`SAMPLE`          |`name`             |in `<sample/>` node                  |
@@ -602,6 +595,28 @@ versions 03 to 08.
 |76|`EXTR_END`        |NONE               |usage unknown                             |
 |77|`SEQUENCE`        |`name`             |in `<sequence/>` node                     |
 
+*Note: metadata tagged with "considered non-relevant" or "usage unknown" indicate that they are not considered (yet) as relevant enough for long-term data preservation and are hence not to be included as a compulsory argument in the XLUM format definition. However, they **can** still be stored in the XLUM format regardless.* 
 
 
+## Freiberg Instruments XSYG argument matching
 
+The XYSG file format by Freiberg Instruments is already an XML-based file format
+and can be somewhat considered as the predecessor of the XLUM format. The format
+was developed in February 2013 but never formally published. Main differences
+are: 
+
+* The XSYG file format consists of only four node instead of five like. Parent node `xlum`
+exists only for the XLUM format
+* Nodes start with a capital letter (e.g., `<Sample>`, instead of `<sample>` in XLUM)
+* The individual curves values are stored as a pair-list with values separated by a semicolon `;`, in the `<Curve>` node, i.e., `x0 , y0 ; x1 , y1 ; x2 , y2 ; x3 , y3`. XLUM uses attributes instead, and values are stored separated through white space
+* For spectrometer data the XSYG format defines an alternative storage format of values in the `<Curve>` node of form `1.0 ,[554|555|559|553|556|550| {...}`. Contrary, XLUM maintains a consistent storage format.
+* The chosen date format was not ISO conform 
+
+In the following, the argument matching is listed per node.
+
+### `<Curve />` vs `<curve />`
+
+
+|# |Argument          |Expression in XLUM |Remarks                              |
+|--|------------------|-------------------|-------------------------------------|               
+|01|`VERSION`         |NONE               |number of BIN/BINX file version      |
