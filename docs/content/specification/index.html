@@ -1,8 +1,8 @@
 ---
 title: "XLUM-file Format Documentation"
 author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne"
-version: "version: 1.0 [2022-09-21]"
-date: "version: 1.0 [2022-09-21]"
+version: "version: 1.0 [2023-03-20]"
+date: "version: 1.0 [2023-03-20]"
 output:
   bookdown::pdf_document2:
      toc: yes
@@ -69,10 +69,19 @@ header-includes:
 <ul>
 <li><a href="#pulsing-data-optional" id="toc-pulsing-data-optional"><span class="toc-section-number">4.1</span> Pulsing data (optional)</a></li>
 </ul></li>
-<li><a href="#pratical-examples" id="toc-pratical-examples"><span class="toc-section-number">5</span> Pratical examples</a></li>
+<li><a href="#practical-examples" id="toc-practical-examples"><span class="toc-section-number">5</span> Practical examples</a></li>
 <li><a href="#appendix" id="toc-appendix"><span class="toc-section-number">6</span> Appendix</a>
 <ul>
 <li><a href="#risø-binbinx-to-xlum-metadata-argument-matching" id="toc-risø-binbinx-to-xlum-metadata-argument-matching"><span class="toc-section-number">6.1</span> Risø BIN/BINX to XLUM metadata argument matching</a></li>
+<li><a href="#freiberg-instruments-xsyg-argument-matching" id="toc-freiberg-instruments-xsyg-argument-matching"><span class="toc-section-number">6.2</span> Freiberg Instruments XSYG argument matching</a>
+<ul>
+<li><a href="#curve-vs-curve" id="toc-curve-vs-curve"><span class="toc-section-number">6.2.1</span> <code>&lt;Curve/&gt;</code> vs <code>&lt;curve/&gt;</code></a></li>
+<li><a href="#record-vs-record" id="toc-record-vs-record"><span class="toc-section-number">6.2.2</span> <code>&lt;Record/&gt;</code> vs <code>&lt;record/&gt;</code></a></li>
+<li><a href="#sequence-vs-sequence" id="toc-sequence-vs-sequence"><span class="toc-section-number">6.2.3</span> <code>&lt;Sequence/&gt;</code> vs <code>&lt;sequence/&gt;</code></a></li>
+<li><a href="#sample-vs-sample" id="toc-sample-vs-sample"><span class="toc-section-number">6.2.4</span> <code>&lt;Sample/&gt;</code> vs <code>&lt;sample/&gt;</code></a></li>
+<li><a href="#general-attributes" id="toc-general-attributes"><span class="toc-section-number">6.2.5</span> General attributes</a></li>
+</ul></li>
+<li><a href="#suerc-psl-argument-matching" id="toc-suerc-psl-argument-matching"><span class="toc-section-number">6.3</span> SUERC PSL argument matching</a></li>
 </ul></li>
 </ul>
 </div>
@@ -180,11 +189,9 @@ A curve holds the predefined/simulated or measured output of one single
 technical component. For example, a typical thermoluminescence measurement
 may consist of one or many curves.</p>
 <ol style="list-style-type: decimal">
-<li><strong>The three curve example</strong>: (a) Time against temperature recorded by a thermocouple
-(temperature sensor), (b) time against photon counts recorded by a photomultiplier tube, (c) time against a predefined heating ramp.</li>
-<li><strong>The one curve example</strong>: Time against temperature. In this case temperature
-is a processed quantity, because measurements happen over a time instant. However, for
-compatibility reasons, this would be allowed although it is not preferred.</li>
+<li><p><strong>The one curve example</strong>: Time against temperature. In this case temperature
+is a processed quantity, because measurements happen over a time instant. However, for compatibility reasons, this would be allowed although it is not preferred.</p></li>
+<li><p><strong>The three curve example</strong>: (a) Time against temperature recorded by a thermocouple (temperature sensor), (b) time against photon counts recorded by a photomultiplier tube, (c) time against a predefined heating ramp.</p></li>
 </ol>
 <p>In both cases, all mentioned <code>&lt;curve/&gt;</code> nodes belong to one parent <code>&lt;record/&gt;</code>. In case 1,
 the record contains one curve and three in case 2. Ideally, curves represent technical
@@ -209,7 +216,7 @@ are not allowed</strong> to avoid decimal delimiter problems. Examples:</p>
 <p>To reduce the size of the file, for instance for image data, the string in <code>&lt;curve/&gt;</code> can be stored using <a href="https://en.wikipedia.org/wiki/Base64">base64</a> encoding. It is up to the parser to decide whether the string
 was encoded or not! Encoding in other places (attributes) is not supported and must not be expected by
 the parser.</p>
-<p><em>Please note that the XSD document does not specify binary encoding considers all values in <code>&lt;curve/&gt;</code> strings (which can be encoded).</em></p>
+<p><em>Please note that the XSD document does not specify binary encoding because it considers all values in <code>&lt;curve/&gt;</code> strings (which can represent encoded values).</em></p>
 <p>For consistency reasons, the value in the node span an array with dimensions
 defined through the node attributes <code>xValues</code>, <code>yValues</code> and <code>tValues</code> (see Fig. <a href="#fig:fig1">3.1</a>).</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig1"></span>
@@ -228,8 +235,7 @@ hitting different pixel areas of the detector.</p></li>
 <li><p>The most complex from is a detector that records events (e.g., luminescence),
 spatially resolved. Such as a camera.</p></li>
 </ol>
-<p>In the examples and the Fig.<a href="#fig:fig1">3.1</a> the detectors detect luminescence,
-however, any type of sensor, electronic component recording information of
+<p>In the examples and Fig.<a href="#fig:fig1">3.1</a> the detectors detect luminescence. However, any type of sensor, electronic component recording information of
 relevance for the measurement of luminescence are suitable. Typical examples:</p>
 <ul>
 <li>Temperature sensor (thermocouple), recording the temperature of the heating element</li>
@@ -392,7 +398,7 @@ relevance for the measurement of luminescence are suitable. Typical examples:</p
 <div id="example" class="section level3" number="3.1.3">
 <h3><span class="header-section-number">3.1.3</span> Example</h3>
 <p>In order to define a suitable standard only a few attributes are required. A few of them are useful for every kind of component,
-others are only meaningfully in combination. For instance, providing information on the detection window is not meaningful for
+others are only meaningful in combination. For instance, providing information on the detection window is not meaningful for
 a heating element.</p>
 <pre class="bash"><code>{...}
   &lt;curve component=&quot;heating element&quot; startDate=&quot;2021-02-14T22:57:00.0Z&quot; 
@@ -453,7 +459,7 @@ detected within the same time frame defined through the attributes <code>&lt;sta
 <td align="left"><code>string</code></td>
 <td align="left">no</td>
 <td align="left"><code>"TL"</code></td>
-<td align="left">valid values according the <code>recordType</code> table</td>
+<td align="left">valid values according to the <code>recordType</code> table</td>
 </tr>
 <tr class="even">
 <td align="left">sequenceStepNumber</td>
@@ -475,7 +481,7 @@ detected within the same time frame defined through the attributes <code>&lt;sta
 word or using an accepted abbreviation (e.g., OSL for optically stimulated luminescence).
 However, it is important to keep in mind that the <code>recordType</code> makes <strong>no</strong> claim on the technical
 components involved, but is solely set to ease the understanding of the record. The hard
-physical information a stored in the <code>&lt;curve&gt;</code> node.</p>
+physical information is stored in the <code>&lt;curve&gt;</code> node.</p>
 <table>
 <caption>Valid <code>recordTypes</code></caption>
 <colgroup>
@@ -503,7 +509,7 @@ physical information a stored in the <code>&lt;curve&gt;</code> node.</p>
 </tr>
 <tr class="even">
 <td align="left"><code>"heating"</code></td>
-<td align="left">any kind for heating without signal detection</td>
+<td align="left">heating without signal detection</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>"spectrometer"</code></td>
@@ -519,15 +525,15 @@ physical information a stored in the <code>&lt;curve&gt;</code> node.</p>
 </tr>
 <tr class="even">
 <td align="left"><code>"ITL"</code></td>
-<td align="left">Isothermal luminescence</td>
+<td align="left">isothermal luminescence</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>"IRSL"</code></td>
-<td align="left">Infrared stimulated luminescence</td>
+<td align="left">infrared stimulated luminescence</td>
 </tr>
 <tr class="even">
 <td align="left"><code>"TM-OSL"</code></td>
-<td align="left">thermally modulated luminescence</td>
+<td align="left">thermally modulated optically stimmulated luminescence</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>"RF"</code></td>
@@ -551,19 +557,19 @@ physical information a stored in the <code>&lt;curve&gt;</code> node.</p>
 </tr>
 <tr class="even">
 <td align="left"><code>"BSL"</code></td>
-<td align="left">blue optically stimulated luminescence</td>
+<td align="left">blue-light optically stimulated luminescence</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>"GSL"</code></td>
-<td align="left">green optically stimulated luminescence</td>
+<td align="left">green-light optically stimulated luminescence</td>
 </tr>
 <tr class="even">
 <td align="left"><code>"VSL"</code></td>
-<td align="left">violet optically stimulated luminescence</td>
+<td align="left">violet-light optically stimulated luminescence</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>"YSL"</code></td>
-<td align="left">yellow optically stimulated luminescence</td>
+<td align="left">yellow-light optically stimulated luminescence</td>
 </tr>
 <tr class="even">
 <td align="left"><code>"POSL"</code></td>
@@ -579,7 +585,7 @@ physical information a stored in the <code>&lt;curve&gt;</code> node.</p>
 </tr>
 </tbody>
 </table>
-<p>valid entries for <code>sampleConditions</code> are:</p>
+<p>Valid entries for for <code>sampleConditions</code> are given in the following table:</p>
 <table>
 <caption>Valid values for <code>sampleConditions</code></caption>
 <colgroup>
@@ -595,35 +601,35 @@ physical information a stored in the <code>&lt;curve&gt;</code> node.</p>
 <tbody>
 <tr class="odd">
 <td align="left"><code>"Natural"</code></td>
-<td align="left">Natural luminescence signal</td>
+<td align="left">natural luminescence signal</td>
 </tr>
 <tr class="even">
 <td align="left"><code>"Natural+Dose"</code></td>
-<td align="left">Natural luminescence signal with additive dose</td>
+<td align="left">natural luminescence signal with additive dose</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>"Bleach"</code></td>
-<td align="left">Artificially depleted luminescence</td>
+<td align="left">artificially depleted luminescence</td>
 </tr>
 <tr class="even">
 <td align="left"><code>"Bleach+Dose"</code></td>
-<td align="left">Artificially depleted luminescence with an additive dose</td>
+<td align="left">artificially depleted luminescence with an additive dose</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>"Nat.(Bleach)"</code></td>
-<td align="left">Naturally depleted luminescence</td>
+<td align="left">artificially bleached natural luminescence signal</td>
 </tr>
 <tr class="even">
 <td align="left"><code>"Nat.+Dose(Bleach)"</code></td>
-<td align="left">Naturally depleted luminescence with dose</td>
+<td align="left">artificially bleached natural luminescence with added dose</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>"Dose"</code></td>
-<td align="left">Artificially irradiated sample</td>
+<td align="left">artificially irradiated sample</td>
 </tr>
 <tr class="even">
 <td align="left"><code>"Background"</code></td>
-<td align="left">Background</td>
+<td align="left">background</td>
 </tr>
 </tbody>
 </table>
@@ -911,7 +917,7 @@ to set different licenses.</p>
 <td align="left"><code>anyURI</code></td>
 <td align="left">yes</td>
 <td align="left"><code>"10.5281/zenodo.596252"</code></td>
-<td align="left">A digital document identifier referencing the dataset already archive in a data repository</td>
+<td align="left">A digital document identifier referencing the dataset already archived in a data repository</td>
 </tr>
 </tbody>
 </table>
@@ -977,8 +983,7 @@ to set different licenses.</p>
 </div>
 <div id="general-parameters-all-nodes" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> General parameters (all nodes)</h2>
-<p>A few attributes are available on all node levels except the root node <code>&lt;xlum&gt;</code>. There are mainly of technical
-nature to ease the sequential of data storage during the measurement process.</p>
+<p>A few attributes are available on all node levels except the root node <code>&lt;xlum&gt;</code>. These attributes are mainly of technical nature to ease the sequential data storage during the measurement process (such as <code>parentID</code>).</p>
 <table>
 <caption>Attributes valid in all nodes</caption>
 <colgroup>
@@ -1010,7 +1015,7 @@ nature to ease the sequential of data storage during the measurement process.</p
 <td align="left"><code>token</code></td>
 <td align="left">yes</td>
 <td align="left"><code>"201007145551910"</code></td>
-<td align="left">unique identifying the parent node, the root node has the ID <code>0</code>, this is usually not needed but may help to store data</td>
+<td align="left">uniquely identifying the parent node, the root node has the ID <code>0</code>, this is usually not needed but may help to store data</td>
 </tr>
 <tr class="odd">
 <td align="left">comment</td>
@@ -1026,17 +1031,11 @@ nature to ease the sequential of data storage during the measurement process.</p
 <div id="special-cases" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Special cases</h1>
 <p>This section provides suggestions for attributes for particular types of measurements.
-These attributes are not compulsory, but may be used for the sake of consistency.</p>
-<p>Either way, these metadata must not be required to store and analyse the data!</p>
+These attributes are not compulsory, but if needed should be used for the sake of consistency.</p>
+<p>Please note: these metadata are not required to store and analyse the data!</p>
 <div id="pulsing-data-optional" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Pulsing data (optional)</h2>
-<p>In measurements with pulsed light stimulation data processing usually requires
-summations of photon counts on the hardware level, because it is neither meaningful
-nor feasible to store every single count in separate curves for photon arrival
-times of <span class="math inline">\(10^{-6} \leq \tau \leq 10^{-3}\)</span> s. Hence, multiple detector <code>&lt;curve/&gt;</code> data may be stored per <code>&lt;record/&gt;</code>,
-one for each (x) pulse(-s). The <code>&lt;record/&gt;</code> node contains some additional metadata that may help
-to understand the data and the undertaken processing on the hardware level better. All attributes
-are optional.</p>
+<p>In measurements with pulsed light stimulation, data processing usually requires summations of photon counts on the hardware level using so-called field-programmable gate arrays (FPGA). It is neither meaningful nor feasible to store single counts in separate curves for photon arrival times of <span class="math inline">\(10^{-6} \leq \tau \leq 10^{-3}\)</span> s. Hence, multiple detectors <code>&lt;curve/&gt;</code> data may be stored per <code>&lt;record/&gt;</code>, one for each (x) pulse(-s). In those cases, the <code>&lt;record/&gt;</code> node contains additional metadata that may help understand the data and pre-processing by the hardware level better. All attributes are optional.</p>
 <table>
 <caption>Additional metadata <code>&lt;record/&gt;</code> node pulsing data</caption>
 <colgroup>
@@ -1120,8 +1119,8 @@ are optional.</p>
 </table>
 </div>
 </div>
-<div id="pratical-examples" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> Pratical examples</h1>
+<div id="practical-examples" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Practical examples</h1>
 <p>This section contains detailed examples for particular curve types in order
 to provide usable examples for the data format.</p>
 <pre class="bash"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
@@ -1141,8 +1140,8 @@ to provide usable examples for the data format.</p>
 <h1><span class="header-section-number">6</span> Appendix</h1>
 <div id="risø-binbinx-to-xlum-metadata-argument-matching" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Risø BIN/BINX to XLUM metadata argument matching</h2>
-<p>The Risø BIN/BINX files consist of a <a href="https://r-luminescence.org/tutorials/binx2r/">metadata header block and a data block</a>. Some of
-the metadata serves the sole purpose of describing the structure of the data block
+<p>Risø BIN/BINX files consist of a <a href="https://r-luminescence.org/tutorials/binx2r/">metadata header block and a data block</a>. Some of
+the metadata serves the sole purpose of describing the structure of the data block,
 others return the specific equipment status but are non-relevant for the data analysis.</p>
 <p>Most BIN/BINX metadata is covered by the XLUM format by design and hence finds their expression implicitly. The following argument list contains
 <strong>all</strong> possible arguments in BIN/BINX files, however, not all BIN/BINX
@@ -1186,7 +1185,7 @@ versions 03 to 08.</p>
 <td>04</td>
 <td><code>RECTYPE</code></td>
 <td>NONE</td>
-<td>non-relevant internal metadata</td>
+<td>file format internal metadata</td>
 </tr>
 <tr class="odd">
 <td>05</td>
@@ -1220,7 +1219,7 @@ versions 03 to 08.</p>
 </tr>
 <tr class="even">
 <td>10</td>
-<td><code>CRUVENO</code></td>
+<td><code>CURVENO</code></td>
 <td>implicit</td>
 <td>through structure</td>
 </tr>
@@ -1628,5 +1627,468 @@ versions 03 to 08.</p>
 </tr>
 </tbody>
 </table>
+<p><em>Note: metadata tagged with “considered non-relevant” or “usage unknown” indicate that they are not considered (yet) as relevant enough for long-term data preservation and are hence not to be included as a compulsory argument in the XLUM format definition. However, they <strong>can</strong> still be stored in the XLUM format regardless.</em></p>
+</div>
+<div id="freiberg-instruments-xsyg-argument-matching" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Freiberg Instruments XSYG argument matching</h2>
+<p>The XYSG file format by Freiberg Instruments is already an XML-based file format
+. It can be somewhat considered the predecessor of the XLUM format. The structure
+was developed in February 2013 but never formally published, and attributes are not
+necessarily followed. The main differences are:</p>
+<ul>
+<li>The XSYG file format consists of only four nodes instead of five. Parent node <code>xlum</code>
+exists only for the XLUM format</li>
+<li>Nodes start with a capital letter (e.g., <code>&lt;Sample&gt;</code>, instead of <code>&lt;sample&gt;</code> in XLUM)</li>
+<li>The individual curves values are stored as a pair-list with values separated by a semicolon <code>;</code>, in the <code>&lt;Curve&gt;</code> node, i.e., <code>x0 , y0 ; x1 , y1 ; x2 , y2 ; x3 , y3</code>. XLUM uses attributes instead, and values are stored separately through white space</li>
+<li>For spectrometer data, the XSYG format defines an alternative storage format of values in the <code>&lt;Curve&gt;</code> node of form <code>1.0 ,[554|555|559|553|556|550| {...}</code>. Contrary, XLUM maintains a consistent storage format.</li>
+<li>The chosen date format was not ISO conform yyyyMMddhhmmss instead of ISO 8601-1:2019: YYYY-MM-DDThh:mm:ss[.mmm]Z recalculated to Zulu time.</li>
+</ul>
+<p>In the following, the XYSG to XLUM argument matching is listed node-wise.</p>
+<div id="curve-vs-curve" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> <code>&lt;Curve/&gt;</code> vs <code>&lt;curve/&gt;</code></h3>
+<table>
+<colgroup>
+<col width="2%" />
+<col width="23%" />
+<col width="25%" />
+<col width="48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>XSYG attribute</th>
+<th>Expression in XLUM</th>
+<th>Remarks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>01</td>
+<td><code>startDate</code></td>
+<td><code>startDate</code></td>
+<td>note the format difference</td>
+</tr>
+<tr class="even">
+<td>02</td>
+<td><code>duration</code></td>
+<td><code>duration</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>03</td>
+<td><code>curveType</code></td>
+<td><code>duration</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>04</td>
+<td><code>stimulator</code></td>
+<td><code>component</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>05</td>
+<td><code>detector</code></td>
+<td><code>component</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>06</td>
+<td><code>curveDscripter</code></td>
+<td><code>xLabel</code>, <code>yLabel</code>, <code>tLabel</code>, <code>vLabel</code>, <code>xUnit</code>, <code>yUnit</code>, <code>tUnit</code>, <code>vUnit</code></td>
+<td>needs to be split and matched separately</td>
+</tr>
+<tr class="odd">
+<td>07</td>
+<td><code>offset</code></td>
+<td>implicit</td>
+<td>can be encode through the <code>tValues</code></td>
+</tr>
+<tr class="even">
+<td>08</td>
+<td><code>detectionWindow</code></td>
+<td><code>detectionWindow</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>09</td>
+<td><code>filterIDs</code></td>
+<td>NONE</td>
+<td>purely manufacture related ID</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td><code>filterNames</code></td>
+<td><code>filter</code></td>
+<td>filter names separated by <code>;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="record-vs-record" class="section level3" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> <code>&lt;Record/&gt;</code> vs <code>&lt;record/&gt;</code></h3>
+<table>
+<colgroup>
+<col width="2%" />
+<col width="23%" />
+<col width="25%" />
+<col width="48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>XSYG attribute</th>
+<th>Expression in XLUM</th>
+<th>Remarks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>01</td>
+<td><code>startDate</code></td>
+<td><code>startDate</code></td>
+<td>note the format difference</td>
+</tr>
+<tr class="even">
+<td>02</td>
+<td><code>endDate</code></td>
+<td>implicit</td>
+<td>can be calculated from other attributes</td>
+</tr>
+<tr class="odd">
+<td>03</td>
+<td><code>recordType</code></td>
+<td><code>recordType</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>04</td>
+<td><code>name</code></td>
+<td>NONE</td>
+<td>encoded through <code>recordType</code> + <code>comment</code></td>
+</tr>
+<tr class="odd">
+<td>05</td>
+<td><code>sequenceStepNumber</code></td>
+<td><code>sequenceStepNumber</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>06</td>
+<td><code>metaIrrType</code></td>
+<td>implicit</td>
+<td>encode through <code>component</code> in <code>&lt;curve/&gt;</code></td>
+</tr>
+<tr class="odd">
+<td>07</td>
+<td><code>metaIrrDuration</code></td>
+<td>implicit</td>
+<td>through <code>&lt;curve/&gt;</code> node</td>
+</tr>
+<tr class="even">
+<td>08</td>
+<td><code>sampleCondition</code></td>
+<td><code>sampleCondition</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="sequence-vs-sequence" class="section level3" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> <code>&lt;Sequence/&gt;</code> vs <code>&lt;sequence/&gt;</code></h3>
+<table>
+<colgroup>
+<col width="2%" />
+<col width="23%" />
+<col width="25%" />
+<col width="48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>XSYG attribute</th>
+<th>Expression in XLUM</th>
+<th>Remarks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>01</td>
+<td><code>position</code></td>
+<td><code>position</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>02</td>
+<td><code>creationDate</code></td>
+<td>implicit</td>
+<td>through <code>startDate</code> of <code>&lt;record/&gt;</code> and <code>&lt;curve/&gt;</code></td>
+</tr>
+<tr class="odd">
+<td>03</td>
+<td><code>name</code></td>
+<td><code>name</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>04</td>
+<td><code>protocol</code></td>
+<td>implicit</td>
+<td>in <code>name</code></td>
+</tr>
+<tr class="odd">
+<td>05</td>
+<td><code>mineral</code></td>
+<td>NONE</td>
+<td>value to be entered in <code>&lt;sample/&gt;</code> node</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="sample-vs-sample" class="section level3" number="6.2.4">
+<h3><span class="header-section-number">6.2.4</span> <code>&lt;Sample/&gt;</code> vs <code>&lt;sample/&gt;</code></h3>
+<table>
+<colgroup>
+<col width="2%" />
+<col width="23%" />
+<col width="25%" />
+<col width="48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>XSYG attribute</th>
+<th>Expression in XLUM</th>
+<th>Remarks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>01</td>
+<td><code>name</code></td>
+<td><code>name</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>02</td>
+<td><code>user</code></td>
+<td>NONE</td>
+<td>Author can be entered in <code>&lt;xlum/&gt;</code> node</td>
+</tr>
+<tr class="odd">
+<td>03</td>
+<td><code>startDate</code></td>
+<td>implicit</td>
+<td>through values in other <code>&lt;curve/&gt;</code> and <code>&lt;record/&gt;</code> nodes</td>
+</tr>
+<tr class="even">
+<td>04</td>
+<td><code>sampleCarrier</code></td>
+<td>NONE</td>
+<td>entry in general attribute <code>comment</code> possible</td>
+</tr>
+<tr class="odd">
+<td>05</td>
+<td><code>lexsygID</code></td>
+<td>implicit</td>
+<td>entry in attributes in <code>&lt;sequence/&gt;</code> node attributes</td>
+</tr>
+<tr class="even">
+<td>06</td>
+<td><code>lexStudioVersion</code></td>
+<td>implicit</td>
+<td>entry in attributes in <code>&lt;sequence/&gt;</code> node attributes</td>
+</tr>
+<tr class="odd">
+<td>07</td>
+<td><code>firmwareVersion</code></td>
+<td>implicit</td>
+<td>entry in attributes in <code>&lt;sequence/&gt;</code> node attributes</td>
+</tr>
+<tr class="even">
+<td>08</td>
+<td><code>os</code></td>
+<td>NONE</td>
+<td>however, entry in <code>comment</code> attribute possible</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="general-attributes" class="section level3" number="6.2.5">
+<h3><span class="header-section-number">6.2.5</span> General attributes</h3>
+<table>
+<colgroup>
+<col width="2%" />
+<col width="23%" />
+<col width="25%" />
+<col width="48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>XSYG attribute</th>
+<th>Expression in XLUM</th>
+<th>Remarks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>01</td>
+<td><code>state</code></td>
+<td><code>state</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>02</td>
+<td><code>partentID</code></td>
+<td><code>partentID</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>03</td>
+<td><code>comment</code></td>
+<td><code>comment</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="suerc-psl-argument-matching" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> SUERC PSL argument matching</h2>
+<p>PSL files are produced by portable luminescence readers produced by the
+Scottish Universities Environmental Research Centre (SUERC). PSL files
+are loosely structured ASCII files without format descriptions.</p>
+<p>Measured values are stored in essentially five columns (three columns, but
+total count and count values per cycle include uncertainties), example:</p>
+<pre><code>Time (s)        Total Count           Counts per Cycle  
+--------   ---------------------   ---------------------
+   1              0 +/-    4              0 +/-    4
+   2             -2 +/-    6             -2 +/-    4
+   3             12 +/-    8             14 +/-    5</code></pre>
+<p>These values can be represented in the XLUM format using <code>&lt;curve/&gt;</code> nodes,
+one <code>&lt;curve/&gt;</code> for the counts per cycle and another for the uncertainties.
+This solution is safer than adding uncertainties as attributes and more consistent
+because the uncertainties must have been estimated using a component.</p>
+<p>Columns under “Total Count” represent cumulative data that can be recalculated from
+the values under “Counts per Cycle” should not be stored explicitly in XLUM.</p>
+<p>Additionally, PSL provides arguments that can be extracted from those files.
+The matching listed below is non-exhaustive and represents the current state-of-knowledge
+about the PSL format.</p>
+<table>
+<colgroup>
+<col width="2%" />
+<col width="23%" />
+<col width="25%" />
+<col width="48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>PSL metadata</th>
+<th>Expression in XLUM</th>
+<th>Remarks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>01</td>
+<td><code>Run Name</code></td>
+<td>implicit</td>
+<td>through <code>comment</code></td>
+</tr>
+<tr class="even">
+<td>02</td>
+<td><code>Sample no</code></td>
+<td><code>name</code></td>
+<td>through <code>name</code> in <code>&lt;sample/&gt;</code> node</td>
+</tr>
+<tr class="odd">
+<td>03</td>
+<td><code>Sequence name</code></td>
+<td><code>name</code></td>
+<td>through <code>name</code> in <code>&lt;sequence/&gt;</code> node</td>
+</tr>
+<tr class="even">
+<td>04</td>
+<td><code>Filename</code></td>
+<td><code>fileName</code></td>
+<td>in <code>&lt;sequence/&gt;</code> node</td>
+</tr>
+<tr class="odd">
+<td>05</td>
+<td><code>Dark Count</code></td>
+<td>implicit</td>
+<td>as <code>&lt;curve/&gt;</code> node</td>
+</tr>
+<tr class="even">
+<td>06</td>
+<td><code>Light Count</code></td>
+<td>implicit</td>
+<td>as <code>&lt;curve/&gt;</code> node</td>
+</tr>
+<tr class="odd">
+<td>07</td>
+<td><code>Dark Count Correction</code></td>
+<td>NONE</td>
+<td>this is a logical attribute, which can part of <code>comment</code> if needed in the <code>&lt;curve/&gt;</code> node</td>
+</tr>
+<tr class="even">
+<td>08</td>
+<td><code>Offset Subract</code></td>
+<td>NONE</td>
+<td>this can be part of <code>comment</code> in <code>&lt;curve/&gt;</code> node</td>
+</tr>
+<tr class="odd">
+<td>09</td>
+<td><code>Datafile Path</code></td>
+<td>NONE</td>
+<td>not considered relevant</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td><code>Summary Path</code></td>
+<td>NONE</td>
+<td>not considered relevant</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td><code>Run Sequence</code></td>
+<td>implicit</td>
+<td>through <code>name</code> in <code>&lt;sequence/&gt;</code> node</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>Timestamp</td>
+<td><code>startDate</code></td>
+<td>in <code>&lt;curve/&gt;</code> node, please note the different format</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td><code>Measurement</code></td>
+<td><code>recordType</code></td>
+<td>in <code>&lt;record/&gt;</code> node</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td><code>Stim</code></td>
+<td><code>recordType</code></td>
+<td>in <code>&lt;record/&gt;</code> node</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td><code>On/Off(us)</code></td>
+<td><code>onTime</code>, <code>offTime</code></td>
+<td>in <code>&lt;curve/&gt;</code> node</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td><code>Cycle(ms), No</code></td>
+<td><code>nPulses</code></td>
+<td>in <code>&lt;curve/&gt;</code> node</td>
+</tr>
+</tbody>
+</table>
+<p><em>Please note: as for the data formats above, in principle, all arguments can be carried over directly. However, for the sake of consistency, the matching should be applied.</em></p>
 </div>
 </div>
