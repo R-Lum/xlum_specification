@@ -40,14 +40,14 @@ Three simple design principles underpin the format specification:
 
 # General description
 
-The `XLUM`-format is an [XML](https://www.w3.org/xml) derivative. The base data structure is a 
+The `XLUM` format is an [XML](https://www.w3.org/xml) derivative. The base data structure is a
 tree with five nodes types storing the data. Each level has its unique denotation.
 
-The levels and a short introduction is given in the table below. A detailed description can be found in the following sections. 
+The levels and a short introduction are given in the table below. A detailed description can be found in the following sections.
 Nodes represent each level in the structure. **Only `<curve>` nodes contain physical quantities, such as luminescence data** all other nodes are parent nodes of `<curve>` 
 to structure the dataset and ship additional metadata. 
 
-The first level, `xlum` is a root node to enable storage of luminescence data in arbitrary files following the XML scheme. As a side effect this also allows custom file endings different from `*.xlum`.
+The first level, `xlum`, is a root node to enable storage of luminescence data in arbitrary files following the XML scheme. As a side effect this also allows custom file endings different from `*.xlum`.
 
 
   |Node name       | Number of samples   |Number of aliquots  | Number of records  | Number of data curves |
@@ -62,7 +62,7 @@ The first level, `xlum` is a root node to enable storage of luminescence data in
 
 A node has a name, attributes, and data stored in it. The data stored in the attributes describe the state of this level. The stored data in the node describes the process(es) assigned to the node. A minimal example is shown in the listing. The documentation provides an overview starting with the leaf node description and going up to the root from there. Further notes:
 
-* The format version bases on [XML version 1.0 (Fifth Edition)](http://www.w3.org/TR/2008/REC-xml-20081126/)
+* The format version is based on [XML version 1.0 (Fifth Edition)](http://www.w3.org/TR/2008/REC-xml-20081126/)
 * File encoding should always be UTF-8
 * This specification lists only mandatory attributes. Additional, custom attributes are explicitly supported.
 * Parser supporting the `XLUM` format must not crash when encountering non-specified node attributes. However, they may skip them.
@@ -189,20 +189,20 @@ a heating element.
 ```{r, engine='bash', eval = FALSE}
 {...}
   <curve component="heating element" startDate="2021-02-14T22:57:00.0Z" 
-    curveType="predefined" duaration="5" 
+    curveType="predefined" duration="5"
     offset="0" xValues="NA" yValues="NA" 
     tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
     tLabel="time" vLabel="temperature" xUnit="NA" yUnit="NA" vUnit="K" tUnit="s">
         293 303 313 323 333
   </curve>
   <curve component="thermo couple" startDate="2021-02-14T22:57:00.0Z" 
-    curveType="measured" duaration="5" 
+    curveType="measured" duration="5"
     offset="0" xValues="NA" yValues="NA" tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
     vLabel="temperature" tLabel="time" xUnit="NA" yUnit="NA" vUnit="K" tUnit="s">
         293 303 313 323 333
   </curve>
   <curve component="EMI 9123QB15" startDate="2021-02-14T22:57:00.0Z" 
-    curveType="measured" duaration="5" offset="0" xValues="NA" yValues="NA" 
+    curveType="measured" duration="5" offset="0" xValues="NA" yValues="NA"
     tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
     vLabel="luminescence" tLabel="time" xUnit="NA" yUnit="NA" vUnit="cts" 
     tUnit="s" detectionWindow="380 nm" filter="Hoya U340 + Delta 365/40">
@@ -249,7 +249,7 @@ physical information is stored in the `<curve>` node.
   |`"TL"`                | thermoluminescence measurement                     | 
   |`"ITL"`               | isothermal luminescence                  | 
   |`"IRSL"`              | infrared stimulated luminescence                 | 
-  |`"TM-OSL"`            | thermally modulated optically stimmulated luminescence                 |
+  |`"TM-OSL"`            | thermally modulated optically stimulated luminescence                 |
   |`"RF"`                | radiofluorescence                                  |
   |`"UV-RF"`             | radiofluorescence with detection in the UV wavelength range    |
   |`"IR-RF"`             | radiofluorescence with detection in the infrared wavelength range    |
@@ -285,7 +285,7 @@ for information stored in BIN/BINX-files. The field can be set to `NA`.*
 
 ### Example 
 
-The following examples consists of two records. 
+The following example consists of two records.
 
 ```{r, engine='bash', eval = FALSE}
 {...}
@@ -333,7 +333,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.
 
 ```{r, engine='bash', eval = FALSE}
 {...}
-<sequence position="1" name="SAR measurment" 
+<sequence position="1" name="SAR measurement"
   fileName="Testsequence.seq" software="DeviceStudio, 2.37">
   <record ...>
     <curve ...>
@@ -386,7 +386,7 @@ level may contain an infinite number of sequences measured for one sample.
 
 ## The `<xlum/>` level 
 
-The `<xlum>` is the format parent node and it can contain an infinite number
+The `<xlum>` is the parent node and it can contain an infinite number
 of samples. Only this level allows to set a license for the distribution 
 and usage of the data. All data within a particular `<xlum>` are considered
 distributed under the license. You have to create new instances of the `<xlum>` 
@@ -507,10 +507,10 @@ to provide usable examples for the data format.
 ## Risø BIN/BINX to XLUM metadata argument matching
 
 Risø BIN/BINX files consist of a [metadata header block and a data block](https://r-luminescence.org/tutorials/binx2r/). Some of
-the metadata serves the sole purpose of describing the structure of the data block, 
+the metadata serve the sole purpose of describing the structure of the data block,
 others return the specific equipment status but are non-relevant for the data analysis. 
 
-Most BIN/BINX metadata is covered by the XLUM format by design and hence finds their expression implicitly. The following argument list contains
+Most BIN/BINX metadata are covered by the XLUM format by design and hence find their expression implicitly. The following argument list contains
 **all** possible arguments in BIN/BINX files, however, not all BIN/BINX
 file versions support all arguments. Covered here are BIN/BINX files between 
 versions 03 to 08.
@@ -670,7 +670,7 @@ In the following, the XYSG to XLUM argument matching is listed node-wise.
 |# |XSYG attribute     |Expression in XLUM |Remarks                              |
 |--|------------------|-------------------|-------------------------------------|               
 |01|`state`           |`state`            |                                     |
-|02|`partentID`       |`partentID`        |                                     |
+|02|`parentID`        |`parentID`         |                                     |
 |03|`comment`         |`comment`          |                                     |
 
 ## SUERC PSL argument matching
