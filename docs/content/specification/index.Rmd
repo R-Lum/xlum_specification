@@ -355,7 +355,7 @@ level may contain an infinite number of sequences measured for one sample.
 
   |Identifier         |Data type            |Allows `NA`?   | Example                           |Information            |
   |:----------------- |:--------------------|:--------------|:---------------------------------|:----------------------|
-  |name               |`number`             |yes            |`"LUM-21321"`                      | unique sample identifier   |
+  |name               |`string`             |yes            |`"LUM-21321"`                      | unique sample identifier   |
   |mineral            |`string`             |yes            |`"quartz"`                         | dominant mineral composition of the sample
   |latitude           |`numeric`            |yes            |`"52.4091392"`                     | latitude in decimal degrees of the sample origin
   |longitude          |`numeric`            |yes            |`"-4.0702446"`                     | longitude in decimal degrees of the sample origin
@@ -400,7 +400,7 @@ to set different licenses.
   lang          |`string`      |no        | *predefined*              | ISO 639-1 language code, must not be changed
   version       |`numeric`      |no        |`"1.0"`                     | the `xlum` format version number relevant |
   flavour       |`string`       |no        |`"generic"`                 | allows to specify a particular flavour of the format, for instance for particular equipment
-  author        |`list(string)` |yes       |`"Max Planck; Marie Curie"` | names of the author(s) of this dataset
+  author        |`string`       |yes       |`"Max Planck; Marie Curie"` | names of the author(s) of this dataset
   license       |`string`       |yes       |`"CC BY 4.0"`               | license for the distribution of the dataset.
   doi           |`anyURI`       |yes       |`"10.5281/zenodo.596252"`   | A digital document identifier referencing the dataset already archived in a data repository
 
