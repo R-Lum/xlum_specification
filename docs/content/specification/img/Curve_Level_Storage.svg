@@ -219,11 +219,7 @@
             </g>
         </g>
         <g transform="matrix(0.909563,0,0,0.246596,166.901,53.9566)">
-            <text x="-98.211px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&lt;curve xValues = &quot;N</text>
-            <text x="4.389px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">A</text>
-            <text x="10.149px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&quot;, yValues = &quot;NA&quot;, tValues =</text>
-            <text x="166.749px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&quot;</text>
-            <text x="171.879px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">1,...,n&quot;&gt;</text>
+            <text x="-98.211px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&lt;curve xValues = &quot;0&quot;, yValues = &quot;0&quot;, tValues = &quot;1,...,n&quot;&gt;</text>
             <text x="-92.811px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">v</text>
             <text x="-87.411px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">t1</text>
             <text x="-81.114px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">,...,v</text>
@@ -231,9 +227,7 @@
             <text x="-98.211px" y="262.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&lt;/curve&gt;</text>
         </g>
         <g transform="matrix(0.909563,0,0,0.246596,157.346,114.457)">
-            <text x="-98.211px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&lt;curve xValues = &quot;1,...,n&quot;, yValues = &quot;NA&quot;, tValues =</text>
-            <text x="193.389px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&quot;</text>
-            <text x="198.519px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">1,...,n&quot;&gt;</text>
+            <text x="-98.211px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&lt;curve xValues = &quot;1,...,n&quot;, yValues = &quot;0&quot;, tValues = &quot;1,...,n&quot;&gt;</text>
             <text x="-92.811px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">v</text>
             <text x="-87.411px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">x1,t1</text>
             <text x="-71.67px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">,v</text>
