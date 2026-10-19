@@ -162,11 +162,11 @@ relevance for the measurement of luminescence are suitable. Typical examples:
   component         | `string`   |yes            |`"EMI 9235QB15"`     | name of the technical component. `NA` allowed only for `"predefined"` |
   startDate         | `dateTime`     |no             |`"2021-07-14T22:59:35.0Z"`  | ISO 8601-1:2019: `YYYY-MM-DDThh:mm:ss[.mmm]Z` recalculated to Zulu time |
   curveType         | `string`   |no             |`"predefined"`                  | Values allowed are only `"predefined"` or `"measured"`    |
-  duration          | `number`   |no             |`"20.000"`                      | Duration of the detection in seconds or a fraction of it|
-  offset            | `number`   |no             |`"10.000"`                      | Before the detection starts in seconds or a fraction of it|
-  xValues           | `list` `unsignedInt`   |no            |`"1 2 3"`                 | x-coordinate values of the detector; `0` indicates that that this parameter is not used                       |
-  yValues           | `list` `unsignedInt`  |no            |`"1 2 3"`                 | y-coordinate values of detector; `0` indicates that that this parameter is not used                            |
-  tValues           | `list` `double`   |no             |`"1. 2.0 3.0"`                 | time values in seconds or fractions of it. Values must be positive|
+  duration          | `double`   |no             |`"20.000"`                      | Duration of the detection in seconds or a fraction of it|
+  offset            | `double`   |no             |`"10.000"`                      | Before the detection starts in seconds or a fraction of it|
+  xValues           | `list(unsignedInt)` |no    |`"1 2 3"`                       | x-coordinate values of the detector; `0` indicates that this parameter is not used|
+  yValues           | `list(unsignedInt)` |no    |`"1 2 3"`                       | y-coordinate values of detector; `0` indicates that this parameter is not used|
+  tValues           | `list(double)`      |no    |`"1. 2.0 3.0"`                  | time values in seconds or fractions of it. Values must be positive|
   vLabel            | `string`   |no             |`"Luminescence"`                | Measured physical quantity                                |
   xLabel            | `string`   |yes            |`"pixel"`                       | label of the x-coordinate values                          |
   yLabel            | `string`   |yes            |`"pixel"`                       | label of the y-coordinate values                          |  
@@ -176,7 +176,7 @@ relevance for the measurement of luminescence are suitable. Typical examples:
   yUnit             | `string`   |yes            |`"px"`                          | SI unit or equivalent for y-values                        |
   tUnit             | `string`   |no             |`"s"`                           | SI unit or equivalent for t-values                        |
   detectionWindow   | `string`   |yes            |`"375"`                         | Centre wavelength if applicable. Can be set to `NA`       |
-  filter          | `list` (`string`) |yes      |`"Hoya U340; Delta BP 365/50EX"`| Filter names separated by `;` |
+  filter            | `string`   |yes            |`"Hoya U340; Delta BP 365/50EX"`| Filter names separated by `;`                             |
 
   Table: Specified curve attributes. Attributes in `[]` are optional, hence `NA` is not allowed.
 
@@ -318,7 +318,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.
 
   |Identifier     |Type         |  Allows `NA`?    |  Example                | Information        |
   |:------------- |:------------|:-----------------|:------------------------|:-------------------|
-  |position       |`numeric`    |no                |`"42"`                   | position of aliquot in the reader, can be `0` in case samples are changed manually, i.e. the equipment has only one single measurement position |
+  |position       |`unsignedInt`|no                |`"42"`                   | position of aliquot in the reader, can be `0` in case samples are changed manually, i.e. the equipment has only one single measurement position |
   |name           |`string`     |yes               |`"SAR measurement"`      | name of the sequence |
   |fileName       |`string`     |yes               |`"SAR_OSL.seq"`          | sequence file, where applicable     |
   |software       |`string`     |yes               |`"Sequence Editor 4.4"`  | software used to write the sequence if applicable |
@@ -357,9 +357,9 @@ level may contain an infinite number of sequences measured for one sample.
   |:----------------- |:--------------------|:--------------|:---------------------------------|:----------------------|
   |name               |`string`             |yes            |`"LUM-21321"`                      | unique sample identifier   |
   |mineral            |`string`             |yes            |`"quartz"`                         | dominant mineral composition of the sample
-  |latitude           |`numeric`            |yes            |`"52.4091392"`                     | latitude in decimal degrees of the sample origin
-  |longitude          |`numeric`            |yes            |`"-4.0702446"`                     | longitude in decimal degrees of the sample origin
-  |altitude           |`numeric`            |yes            |`"50"`                             | altitude in m above see level 
+  |latitude           |`double`             |yes            |`"52.4091392"`                     | latitude in decimal degrees of the sample origin
+  |longitude          |`double`             |yes            |`"-4.0702446"`                     | longitude in decimal degrees of the sample origin
+  |altitude           |`double`             |yes            |`"50"`                             | altitude in m above sea level
   |doi                |`anyURI`             |yes            |`"10.1016/j.radmeas.2017.02.003"`  | valid DOI with further information on the sample, if applicable            
 
   Table: Mandatory attributes `<sample>` node
@@ -398,7 +398,7 @@ to set different licenses.
   |:------------|:--------------|:---------|:---------------------------|:--------------|
   xmlns         |`namespace`    |no       | *predefined*               | Format specific namespace
   lang          |`string`      |no        | *predefined*              | ISO 639-1 language code, must not be changed
-  version       |`numeric`      |no        |`"1.0"`                     | the `xlum` format version number relevant |
+  formatVersion |`decimal`      |no        |`"1.0"`                     | the `xlum` format version number relevant |
   flavour       |`string`       |no        |`"generic"`                 | allows to specify a particular flavour of the format, for instance for particular equipment
   author        |`string`       |yes       |`"Max Planck; Marie Curie"` | names of the author(s) of this dataset
   license       |`string`       |yes       |`"CC BY 4.0"`               | license for the distribution of the dataset.
@@ -447,7 +447,7 @@ A few attributes are available on all node levels except the root node `<xlum>`.
   |:-------------|:---------------|:--------------------|:---------------------|:----------------|
   |state        |`string`         |yes                  |`"recording"`         |defines the state of the node; only used by equipment manufacturers 
   |parentID     |`token`         |yes                  |`"201007145551910"`   |uniquely identifying the parent node, the root node has the ID `0`, this is usually not needed but may help to store data |
-  |comment      |`String`         |yes                  |`"what a wonderful sample"`| comment field |
+  |comment       |`string`        |yes                  |`"what a wonderful sample"`| comment field |
   
   Table: Attributes valid in all nodes
   
@@ -464,12 +464,12 @@ In measurements with pulsed light stimulation, data processing usually requires 
 
   |Identifier        | Data type    |Example    |Information            |
   |:-----------------|:-------------|:----------|:----------------------|
-  |onTime            |`numeric`     |`"1E-01"` | on time of stimulation per pulse, [s]     |
-  |offTime           |`numeric`     |`"1E-01"` | on time of stimulation per pulse, [s]    |
-  |nPulses           |`numeric`     |`"10"`     | number of stimulation pulses total     |
-  |summations        |`numeric`     |`"2"`     | how many consecutive pulse records are summed (e.g. 10 pulses, 2 summations -> 5 records) |
-  |channelsPerPulse  |`numeric`     |`"1000"`   | number of channels that are recorded in one curve      |
-  |countsNormalised  |`numeric`     |`"1"`    |  if not 0, counts per channel are normalized to counts per second (helpful with uneven distributed channel times) |
+  |onTime            |`double`      |`"1E-01"`  | on time of stimulation per pulse, [s]  |
+  |offTime           |`double`      |`"1E-01"`  | off time of stimulation per pulse, [s] |
+  |nPulses           |`unsignedInt` |`"10"`     | number of stimulation pulses total     |
+  |summations        |`unsignedInt` |`"2"`      | how many consecutive pulse records are summed (e.g. 10 pulses, 2 summations -> 5 records) |
+  |channelsPerPulse  |`unsignedInt` |`"1000"`   | number of channels that are recorded in one curve |
+  |countsNormalised  |`unsignedInt` |`"1"`      | if not 0, counts per channel are normalized to counts per second (helpful with unevenly distributed channel times) |
   
   Table: Additional metadata `<record/>` node pulsing data
   
@@ -477,7 +477,7 @@ Also the curves contain additional metadata
 
   |Identifier         |Data type   |Example    |Information |
   |:------------------|:-----------|:----------|:---------------------------------------|
-  |pulseID            |`numeric`   |`"1"`     | current pulse number |
+  |pulseID            |`unsignedInt`|`"1"`     | current pulse number |
   
   Table: Additional metadata `<curve>` node pulsing data
   
@@ -489,7 +489,7 @@ to provide usable examples for the data format.
 
 ```{r, engine='bash', eval = FALSE, tidy=FALSE}
 <?xml version="1.0" encoding="utf-8"?>
-<xlum lang="en" version="1.0" flavour="xlum" doiRef="">
+<xlum lang="en" formatVersion="1.0" flavour="xlum" doi="">
  <sample ...>
   <sequence ...>
    <record ...>
@@ -620,7 +620,7 @@ In the following, the XSYG to XLUM argument matching is listed node-wise.
 |--|------------------|-------------------|-------------------------------------|               
 |01|`startDate`       |`startDate`        |note the format difference |
 |02|`duration`        |`duration`         |                                     |
-|03|`curveType`       |`duration`         |                                     |
+|03|`curveType`       |`curveType`        |                                     |
 |04|`stimulator`      |`component`        |                                     |
 |05|`detector`        |`component`        |                                     |
 |06|`curveDescripter` |`xLabel`, `yLabel`, `tLabel`, `vLabel`, `xUnit`, `yUnit`, `tUnit`, `vUnit` | needs to be split and matched separately             |
