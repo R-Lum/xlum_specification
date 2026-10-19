@@ -190,19 +190,19 @@ a heating element.
 {...}
   <curve component="heating element" startDate="2021-02-14T22:57:00.0Z" 
     curveType="predefined" duration="5"
-    offset="0" xValues="NA" yValues="NA" 
+    offset="0" xValues="0" yValues="0"
     tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
     tLabel="time" vLabel="temperature" xUnit="NA" yUnit="NA" vUnit="K" tUnit="s">
         293 303 313 323 333
   </curve>
   <curve component="thermo couple" startDate="2021-02-14T22:57:00.0Z" 
     curveType="measured" duration="5"
-    offset="0" xValues="NA" yValues="NA" tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
+    offset="0" xValues="0" yValues="0" tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
     vLabel="temperature" tLabel="time" xUnit="NA" yUnit="NA" vUnit="K" tUnit="s">
         293 303 313 323 333
   </curve>
   <curve component="EMI 9123QB15" startDate="2021-02-14T22:57:00.0Z" 
-    curveType="measured" duration="5" offset="0" xValues="NA" yValues="NA"
+    curveType="measured" duration="5" offset="0" xValues="0" yValues="0"
     tValues="1 2 3 4 5" xLabel="NA" yLabel="NA"
     vLabel="luminescence" tLabel="time" xUnit="NA" yUnit="NA" vUnit="cts" 
     tUnit="s" detectionWindow="380 nm" filter="Hoya U340 + Delta 365/40">
