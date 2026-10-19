@@ -30,7 +30,7 @@ knitr::opts_chunk$set(collapse = TRUE)
 
 # Motivation and principles   
 
-This document details the `XLUM` format, an XML based file format for long-term data preservation and exchange of luminescence data. The format is readable by humans and machines, and the data can be easily checked with any text reader on any major operating system. This design allows a platform-independent operation. The following documentation provides essential information on the file `XLUM` format  and accounts for the needs for individual flexible data analysis, even with self-written software applications.
+This document details the `XLUM` format, an XML-based file format for long-term data preservation and exchange of luminescence data. The format is readable by humans and machines, and the data can be easily checked with any text reader on any major operating system. This design allows a platform-independent operation. The following documentation provides essential information on the file `XLUM` format  and accounts for the needs for individual flexible data analysis, even with self-written software applications.
 
 Three simple design principles underpin the format specification:
 
@@ -41,10 +41,10 @@ Three simple design principles underpin the format specification:
 # General description
 
 The `XLUM` format is an [XML](https://www.w3.org/xml) derivative. The base data structure is a
-tree with five nodes types storing the data. Each level has its unique denotation.
+tree with five node types storing the data. Each level has its unique denotation.
 
 The levels and a short introduction are given in the table below. A detailed description can be found in the following sections.
-Nodes represent each level in the structure. **Only `<curve>` nodes contain physical quantities, such as luminescence data** all other nodes are parent nodes of `<curve>` 
+Nodes represent each level in the structure. **Only `<curve>` nodes contain physical quantities, such as luminescence data**. All other nodes are parent nodes of `<curve>`
 to structure the dataset and ship additional metadata. 
 
 The first level, `xlum`, is a root node to enable storage of luminescence data in arbitrary files following the XML scheme. As a side effect this also allows custom file endings different from `*.xlum`.
@@ -65,7 +65,7 @@ A node has a name, attributes, and data stored in it. The data stored in the att
 * The format version is based on [XML version 1.0 (Fifth Edition)](http://www.w3.org/TR/2008/REC-xml-20081126/)
 * File encoding should always be UTF-8
 * This specification lists only mandatory attributes. Additional, custom attributes are explicitly supported.
-* Parser supporting the `XLUM` format must not crash when encountering non-specified node attributes. However, they may skip them.
+* Parsers supporting the `XLUM` format must not crash when encountering non-specified node attributes. However, they may skip them.
 
 ```{r, engine='bash', eval = FALSE}
 <?xml version="1.0" encoding="utf-8"?>
@@ -127,7 +127,7 @@ the parser.
 
 *Please note that the XSD document does not specify binary encoding because it considers all values in `<curve/>` strings (which can represent encoded values).*
 
-For consistency reasons, the value in the node span an array with dimensions 
+For consistency reasons, the values in the node span an array with dimensions
 defined through the node attributes `xValues`, `yValues` and `tValues` (see Fig. \@ref(fig:fig1)).
 
 ```{r fig1, echo=FALSE, fig.align='center', fig.cap="The three cases for data storage depending on the detector. The black solid arrows indicate how the array is constructed from the values stored in the node."}
@@ -136,15 +136,15 @@ try(knitr::include_graphics("img/Curve_Level_Storage.png", auto_pdf = TRUE, dpi 
 ```
   
 1. The simplest form is a detector that records no spatial information. For instance,
-a photomultiplier tube only knows about count recorded over time. Alternatively, the
+a photomultiplier tube only knows about counts recorded over time. Alternatively, the
 detector can be any sensor, measuring, e.g., temperature, pressure or current. 
 
 2. A spectrometer (here a camera in front of a spectrograph) is another type of 
 detector with spatial information, here wavelengths split by the spectrograph 
 hitting different pixel areas of the detector. 
 
-3. The most complex from is a detector that records events (e.g., luminescence), 
-spatially resolved. Such as a camera. 
+3. The most complex form is a detector that records events (e.g., luminescence),
+spatially resolved, such as a camera.
 
 In the examples and Fig.\@ref(fig:fig1) the detectors detect luminescence. However, any type of sensor, electronic component recording information of
 relevance for the measurement of luminescence are suitable. Typical examples:
@@ -175,7 +175,7 @@ relevance for the measurement of luminescence are suitable. Typical examples:
   xUnit             | `string`   |yes            |`"nm"`                          | SI unit or equivalent for x-values                        |
   yUnit             | `string`   |yes            |`"px"`                          | SI unit or equivalent for y-values                        |
   tUnit             | `string`   |no             |`"s"`                           | SI unit or equivalent for t-values                        |
-  detectionWindow | `string`   |yes             |`"375"`                         | Centre wavelength if applicable. can be set to `NA`    |
+  detectionWindow   | `string`   |yes            |`"375"`                         | Centre wavelength if applicable. Can be set to `NA`       |
   filter          | `list` (`string`) |yes      |`"Hoya U340; Delta BP 365/50EX"`| Filter names separated by `;` |
 
   Table: Specified curve attributes. Attributes in `[]` are optional, hence `NA` is not allowed.
@@ -211,7 +211,7 @@ a heating element.
 {...}
 ```
 
-One curve is related to one technical device. To define a accurate time window, 
+One curve is related to one technical device. To define an accurate time window,
 the parameters *duration* and *offset* should be used. These parameters are related to the 
 start of the parent `<record/>` node.
 
@@ -265,7 +265,7 @@ physical information is stored in the `<curve>` node.
   
   Table: Valid `recordTypes`
 
-Valid entries for for  `sampleConditions` are given in the following table:
+Valid entries for `sampleConditions` are given in the following table:
 
   |`sampleCondition`   |  Information        |
   |:-------------------|:--------------------|
@@ -310,7 +310,7 @@ The following example consists of two records.
 A sequence describes multiple measurements sequentially used at **one** aliquot, 
 for instance as cup/disc with multiple grains or a single grain. Hence, another
 aliquot from the **same** sample and the sample sequence needs to be wrapped in a new `<sequence/>` node. 
-Naturally the information stored an that level can be very verbose, but are limited to  
+Naturally the information stored at that level can be very verbose, but is limited to
 a few required attributes only. In the luminescence context a sequence can fit, e.g., 
 a SAR protocol, but also a succession of protocols measured on one aliquot.
 
@@ -320,7 +320,7 @@ a SAR protocol, but also a succession of protocols measured on one aliquot.
   |:------------- |:------------|:-----------------|:------------------------|:-------------------|
   |position       |`numeric`    |no                |`"42"`                   | position of aliquot in the reader, can be `0` in case samples are changed manually, i.e. the equipment has only one single measurement position |
   |name           |`string`     |yes               |`"SAR measurement"`      | name of the sequence |
-  |fileName       |`string`     |yes               |`"SAR_OSL.seq"`          | sequence file so far applicable |
+  |fileName       |`string`     |yes               |`"SAR_OSL.seq"`          | sequence file, where applicable     |
   |software       |`string`     |yes               |`"Sequence Editor 4.4"`  | software used to write the sequence if applicable |
   |readerName     |`string`     |yes               |`"Risø OSL/TL"`          | name of the luminescence reader employed for the measurement
   |readerSN       |`string`     |yes               |`"234-23"`               | reader serial number 
@@ -445,7 +445,7 @@ A few attributes are available on all node levels except the root node `<xlum>`.
 
   |Identifier    |Data type       |Allows `NA`?         |Example               |Information      |
   |:-------------|:---------------|:--------------------|:---------------------|:----------------|
-  |state        |`string`         |yes                  |`"recording"`         |defines the state of the node; only used by equipment manufactures 
+  |state        |`string`         |yes                  |`"recording"`         |defines the state of the node; only used by equipment manufacturers 
   |parentID     |`token`         |yes                  |`"201007145551910"`   |uniquely identifying the parent node, the root node has the ID `0`, this is usually not needed but may help to store data |
   |comment      |`String`         |yes                  |`"what a wonderful sample"`| comment field |
   
@@ -460,7 +460,7 @@ Please note: these metadata are not required to store and analyse the data!
 
 ## Pulsing data (optional)
 
-In measurements with pulsed light stimulation, data processing usually requires summations of photon counts on the hardware level using so-called field-programmable gate arrays (FPGA). It is neither meaningful nor feasible to store single counts in separate curves for photon arrival times of $10^{-6} \leq \tau \leq 10^{-3}$ s. Hence, multiple detectors `<curve/>` data may be stored per `<record/>`, one for each (x) pulse(-s). In those cases, the `<record/>` node contains additional metadata that may help understand the data and pre-processing by the hardware level better. All attributes are optional.
+In measurements with pulsed light stimulation, data processing usually requires summations of photon counts on the hardware level using so-called field-programmable gate arrays (FPGA). It is neither meaningful nor feasible to store single counts in separate curves for photon arrival times of $10^{-6} \leq \tau \leq 10^{-3}$ s. Hence, multiple detectors `<curve/>` data may be stored per `<record/>`, one for each pulse. In those cases, the `<record/>` node contains additional metadata that may help understand the data and pre-processing by the hardware level better. All attributes are optional.
 
   |Identifier        | Data type    |Example    |Information            |
   |:-----------------|:-------------|:----------|:----------------------|
@@ -561,13 +561,13 @@ versions 03 to 08.
 |42|`TOLOFF`          |implicit           |expressed as `<curve/>`              |
 |43|`IRR_TIME`        |implicit           |expressed as `<curve/>`              |
 |44|`IRR_TYPE`        |NONE               |can be added as comment              |
-|45|`IRR_UNIT`        |`tUnit`            |in `<curve/`> node                   |
+|45|`IRR_UNIT`        |`tUnit`            |in `<curve/>` node                   |
 |46|`IRR_DOSERATE`    |NONE               |either as curve or comment           |
 |47|`IRR_DOSERATEERR` |NONE               |only as comment possible             |
 |48|`TIMESINCEIRR`    |implicit           |calculated from time stamps          |
-|49|`TIMETICK`        |implicit           |derived from `onTIME` and `offTIME`  |
-|50|`ONTIME`          |`onTIME`           |in `<record/>` node                  |
-|51|`OFFTIME`         |`offTIME`          |in `<record/>` node                  |
+|49|`TIMETICK`        |implicit           |derived from `onTime` and `offTime`  |
+|50|`ONTIME`          |`onTime`           |in `<record/>` node                  |
+|51|`OFFTIME`         |`offTime`          |in `<record/>` node                  |
 |52|`STIMEPERIOD`     |implicit           |through `nPulses` in `<record/>` node|
 |53|`GATE_ENABLED`    |NONE               |considered non-relevant              |
 |54|`ENABLE_FLAGS`    |NONE               |considered non-relevant              |
@@ -583,7 +583,7 @@ versions 03 to 08.
 |64|`XRF_DEADTIMEEF`  |NONE               |possible as comment                  |
 |65|`DETECTOR_ID`     |`component`        |in `<curve/>` node                   |
 |66|`LOWERFILTER_ID`  |`filter`           |in `<curve/>` node                   |
-|67|`LOWERFILTER_ID`  |`filter`           |in `<curve/>` node                   |
+|67|`UPPERFILTER_ID`  |`filter`           |in `<curve/>` node                   |
 |68|`ENOISEFACTOR`    |NONE               |usage unknown                        |
 |69|`MARKPOS_X1`      |implicit           |can be expressed as `<curve/>` or comment |
 |70|`MARKPOS_Y1`      |implicit           |can be expressed as `<curve/>` or comment |
@@ -600,7 +600,7 @@ versions 03 to 08.
 
 ## Freiberg Instruments XSYG argument matching
 
-The XYSG file format by Freiberg Instruments is already an XML-based file format
+The XSYG file format by Freiberg Instruments is already an XML-based file format
 . It can be somewhat considered the predecessor of the XLUM format. The structure
 was developed in February 2013 but never formally published, and attributes are not 
 necessarily followed. The main differences are: 
@@ -608,11 +608,11 @@ necessarily followed. The main differences are:
 * The XSYG file format consists of only four nodes instead of five. Parent node `xlum`
 exists only for the XLUM format
 * Nodes start with a capital letter (e.g., `<Sample>`, instead of `<sample>` in XLUM)
-* The individual curves values are stored as a pair-list with values separated by a semicolon `;`, in the `<Curve>` node, i.e., `x0 , y0 ; x1 , y1 ; x2 , y2 ; x3 , y3`. XLUM uses attributes instead, and values are stored separately through white space
+* The individual curve values are stored as a pair-list with values separated by a semicolon `;`, in the `<Curve>` node, i.e., `x0 , y0 ; x1 , y1 ; x2 , y2 ; x3 , y3`. XLUM uses attributes instead, and values are stored separately through white space
 * For spectrometer data, the XSYG format defines an alternative storage format of values in the `<Curve>` node of form `1.0 ,[554|555|559|553|556|550| {...}`. Contrary, XLUM maintains a consistent storage format.
-* The chosen date format was not ISO conform yyyyMMddhhmmss instead of ISO 8601-1:2019: YYYY-MM-DDThh:mm:ss[.mmm]Z recalculated to Zulu time.
+* The chosen date format was not ISO-conformant: yyyyMMddhhmmss instead of ISO 8601-1:2019: YYYY-MM-DDThh:mm:ss[.mmm]Z recalculated to Zulu time.
 
-In the following, the XYSG to XLUM argument matching is listed node-wise.
+In the following, the XSYG to XLUM argument matching is listed node-wise.
 
 ### `<Curve/>` vs `<curve/>`
 
@@ -623,10 +623,10 @@ In the following, the XYSG to XLUM argument matching is listed node-wise.
 |03|`curveType`       |`duration`         |                                     |
 |04|`stimulator`      |`component`        |                                     |
 |05|`detector`        |`component`        |                                     |
-|06|`curveDscripter`  |`xLabel`, `yLabel`, `tLabel`, `vLabel`, `xUnit`, `yUnit`, `tUnit`, `vUnit` | needs to be split and matched separately             |
-|07|`offset`          |implicit         |  can be encode through the `tValues`           |
+|06|`curveDescripter` |`xLabel`, `yLabel`, `tLabel`, `vLabel`, `xUnit`, `yUnit`, `tUnit`, `vUnit` | needs to be split and matched separately             |
+|07|`offset`          |implicit           |can be encoded through the `tValues` |
 |08|`detectionWindow` |`detectionWindow`  |                                     |
-|09|`filterIDs`        |NONE|   purely manufacture related ID         |
+|09|`filterIDs`       |NONE               |purely manufacturer-related ID       |
 |10|`filterNames`        |`filter`         | filter names separated by `;`                               |
 
 ### `<Record/>` vs `<record/>`
@@ -711,7 +711,7 @@ about the PSL format.
 |04|`Filename`        |`fileName`         |in `<sequence/>` node                |
 |05|`Dark Count`      |implicit           |as `<curve/>` node                   |
 |06|`Light Count`     |implicit           |as `<curve/>` node                   |
-|07|`Dark Count Correction`|NONE          |this is a logical attribute, which can part of `comment` if needed in the `<curve/>` node         |
+|07|`Dark Count Correction`|NONE          |this is a logical attribute, which can be part of `comment` if needed in the `<curve/>` node      |
 |08|`Offset Subract`  |NONE               |this can be part of `comment` in `<curve/>` node   |
 |09|`Datafile Path`   |NONE               |not considered relevant              |
 |10|`Summary Path`    |NONE               |not considered relevant              |
