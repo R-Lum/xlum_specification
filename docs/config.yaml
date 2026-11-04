@@ -1,9 +1,15 @@
 baseurl: https://r-lum.github.io/xlum_specification
-languageCode: en-us
+languages:
+  en:
+    label: English
+    locale: en-US
 title: XLUM-specification
 theme: hugo-lithium
 googleAnalytics: ''
 disqusShortname: ''
+security:
+  allowContent:
+  - '^text/html$'
 uglyurls: false
 publishdir: "public/"
 ignoreFiles:
@@ -34,7 +40,7 @@ menu:
       pre: "<i class=\"bi bi-arrow-up-right-square\"></i>"
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
-  MathJaxVersion: 3.2.2
+  MathJaxVersion: 4.0.0
   description: Built through Hugo and blogdown.
   favicon: favicon.ico
   highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
@@ -45,7 +51,7 @@ params:
     - bash
     - sh
   highlightjsTheme: xcode
-  highlightjsVersion: 11.5.1
+  highlightjsVersion: 11.9.0
   logo:
     alt: Logo
     height: 50
