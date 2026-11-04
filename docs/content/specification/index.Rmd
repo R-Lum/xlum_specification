@@ -47,7 +47,7 @@ The levels and a short introduction are given in the table below. A detailed des
 Nodes represent each level in the structure. **Only `<curve>` nodes contain physical quantities, such as luminescence data**. All other nodes are parent nodes of `<curve>`
 to structure the dataset and ship additional metadata. 
 
-The first level, `xlum`, is a root node to enable storage of luminescence data in arbitrary files following the XML scheme. As a side effect this also allows custom file endings different from `*.xlum`.
+The root node `<xlum>` enables storage of luminescence data in arbitrary files following the XML scheme. As a side effect this also allows custom file endings different from `*.xlum`.
 
 
   |Node name       | Number of samples   |Number of aliquots  | Number of records  | Number of data curves |
@@ -384,13 +384,13 @@ level may contain an infinite number of sequences measured for one sample.
 {...}
 ```
 
-## The `<xlum/>` level 
+## The `<xlum/>` level
 
-The `<xlum>` is the parent node and it can contain an infinite number
-of samples. Only this level allows to set a license for the distribution 
-and usage of the data. All data within a particular `<xlum>` are considered
-distributed under the license. You have to create new instances of the `<xlum>` 
-to set different licenses. 
+The `<xlum>` is the parent node and can contain an infinite number
+of samples. Only this level allows to set a license for data distribution
+and usage. All data within a particular `<xlum>` are considered
+distributed under that license. You have to create new `<xlum>` instances (in
+separate files) to set different licenses.
 
 ### Attributes
 
@@ -398,7 +398,7 @@ to set different licenses.
   |:------------|:--------------|:---------|:---------------------------|:--------------|
   xmlns         |`namespace`    |no       | *predefined*               | Format specific namespace
   lang          |`string`      |no        | *predefined*              | ISO 639-1 language code, must not be changed
-  formatVersion |`decimal`      |no        |`"1.0"`                     | the `xlum` format version number relevant |
+  formatVersion |`decimal`      |no        |`"1.0"`                     | the `XLUM` format version number
   flavour       |`string`       |no        |`"generic"`                 | allows to specify a particular flavour of the format, for instance for particular equipment
   author        |`string`       |yes       |`"Max Planck; Marie Curie"` | names of the author(s) of this dataset
   license       |`string`       |yes       |`"CC BY 4.0"`               | license for the distribution of the dataset.
@@ -605,7 +605,7 @@ The XSYG file format by Freiberg Instruments is already an XML-based file format
 was developed in February 2013 but never formally published, and attributes are not 
 necessarily followed. The main differences are: 
 
-* The XSYG file format consists of only four nodes instead of five. Parent node `xlum`
+* The XSYG file format consists of only four nodes instead of five. The root node `<xlum>`
 exists only for the XLUM format
 * Nodes start with a capital letter (e.g., `<Sample>`, instead of `<sample>` in XLUM)
 * The individual curve values are stored as a pair-list with values separated by a semicolon `;`, in the `<Curve>` node, i.e., `x0 , y0 ; x1 , y1 ; x2 , y2 ; x3 , y3`. XLUM uses attributes instead, and values are stored separately through white space
