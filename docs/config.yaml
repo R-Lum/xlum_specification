@@ -40,7 +40,7 @@ menu:
       pre: "<i class=\"bi bi-arrow-up-right-square\"></i>"
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
-  MathJaxVersion: 4.0.0
+  MathJaxVersion: 3.2.2
   description: Built through Hugo and blogdown.
   favicon: favicon.ico
   highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs

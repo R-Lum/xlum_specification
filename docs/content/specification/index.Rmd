@@ -164,8 +164,8 @@ relevance for the measurement of luminescence are suitable. Typical examples:
   curveType         | `string`   |no             |`"predefined"`                  | Values allowed are only `"predefined"` or `"measured"`    |
   duration          | `double`   |no             |`"20.000"`                      | Duration of the detection in seconds or a fraction of it|
   offset            | `double`   |no             |`"10.000"`                      | Before the detection starts in seconds or a fraction of it|
-  xValues           | `list(unsignedInt)` |no    |`"1 2 3"`                       | x-coordinate values of the detector; `0` indicates that this parameter is not used|
-  yValues           | `list(unsignedInt)` |no    |`"1 2 3"`                       | y-coordinate values of detector; `0` indicates that this parameter is not used|
+  xValues           | `list(unsignedInt)` |no    |`"1 2 3"`                       | x-coordinate values of the detector; `0` indicates that this parameter is not used or missing |
+  yValues           | `list(unsignedInt)` |no    |`"1 2 3"`                       | y-coordinate values of detector; `0` indicates that this parameter is not used or missing |
   tValues           | `list(double)`      |no    |`"1. 2.0 3.0"`                  | time values in seconds or fractions of it. Values must be positive|
   vLabel            | `string`   |no             |`"Luminescence"`                | Measured physical quantity                                |
   xLabel            | `string`   |yes            |`"pixel"`                       | label of the x-coordinate values                          |
@@ -226,9 +226,9 @@ detected within the same time frame defined through the attributes `<startDate>`
 
   |Identifier          | Type          |Allows `NA`? | Example        |Information  |
   |:-------------------|:--------------|:------------|:---------------|:------------|
-  |recordType          |`string`       |no          |  `"TL"`                  |  valid values according to the `recordType` table                 |
+  |recordType          |`string`       |no           | `"TL"`         |  valid values according to the `recordType` table below     |
   |sequenceStepNumber  |`unsignedInt`      |yes         |  `5`                     |  index in the sequence     |
-  |sampleCondition     |`string`       |yes         |  dose                    | valid values according to the table below |
+  |sampleCondition     |`string`       |yes          | `"Dose"`       | valid values according to the `sampleCondition` table below |
 
   Table: Allowed attributes for `<record>` node.
 
@@ -260,12 +260,15 @@ physical information is stored in the `<curve>` node.
   |`"VSL"`               | violet-light optically stimulated luminescence                    |
   |`"YSL"`               | yellow-light optically stimulated luminescence                    |
   |`"POSL"`              | pulsed optical stimulated luminescence               |
+  |`"PREHEAT_TL"`        | combination of preheat and TL           |
+  |`"NORM_Irrad"`        | DayBreak irradiation                    |
+  |`"USER"`              | user-defined                            |
   |`"pause"`             | pause     |
   |`"custom"`            | any undefined or custom record type  not listed above   |
 
-  Table: Valid `recordTypes`
+  Table: Valid values for `recordType`
 
-Valid entries for `sampleConditions` are given in the following table:
+Valid entries for `sampleCondition` are given in the following table:
 
   |`sampleCondition`   |  Information        |
   |:-------------------|:--------------------|
@@ -278,7 +281,7 @@ Valid entries for `sampleConditions` are given in the following table:
   |`"Dose"`               |  artificially irradiated sample  |
   |`"Background"`         |  background |
 
-  Table: Valid values for `sampleConditions`
+  Table: Valid values for `sampleCondition`
 
 *Please note that the attribute `sampleCondition` is of informative nature, accounting
 for information stored in BIN/BINX-files. The field can be set to `NA`.*
@@ -409,7 +412,7 @@ separate files) to set different licenses.
 
 |`license`            | License name  |Reference            |Comment            |
 |:--------------------|:--------------|:--------------------|:------------------|
-`"CC BY"`         |Creative commons| https://creativecommons.org | all flavours of the creative commons license scheme (e.g., CC BY-SA, CC BY-NC)
+`"CC BY"`         |Creative commons| https://creativecommons.org | all flavours of the creative commons license scheme (e.g., CC BY-SA, CC BY-NC, etc)
 `"CC0"`         |Creative Commons Public Domain Dedication | https://creativecommons.org | you give up the copyright on your data and make it public domain. Please note this cannot be revoked!
 `"Copyright"`         |Copyright protected | -            | Data are copyright protected and cannot be used or distributed without the creator's agreement 
 
