@@ -114,21 +114,11 @@
             <g transform="matrix(0.909563,-0,-0,0.242351,45.0125,46.2115)">
                 <use xlink:href="#_Image3" x="205.57" y="59.758" width="164.909px" height="167.725px" transform="matrix(0.999451,0,0,0.998365,0,0)"/>
             </g>
-            <g transform="matrix(0.909563,0,0,0.242351,72.2402,66.6822)">
+            <g transform="matrix(0.909563,0,0,0.242351,72.2402,81.5595)">
                 <text x="165.197px" y="11.182px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:10px;">y</text>
-                <text x="170.236px" y="14.512px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:5.83px;">1</text>
             </g>
-            <g transform="matrix(0.909563,0,0,0.242351,72.2402,96.4367)">
-                <text x="165.197px" y="11.182px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:10px;">y</text>
-                <text x="170.236px" y="14.512px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:5.83px;">n</text>
-            </g>
-            <g transform="matrix(0.909563,0,0,0.242351,88.9681,101.153)">
+            <g transform="matrix(0.909563,0,0,0.242351,144.5421,101.153)">
                 <text x="165.197px" y="11.182px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:10px;">x</text>
-                <text x="170.436px" y="14.512px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:5.83px;">1</text>
-            </g>
-            <g transform="matrix(0.909563,0,0,0.242351,200.116,101.153)">
-                <text x="165.197px" y="11.182px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:10px;">x</text>
-                <text x="170.436px" y="14.512px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:5.83px;">n</text>
             </g>
             <g transform="matrix(0.909563,0,0,0.242351,91.887,57.4377)">
                 <text x="165.197px" y="11.182px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:10px;">t</text>
@@ -197,13 +187,8 @@
                     <use xlink:href="#_Image4" x="202.675" y="301.243" width="164.909px" height="167.992px" transform="matrix(0.999451,0,0,0.999954,0,0)"/>
                 </g>
             </g>
-            <g transform="matrix(0.909563,0,0,0.242351,69.6081,119.475)">
+            <g transform="matrix(0.909563,0,0,0.242351,69.6081,134.352)">
                 <text x="165.197px" y="11.182px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:10px;">y</text>
-                <text x="170.236px" y="14.512px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:5.83px;">1</text>
-            </g>
-            <g transform="matrix(0.909563,0,0,0.242351,69.6081,149.229)">
-                <text x="165.197px" y="11.182px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:10px;">y</text>
-                <text x="170.236px" y="14.512px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:5.83px;">n</text>
             </g>
             <g transform="matrix(0.909563,0,0,0.242351,86.3361,153.946)">
                 <text x="165.197px" y="11.182px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:10px;">x</text>
@@ -219,48 +204,46 @@
             </g>
         </g>
         <g transform="matrix(0.909563,0,0,0.246596,166.901,53.9566)">
-            <text x="-98.211px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&lt;curve xValues = &quot;0&quot;, yValues = &quot;0&quot;, tValues = &quot;1,...,n&quot;&gt;</text>
+            <text x="-98.211px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&lt;curve xValues = &quot;0&quot; yValues = &quot;0&quot; tValues = &quot;1 ... n&quot;&gt;</text>
             <text x="-92.811px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">v</text>
             <text x="-87.411px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">t1</text>
-            <text x="-81.114px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">,...,v</text>
+            <text x="-81.114px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;"> ... v</text>
             <text x="-48.714px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">tn</text>
             <text x="-98.211px" y="262.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&lt;/curve&gt;</text>
         </g>
         <g transform="matrix(0.909563,0,0,0.246596,157.346,114.457)">
-            <text x="-98.211px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&lt;curve xValues = &quot;1,...,n&quot;, yValues = &quot;0&quot;, tValues = &quot;1,...,n&quot;&gt;</text>
+            <text x="-98.211px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&lt;curve xValues = &quot;1 ... n&quot; yValues = &quot;0&quot; tValues = &quot;1 ... n&quot;&gt;</text>
             <text x="-92.811px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">v</text>
             <text x="-87.411px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">x1,t1</text>
-            <text x="-71.67px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">,v</text>
+            <text x="-71.67px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;"> v</text>
             <text x="-60.87px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">x2,t1</text>
-            <text x="-45.129px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">,v</text>
+            <text x="-45.129px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;"> v</text>
             <text x="-34.329px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">x1,t2</text>
-            <text x="-18.588px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">,v</text>
+            <text x="-18.588px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;"> v</text>
             <text x="-7.788px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">x2,t2</text>
-            <text x="7.953px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">...,v</text>
+            <text x="7.953px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">... v</text>
             <text x="34.953px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">xn,tn</text>
             <text x="-98.211px" y="262.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&lt;/curve&gt;</text>
         </g>
         <g transform="matrix(0.909563,0,0,0.246596,143.38,174.641)">
-            <text x="-98.211px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&lt;curve xValues = &quot;1,...,n&quot;, yValues = &quot;1,...,n&quot;, tValues =</text>
-            <text x="220.389px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&quot;</text>
-            <text x="225.519px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">1,...,n&quot;&gt;</text>
+            <text x="-98.211px" y="244.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&lt;curve xValues = &quot;1 ... n&quot; yValues = &quot;1 ... n&quot; tValues = &quot;1 ... n&quot;&gt;</text>
             <text x="-92.811px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">v</text>
             <text x="-87.411px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">x1,y1,t1</text>
-            <text x="-62.225px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">,v</text>
+            <text x="-62.225px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;"> v</text>
             <text x="-51.425px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">x1,y2,t1</text>
-            <text x="-26.24px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">,v</text>
+            <text x="-26.24px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;"> v</text>
             <text x="-15.44px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">x2,y1,t1</text>
-            <text x="9.746px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">,v</text>
+            <text x="9.746px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;"> v</text>
             <text x="20.546px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">x2,y2,t1,</text>
             <text x="48.88px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">v</text>
             <text x="54.28px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">x1,y1,t2</text>
-            <text x="79.465px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">,v</text>
+            <text x="79.465px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;"> v</text>
             <text x="90.265px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">x1,y2,t2</text>
-            <text x="115.451px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">,v</text>
+            <text x="115.451px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;"> v</text>
             <text x="126.251px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">x2,y1,t2</text>
-            <text x="151.437px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">,v</text>
-            <text x="162.237px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">x2,y2,t2,</text>
-            <text x="190.57px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">...,v</text>
+            <text x="151.437px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;"> v</text>
+            <text x="162.237px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">x2,y2,t2 </text>
+            <text x="190.57px" y="253.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">... v</text>
             <text x="217.57px" y="256.623px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:5.247px;">xn,yn,tn</text>
             <text x="-98.211px" y="262.626px" style="font-family:'SourceCodePro-Regular', 'Source Code Pro', monospace;font-size:9px;">&lt;/curve&gt;</text>
         </g>
