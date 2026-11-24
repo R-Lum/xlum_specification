@@ -8,9 +8,12 @@ draft: false
 
 <div id="minor-updates-specification-v1.0.0-to-v1.0.2" class="section level3">
 <h3>Minor updates specification v1.0.0 to v1.0.2</h3>
-<p>The changes listed below are considered of minor nature, given
-that the XLUM-format is not widespread.</p>
+<p>The modifications outlined below are deemed minor, as the XLUM format is not widely adopted;
+they are necessary to mature the format. After, any substantial revisions
+will necessitate a major version increment.</p>
 <ul>
+<li>Remove <code>'camera'</code> and <code>'spectrometer'</code> from the specification as <code>recordType</code>, this did not make sense;
+update XSD scheme accordingly.</li>
 <li>Update Fig. 3.1 to align figure better with specification</li>
 <li><code>xValues</code> and <code>yValues</code> allow double instead of signed integer values (specification and XSD schema)</li>
 <li>Change <code>NA</code> to <code>0</code> for <code>xValues</code> and <code>yValues</code></li>

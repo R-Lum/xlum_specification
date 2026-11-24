@@ -6,9 +6,12 @@ draft: false
   
 ### Minor updates specification v1.0.0 to v1.0.2
 
-The changes listed below are considered of minor nature, given 
-that the XLUM-format is not widespread. 
+The modifications outlined below are deemed minor, as the XLUM format is not widely adopted; 
+they are necessary to mature the format. After, any substantial revisions 
+will necessitate a major version increment. 
 
+* Remove `'camera'` and `'spectrometer'` from the specification as `recordType`, this did not make sense;
+update XSD scheme accordingly. 
 * Update Fig. 3.1 to align figure better with specification
 * `xValues` and `yValues` allow double instead of signed integer values (specification and XSD schema)
 * Change `NA` to `0` for `xValues` and `yValues`
