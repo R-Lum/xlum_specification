@@ -30,9 +30,13 @@ menu:
       url: /xsd-schema/
       weight: 1000
       pre: "<i class=\"bi bi bi-body-text\"></i>"
+    - name: Changes
+      url: /changes/
+      weight: 3000
+      pre: "<i class=\"bi bi bi-exclamation-square\"></i>"
     - name: About
       url: /about/
-      weight: 3000
+      weight: 4000
       pre: "<i class=\"bi bi bi-question-square\"></i>"
     - name: GitHub
       url: https://github.com/R-Lum/xlum_specification

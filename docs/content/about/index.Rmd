@@ -1,6 +1,6 @@
 ---
 title: "About"
-date: "2022-06-27"
+date: "2026-11-24" 
 draft: false
 ---
   
@@ -9,8 +9,8 @@ paste(readLines("../../../README.md"), collapse = "\n") |>
   pander::pander()
 ```
 
-### Disclaimer 
+### Disclaimer  
 
-This website is part of the [GitHub](https://github.com) repository [R-Lum/xlum_specification](https://github.com/R-Lum/xlum_specification) interfacing our corresponding XLUM documentation.
+This website is part of the [GitHub](https://github.com) repository [R-Lum/xlum_specification](https://github.com/R-Lum/xlum_specification) interfacing our corresponding XLUM documentation. 
 
 All the information and software on this website is published in good faith and for general use only. We do not make any warranties about the completeness, reliability and accuracy of this information. Any action you take upon the information you find on this website, is strictly at your own risk. We will not be liable for any losses and/or damages in connection with the use of our website.

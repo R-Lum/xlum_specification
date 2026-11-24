@@ -1,8 +1,8 @@
 ---
 title: "XLUM-file Format Documentation"
 author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne"
-version: "version: 1.0.1 [2026-11-04]"
-date: "2026-11-04"
+version: "version: 1.0.2 [2026-11-24]"
+date: "2026-11-24"
 output:
   bookdown::pdf_document2:
      toc: yes
@@ -220,7 +220,7 @@ the parser.</p>
 <p>For consistency reasons, the values in the node span an array with dimensions
 defined through the node attributes <code>xValues</code>, <code>yValues</code> and <code>tValues</code> (see Fig. <a href="#fig:fig1">3.1</a>).</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig1"></span>
-<img src="img/Curve_Level_Storage.png" alt="The three cases for data storage depending on the detector. The black solid arrows indicate how the array is constructed from the values stored in the node." width="384" />
+<img src="img/Curve_Level_Storage_V2.png" alt="The three cases for data storage depending on the detector. The black solid arrows indicate how the array is constructed from the values stored in the node." width="384" />
 <p class="caption">
 Figure 3.1: The three cases for data storage depending on the detector. The black solid arrows indicate how the array is constructed from the values stored in the node.
 </p>
@@ -303,23 +303,23 @@ relevance for the measurement of luminescence are suitable. Typical examples:</p
 </tr>
 <tr class="even">
 <td align="left">xValues</td>
-<td align="left"><code>list(unsignedInt)</code></td>
+<td align="left"><code>list(double)</code></td>
 <td align="left">no</td>
-<td align="left"><code>"1 2 3"</code></td>
-<td align="left">x-coordinate values of the detector; <code>0</code> indicates that this parameter is not used</td>
+<td align="left"><code>"1.0 2.0 3.0"</code></td>
+<td align="left">x-coordinate values of the detector; <code>0</code> indicates that this parameter is not used or missing</td>
 </tr>
 <tr class="odd">
 <td align="left">yValues</td>
-<td align="left"><code>list(unsignedInt)</code></td>
+<td align="left"><code>list(double)</code></td>
 <td align="left">no</td>
-<td align="left"><code>"1 2 3"</code></td>
-<td align="left">y-coordinate values of detector; <code>0</code> indicates that this parameter is not used</td>
+<td align="left"><code>"1.0 2.0 3.0"</code></td>
+<td align="left">y-coordinate values of detector; <code>0</code> indicates that this parameter is not used or missing</td>
 </tr>
 <tr class="even">
 <td align="left">tValues</td>
 <td align="left"><code>list(double)</code></td>
 <td align="left">no</td>
-<td align="left"><code>"1. 2.0 3.0"</code></td>
+<td align="left"><code>"1.0 2.0 3.0"</code></td>
 <td align="left">time values in seconds or fractions of it. Values must be positive</td>
 </tr>
 <tr class="odd">
@@ -459,7 +459,7 @@ detected within the same time frame defined through the attributes <code>&lt;sta
 <td align="left"><code>string</code></td>
 <td align="left">no</td>
 <td align="left"><code>"TL"</code></td>
-<td align="left">valid values according to the <code>recordType</code> table</td>
+<td align="left">valid values according to the <code>recordType</code> table below</td>
 </tr>
 <tr class="even">
 <td align="left">sequenceStepNumber</td>
@@ -472,8 +472,8 @@ detected within the same time frame defined through the attributes <code>&lt;sta
 <td align="left">sampleCondition</td>
 <td align="left"><code>string</code></td>
 <td align="left">yes</td>
-<td align="left">dose</td>
-<td align="left">valid values according to the table below</td>
+<td align="left"><code>"Dose"</code></td>
+<td align="left">valid values according to the <code>sampleCondition</code> table below</td>
 </tr>
 </tbody>
 </table>
@@ -483,7 +483,7 @@ However, it is important to keep in mind that the <code>recordType</code> makes 
 components involved, but is solely set to ease the understanding of the record. The hard
 physical information is stored in the <code>&lt;curve&gt;</code> node.</p>
 <table>
-<caption>Valid <code>recordTypes</code></caption>
+<caption>Valid values for <code>recordType</code></caption>
 <colgroup>
 <col width="34%" />
 <col width="65%" />
@@ -576,18 +576,30 @@ physical information is stored in the <code>&lt;curve&gt;</code> node.</p>
 <td align="left">pulsed optical stimulated luminescence</td>
 </tr>
 <tr class="odd">
+<td align="left"><code>"PREHEAT_TL"</code></td>
+<td align="left">combination of preheat and TL</td>
+</tr>
+<tr class="even">
+<td align="left"><code>"NORM_Irrad"</code></td>
+<td align="left">DayBreak irradiation</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>"USER"</code></td>
+<td align="left">user-defined</td>
+</tr>
+<tr class="even">
 <td align="left"><code>"pause"</code></td>
 <td align="left">pause</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>"custom"</code></td>
 <td align="left">any undefined or custom record type not listed above</td>
 </tr>
 </tbody>
 </table>
-<p>Valid entries for <code>sampleConditions</code> are given in the following table:</p>
+<p>Valid entries for <code>sampleCondition</code> are given in the following table:</p>
 <table>
-<caption>Valid values for <code>sampleConditions</code></caption>
+<caption>Valid values for <code>sampleCondition</code></caption>
 <colgroup>
 <col width="48%" />
 <col width="51%" />
@@ -942,7 +954,7 @@ separate files) to set different licenses.</p>
 <td align="left"><code>"CC BY"</code></td>
 <td align="left">Creative commons</td>
 <td align="left"><a href="https://creativecommons.org" class="uri">https://creativecommons.org</a></td>
-<td align="left">all flavours of the creative commons license scheme (e.g., CC BY-SA, CC BY-NC)</td>
+<td align="left">all flavours of the creative commons license scheme (e.g., CC BY-SA, CC BY-NC, etc)</td>
 </tr>
 <tr class="even">
 <td align="left"><code>"CC0"</code></td>

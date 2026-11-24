@@ -1,7 +1,7 @@
 ---
 title: "XLUM-file Format Documentation"
 author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne"
-version: "version: 1.0.1 [`r Sys.Date()`]"
+version: "version: 1.0.2 [`r Sys.Date()`]"
 date: "`r Sys.Date()`"
 output:
   bookdown::pdf_document2:
@@ -26,7 +26,7 @@ header-includes:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 ```
-\clearpage{}
+\clearpage{} 
 
 # Motivation and principles   
 
@@ -123,7 +123,7 @@ are not allowed** to avoid decimal delimiter problems. Examples:
  
 To reduce the size of the file, for instance for image data, the string in `<curve/>` can be stored using [base64](https://en.wikipedia.org/wiki/Base64) encoding. It is up to the parser to decide whether the string 
 was encoded or not! Encoding in other places (attributes) is not supported and must not be expected by 
-the parser. 
+the parser.  
 
 *Please note that the XSD document does not specify binary encoding because it considers all values in `<curve/>` strings (which can represent encoded values).*
 
@@ -131,7 +131,7 @@ For consistency reasons, the values in the node span an array with dimensions
 defined through the node attributes `xValues`, `yValues` and `tValues` (see Fig. \@ref(fig:fig1)).
 
 ```{r fig1, echo=FALSE, fig.align='center', fig.cap="The three cases for data storage depending on the detector. The black solid arrows indicate how the array is constructed from the values stored in the node."}
-try(knitr::include_graphics("img/Curve_Level_Storage.png", auto_pdf = TRUE, dpi = 300), 
+try(knitr::include_graphics("img/Curve_Level_Storage_V2.png", auto_pdf = TRUE, dpi = 300), 
     silent = TRUE)
 ```
 
@@ -153,7 +153,7 @@ relevance for the measurement of luminescence are suitable. Typical examples:
 * Photo diode, monitoring the optical power density at the sample position
 * Resistor, measuring the current of a LED
 * Pressure sensor, monitoring the atmosphere in the measurement chamber
-* Inductive sensor, monitoring closing and opening of a shutter
+* Inductive sensor, monitoring closing and opening of a shutter 
 
 ### Node attributes
 
@@ -164,9 +164,9 @@ relevance for the measurement of luminescence are suitable. Typical examples:
   curveType         | `string`   |no             |`"predefined"`                  | Values allowed are only `"predefined"` or `"measured"`    |
   duration          | `double`   |no             |`"20.000"`                      | Duration of the detection in seconds or a fraction of it|
   offset            | `double`   |no             |`"10.000"`                      | Before the detection starts in seconds or a fraction of it|
-  xValues           | `list(unsignedInt)` |no    |`"1 2 3"`                       | x-coordinate values of the detector; `0` indicates that this parameter is not used or missing |
-  yValues           | `list(unsignedInt)` |no    |`"1 2 3"`                       | y-coordinate values of detector; `0` indicates that this parameter is not used or missing |
-  tValues           | `list(double)`      |no    |`"1. 2.0 3.0"`                  | time values in seconds or fractions of it. Values must be positive|
+  xValues           | `list(double)` |no    |`"1.0 2.0 3.0"`                       | x-coordinate values of the detector; `0` indicates that this parameter is not used or missing |
+  yValues           | `list(double)` |no    |`"1.0 2.0 3.0"`                       | y-coordinate values of detector; `0` indicates that this parameter is not used or missing |
+  tValues           | `list(double)`      |no    |`"1.0 2.0 3.0"`                  | time values in seconds or fractions of it. Values must be positive|
   vLabel            | `string`   |no             |`"Luminescence"`                | Measured physical quantity                                |
   xLabel            | `string`   |yes            |`"pixel"`                       | label of the x-coordinate values                          |
   yLabel            | `string`   |yes            |`"pixel"`                       | label of the y-coordinate values                          |  

@@ -24,7 +24,7 @@
             <xs:simpleType>
               <xs:list>
                 <xs:simpleType>
-                  <xs:restriction base="xs:unsignedInt">
+                  <xs:restriction base="xs:double">
                     <xs:minInclusive value="0"/>
                   </xs:restriction>
                 </xs:simpleType>
@@ -35,7 +35,7 @@
             <xs:simpleType>
               <xs:list>
                 <xs:simpleType>
-                  <xs:restriction base="xs:unsignedInt">
+                  <xs:restriction base="xs:double">
                     <xs:minInclusive value="0"/>
                   </xs:restriction>
                 </xs:simpleType>

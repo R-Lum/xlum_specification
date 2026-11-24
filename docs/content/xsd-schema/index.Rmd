@@ -1,6 +1,6 @@
 ---
 title: "XLUM XSD-schema"
-date: "2022-06-27"
+date: "2026-11-24"
 draft: false
 ---
  

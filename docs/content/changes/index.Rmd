@@ -1,0 +1,16 @@
+---
+title: "Changes"
+date: "2026-11-24"
+draft: false
+---
+  
+### Minor updates specification v1.0.0 to v1.0.2
+
+The changes listed below are considered of minor nature, given 
+that the XLUM-format is not widespread. 
+
+* Update Fig. 3.1 to align figure better with specification
+* `xValues` and `yValues` allow double instead of signed integer values (specification and XSD schema)
+* Change `NA` to `0` for `xValues` and `yValues`
+* Correct type mismatch to align specification with XSD schema
+* Typo correction and minor clarifications 
