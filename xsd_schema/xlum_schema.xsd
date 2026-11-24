@@ -83,8 +83,6 @@
             <xs:enumeration value="irradiation"/>
             <xs:enumeration value="atmosphereExchange"/>
             <xs:enumeration value="heating"/>
-            <xs:enumeration value="spectrometer"/>
-            <xs:enumeration value="camera"/>
             <xs:enumeration value="TL"/>
             <xs:enumeration value="ITL"/>
             <xs:enumeration value="IRSL"/>

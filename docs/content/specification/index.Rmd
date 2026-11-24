@@ -243,12 +243,10 @@ physical information is stored in the `<curve>` node.
   |`"bleaching"`         | any kind of bleaching                   |
   |`"irradiation"`       | irradiation with ionising source        |
   |`"atmosphereExchange"`| atmosphere exchange                     |
-  |`"heating"`           | heating without signal detection       |
-  |`"spectrometer"`      | spectrometer                            |
-  |`"camera"`            | camera, e.g. any kind of imaging other than spectrometry      |
-  |`"TL"`                | thermoluminescence measurement                     | 
-  |`"ITL"`               | isothermal luminescence                  | 
-  |`"IRSL"`              | infrared stimulated luminescence                 | 
+  |`"heating"`           | heating without signal detection        |
+  |`"TL"`                | thermoluminescence measurement          |
+  |`"ITL"`               | isothermal luminescence                 |
+  |`"IRSL"`              | infrared stimulated luminescence        |
   |`"TM-OSL"`            | thermally modulated optically stimulated luminescence                 |
   |`"RF"`                | radiofluorescence                                  |
   |`"UV-RF"`             | radiofluorescence with detection in the UV wavelength range    |
