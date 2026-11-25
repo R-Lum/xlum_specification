@@ -2,8 +2,8 @@
 title: "XLUM XSD-schema"
 date: "2026-11-24"
 draft: false
----
-  
+--- 
+
 ```
 `r paste(readLines("../../../xsd_schema/xlum_schema.xsd"), 
       collapse = "\n")` 

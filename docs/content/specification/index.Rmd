@@ -1,7 +1,7 @@
 ---
 title: "XLUM-file Format Documentation"
 author: "Sebastian Kreutzer, Steve Grehl, Michael Höhne"
-version: "version: 1.0.2 [`r Sys.Date()`]"
+version: "version: 1.1 [`r Sys.Date()`]"
 date: "`r Sys.Date()`"
 output:
   bookdown::pdf_document2:
@@ -29,7 +29,7 @@ knitr::opts_chunk$set(collapse = TRUE)
 \clearpage{} 
 
 # Motivation and principles   
-
+ 
 This document details the `XLUM` format, an XML-based file format for long-term data preservation and exchange of luminescence data. The format is readable by humans and machines, and the data can be easily checked with any text reader on any major operating system. This design allows a platform-independent operation. The following documentation provides essential information on the file `XLUM` format  and accounts for the needs for individual flexible data analysis, even with self-written software applications.
 
 Three simple design principles underpin the format specification:
@@ -399,7 +399,7 @@ separate files) to set different licenses.
   |:------------|:--------------|:---------|:---------------------------|:--------------|
   xmlns         |`namespace`    |no       | *predefined*               | Format specific namespace
   lang          |`string`      |no        | *predefined*              | ISO 639-1 language code, must not be changed
-  formatVersion |`decimal`      |no        |`"1.0.2"`                     | the `XLUM` format version number
+  formatVersion |`decimal`      |no        |`"1.1"`                     | the `XLUM` format version number
   flavour       |`string`       |no        |`"generic"`                 | allows to specify a particular flavour of the format, for instance for particular equipment
   author        |`string`       |yes       |`"Max Planck; Marie Curie"` | names of the author(s) of this dataset
   license       |`string`       |yes       |`"CC BY 4.0"`               | license for the distribution of the dataset.
@@ -422,7 +422,7 @@ Table: Allowed `license` types
 ```{r, engine='bash', eval = FALSE}
 {...}
 <xlum xmlns:xlum="xlum.org" lang="en" 
-  formatVersion="1.0.2" flavour="generic" author="Marie Curie; Max Planck" 
+  formatVersion="1.1" flavour="generic" author="Marie Curie; Max Planck" 
   license="CC BY 4.0" doi="NA">
   <sample ...>
     <sequence ...>
@@ -490,7 +490,7 @@ to provide usable examples for the data format.
 
 ```{r, engine='bash', eval = FALSE, tidy=FALSE}
 <?xml version="1.0" encoding="utf-8"?>
-<xlum lang="en" formatVersion="1.0.2" flavour="xlum" doi="">
+<xlum lang="en" formatVersion="1.1" flavour="xlum" doi="">
  <sample ...>
   <sequence ...>
    <record ...>
