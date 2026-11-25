@@ -3,6 +3,7 @@
   xmlns:xlum=&quot;http://xlum.r-luminescence.org&quot;
   attributeFormDefault=&quot;unqualified&quot;
   elementFormDefault=&quot;qualified&quot;
+  version=&quot;1.0.2&quot;
   xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
   &lt;xs:element name=&quot;curve&quot;&gt;
     &lt;xs:complexType&gt;
@@ -24,7 +25,7 @@
             &lt;xs:simpleType&gt;
               &lt;xs:list&gt;
                 &lt;xs:simpleType&gt;
-                  &lt;xs:restriction base=&quot;xs:unsignedInt&quot;&gt;
+                  &lt;xs:restriction base=&quot;xs:double&quot;&gt;
                     &lt;xs:minInclusive value=&quot;0&quot;/&gt;
                   &lt;/xs:restriction&gt;
                 &lt;/xs:simpleType&gt;
@@ -35,7 +36,7 @@
             &lt;xs:simpleType&gt;
               &lt;xs:list&gt;
                 &lt;xs:simpleType&gt;
-                  &lt;xs:restriction base=&quot;xs:unsignedInt&quot;&gt;
+                  &lt;xs:restriction base=&quot;xs:double&quot;&gt;
                     &lt;xs:minInclusive value=&quot;0&quot;/&gt;
                   &lt;/xs:restriction&gt;
                 &lt;/xs:simpleType&gt;
@@ -65,7 +66,7 @@
           &lt;xs:attribute type=&quot;xs:string&quot; name=&quot;filter&quot; use=&quot;optional&quot;/&gt;
           &lt;xs:attribute type=&quot;xs:string&quot; name=&quot;comment&quot; use=&quot;optional&quot;/&gt;
           &lt;xs:attribute type=&quot;xs:string&quot; name=&quot;state&quot; use=&quot;optional&quot;/&gt;
-          &lt;xs:attribute type=&quot;xs:token&quot; name=&quot;parentID&quot; use=&quot;optional/&gt;
+          &lt;xs:attribute type=&quot;xs:token&quot; name=&quot;parentID&quot; use=&quot;optional&quot;/&gt;
           &lt;xs:attribute type=&quot;xs:unsignedInt&quot; name=&quot;pulseID&quot; use=&quot;optional&quot;/&gt;
         &lt;/xs:extension&gt;
       &lt;/xs:simpleContent&gt;
@@ -83,8 +84,6 @@
             &lt;xs:enumeration value=&quot;irradiation&quot;/&gt;
             &lt;xs:enumeration value=&quot;atmosphereExchange&quot;/&gt;
             &lt;xs:enumeration value=&quot;heating&quot;/&gt;
-            &lt;xs:enumeration value=&quot;spectrometer&quot;/&gt;
-            &lt;xs:enumeration value=&quot;camera&quot;/&gt;
             &lt;xs:enumeration value=&quot;TL&quot;/&gt;
             &lt;xs:enumeration value=&quot;ITL&quot;/&gt;
             &lt;xs:enumeration value=&quot;IRSL&quot;/&gt;
@@ -132,7 +131,7 @@
       &lt;/xs:attribute&gt;
       &lt;xs:attribute type=&quot;xs:string&quot; name=&quot;comment&quot; use=&quot;optional&quot;/&gt;
       &lt;xs:attribute type=&quot;xs:string&quot; name=&quot;state&quot; use=&quot;optional&quot;/&gt;
-      &lt;xs:attribute type=&quot;xs:token&quot; name=&quot;parentID&quot; use=&quot;optional/&gt;
+      &lt;xs:attribute type=&quot;xs:token&quot; name=&quot;parentID&quot; use=&quot;optional&quot;/&gt;
       &lt;xs:attribute type=&quot;xs:double&quot; name=&quot;onTime&quot; use=&quot;optional&quot;/&gt;
       &lt;xs:attribute type=&quot;xs:double&quot; name=&quot;offTime&quot; use=&quot;optional&quot;/&gt;
       &lt;xs:attribute type=&quot;xs:unsignedInt&quot; name=&quot;nPulses&quot; use=&quot;optional&quot;/&gt;
@@ -192,7 +191,7 @@
       &lt;xs:attribute type=&quot;xs:anyURI&quot; name=&quot;doi&quot; use=&quot;required&quot;/&gt;
       &lt;xs:attribute type=&quot;xs:string&quot; name=&quot;comment&quot; use=&quot;optional&quot;/&gt;
       &lt;xs:attribute type=&quot;xs:string&quot; name=&quot;state&quot; use=&quot;optional&quot;/&gt;
-      &lt;xs:attribute type=&quot;xs:token&quot; name=&quot;parentID&quot; use=&quot;optional/&gt;
+      &lt;xs:attribute type=&quot;xs:token&quot; name=&quot;parentID&quot; use=&quot;optional&quot;/&gt;
     &lt;/xs:complexType&gt;
   &lt;/xs:element&gt;
   &lt;xs:element name=&quot;xlum&quot;&gt;
