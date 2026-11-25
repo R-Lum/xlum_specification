@@ -3,6 +3,7 @@
   xmlns:xlum="http://xlum.r-luminescence.org"
   attributeFormDefault="unqualified"
   elementFormDefault="qualified"
+  version="1.0.2"
   xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="curve">
     <xs:complexType>

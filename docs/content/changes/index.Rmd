@@ -10,6 +10,8 @@ The modifications outlined below are deemed minor, as the XLUM format is not wid
 they are necessary to mature the format. After, any substantial revisions 
 will necessitate a major version increment. 
 
+* Update `formatVersion` to recent version
+* Add `version` information to XSD schema
 * Remove `'camera'` and `'spectrometer'` from the specification as `recordType`, this did not make sense;
 update XSD scheme accordingly. 
 * Update Fig. 3.1 to align figure better with specification
