@@ -1,0 +1,10 @@
+---
+title: "v1.1"
+date: "2026-11-24"
+draft: false
+--- 
+  
+```
+`r paste(readLines("../../../../xsd_schema/xlum_schema_1.1.xsd"), 
+      collapse = "\n")` 
+```

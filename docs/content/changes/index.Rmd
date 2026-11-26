@@ -3,7 +3,7 @@ title: "Changes"
 date: "2026-11-24"
 draft: false
 ---
-   
+     
 ### Minor updates specification v1.0 to v1.1
 
 The modifications outlined below are deemed minor, as the XLUM format is not widely adopted; 

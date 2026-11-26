@@ -20,13 +20,15 @@ ignoreFiles:
   - \.utf8\.md$
 permalinks:
   post: /:year/:month/:day/:slug/
+staticDir:
+ - static
 menu:
   main:
     - name: XLUM specification
       url: /specification/
       weight: 1
       pre: "<i class=\"bi bi-journal-text\"></i>"
-    - name: Latest XSD-Schema
+    - name: XSD-Schema
       url: /xsd-schema/
       weight: 1000
       pre: "<i class=\"bi bi bi-body-text\"></i>"
@@ -44,7 +46,7 @@ menu:
       pre: "<i class=\"bi bi-arrow-up-right-square\"></i>"
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
-  MathJaxVersion: 3.2.2
+  MathJaxVersion: 4.1.3
   description: Built through Hugo and blogdown.
   favicon: favicon.ico
   highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
@@ -53,9 +55,8 @@ params:
     - yaml
     - xml
     - bash
-    - sh
   highlightjsTheme: xcode
-  highlightjsVersion: 11.9.0
+  highlightjsVersion: 11.12.0
   logo:
     alt: Logo
     height: 50

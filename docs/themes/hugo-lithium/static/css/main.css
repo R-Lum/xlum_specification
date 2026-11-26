@@ -45,6 +45,15 @@ img {
   border-bottom: 1px solid #eaeaea;
 }
 
+.breadcrumbs {
+  padding: 25px 130px;
+  text-align: left;
+  font-size: 12px;
+  list-style: none;
+  text-decoration: none;
+  color: #111;
+}
+
 .nav {
   max-width: 800px;
   margin: 0 auto;

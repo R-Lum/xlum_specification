@@ -2,7 +2,7 @@
 
 Specification of the [XLUM format to exchange and archive luminescence data](https://r-lum.github.io/xlum_specification/specification).
 
-[![DOI](https://zenodo.org/badge/71261763.svg)](https://zenodo.org/badge/latestdoi/71261763)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7362438.svg)](https://doi.org/10.5281/zenodo.7362438)
 
 
 ## Contributors 

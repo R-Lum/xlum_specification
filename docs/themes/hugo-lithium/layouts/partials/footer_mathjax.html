@@ -1,6 +1,6 @@
 {{ if and (not .Params.disable_mathjax) (or (in (string .Content) "\\") (in (string .Content) "$")) }}
-<script src="{{ "/js/math-code.js" | relURL }}"></script>
-<script async src="{{ .Site.Params.MathJaxCDN | default "//cdnjs.cloudflare.com/ajax/libs" }}/mathjax/{{ .Site.Params.MathJaxVersion | default "3.2.2" }}/es5/tex-mml-chtml.min.js"></script>
+<script src="{{ "js/math-code.js" | relURL }}"></script>
+<script async src="{{ .Site.Params.MathJaxCDN | default "//cdnjs.cloudflare.com/ajax/libs" }}/mathjax/{{ .Site.Params.MathJaxVersion | default "4.1.3" }}/tex-chtml-nofont.min.js"></script>
 {{ end }}
 
 

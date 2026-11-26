@@ -7,7 +7,7 @@ licenselink = "https://github.com/jrutheiser/hugo-lithium-theme/blob/master/LICE
 description = "Lithium minimal theme"
 homepage = "https://github.com/jrutheiser/hugo-lithium-theme"
 tags = ["blog"]
-features = ["blog", "google analytics"]
+features = ["blog"]
 min_version = 0.15
 
 [author]
