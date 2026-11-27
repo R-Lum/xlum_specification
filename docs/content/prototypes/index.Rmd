@@ -1,0 +1,13 @@
+---
+title: "Prototypes"
+date: "2026-11-24"
+draft: false
+--- 
+  
+```{r, echo=FALSE}
+l <- list.files("../../../protoypes/", full.names = TRUE)
+```
+
+```
+`r paste(readLines(l[[1]]), collapse = "\n")` 
+```
