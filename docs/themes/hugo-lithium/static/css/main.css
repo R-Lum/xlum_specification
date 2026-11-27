@@ -45,13 +45,44 @@ img {
   border-bottom: 1px solid #eaeaea;
 }
 
+/* Same box as .nav, so the trail lines up with the nav content edge.
+   padding-left is widened at >=830px (see below) to sit under the first
+   menu icon, which is only at a fixed offset once the menu fits one line. */
 .breadcrumbs {
-  padding: 25px 130px;
-  text-align: left;
+  box-sizing: border-box;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px 15px 0;
   font-size: 12px;
-  list-style: none;
-  text-decoration: none;
   color: #111;
+  text-decoration: none;
+}
+
+.breadcrumbs a {
+  color: #111;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: #000;
+}
+
+/* Accent pill reuses the theme's own link-highlight colour (#CBF8DF). */
+.breadcrumbs a.current {
+  font-weight: bold;
+  color: #222;
+  background: #CBF8DF;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.breadcrumbs a.current .bi {
+  color: inherit;
+}
+
+.breadcrumbs .bi {
+  color: #999;
+  margin-right: 2px;
 }
 
 .nav {
@@ -281,7 +312,7 @@ th, td {
   }
 
   .nav-links li {
-    margin: 0 0 0 30px;
+    margin: 0 0 0 15px;
   }
 
   .content {
@@ -328,8 +359,16 @@ th, td {
   }
 }
 
+/* The menu is flush right inside an 830px box, so the first icon sits a fixed
+   distance from the left content edge only once the menu fits on one line. */
+@media (min-width: 830px) {
+  .breadcrumbs {
+    padding-left: 112px;
+  }
+}
+
 @media print {
-  .header, .footer {
+  .header, .breadcrumbs, .footer {
     display: none;
   }
   .article-content a {

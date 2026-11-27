@@ -1,6 +1,6 @@
 <div id="breadcrumbs" class="breadcrumbs">
   {{- range .Ancestors.Reverse }}
-  <a href="{{ .RelPermalink }}"> >> {{ .Title }} </a>
+  <a href="{{ .RelPermalink }}"><i class="bi bi-arrow-right-short" aria-hidden="true"></i>{{ .Title }}</a>
   {{- end }}
-  <a href="{{ .RelPermalink }}"> >> {{ .Title }}</a>
+  <a href="{{ .RelPermalink }}" class="current" aria-current="page"><i class="bi bi-arrow-right-short" aria-hidden="true"></i>{{ .Title }}</a>
 </div>

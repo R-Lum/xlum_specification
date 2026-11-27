@@ -24,7 +24,7 @@ staticDir:
  - static
 menu:
   main:
-    - name: XLUM specification
+    - name: Specification
       url: /specification/
       weight: 1
       pre: "<i class=\"bi bi-journal-text\"></i>"
@@ -32,6 +32,10 @@ menu:
       url: /xsd-schema/
       weight: 1000
       pre: "<i class=\"bi bi bi-body-text\"></i>"
+    - name: Prototypes
+      url: /prototypes/
+      weight: 1500
+      pre: "<i class=\"bi bi bi-card-text\"></i>"
     - name: Changes
       url: /changes/
       weight: 3000
@@ -43,7 +47,7 @@ menu:
     - name: GitHub
       url: https://github.com/R-Lum/xlum_specification
       weight: 9000
-      pre: "<i class=\"bi bi-arrow-up-right-square\"></i>"
+      pre: "<i class=\"bi bi-github\"></i>"
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 4.1.3
