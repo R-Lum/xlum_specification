@@ -181,9 +181,6 @@
                         <text x="29.827px" y="211.732px" style="font-family:'OpenSans-Bold', 'Open Sans', sans-serif;font-weight:700;font-size:18px;fill:rgb(163,163,163);">Spectr<tspan x="86.648px " y="211.732px ">o</tspan>meter</text>
                     </g>
                 </g>
-                <g transform="matrix(0.909563,0,0,0.242351,67.879,110.215)">
-                    <path d="M170.831,56.004L170.831,159.533" style="fill:none;stroke:black;stroke-width:0.5px;stroke-linecap:butt;stroke-dasharray:2.5,2.5,0,0;"/>
-                </g>
                 <g transform="matrix(-1.67084e-16,0.242351,-0.909563,-4.45191e-17,391.828,115.024)">
                     <path d="M170.831,56.004L170.831,159.533" style="fill:none;stroke:black;stroke-width:0.5px;stroke-linecap:butt;stroke-dasharray:2.5,2.5,0,0;"/>
                 </g>
@@ -203,17 +200,8 @@
                     <use xlink:href="#_Image4" x="202.564" y="301.229" width="165px" height="168px"/>
                 </g>
             </g>
-            <g transform="matrix(0.909563,0,0,0.242351,69.6081,119.475)">
+            <g transform="matrix(0.909563,0,0,0.242351,69.6081,133.475)">
                 <text x="165.197px" y="11.182px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:10px;">y</text>
-                <g transform="matrix(5.83,0,0,5.83,173.57,14.512)">
-                </g>
-                <text x="170.236px" y="14.512px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:5.83px;">1</text>
-            </g>
-            <g transform="matrix(0.909563,0,0,0.242351,69.6081,149.229)">
-                <text x="165.197px" y="11.182px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:10px;">y</text>
-                <g transform="matrix(5.83,0,0,5.83,173.57,14.512)">
-                </g>
-                <text x="170.236px" y="14.512px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:5.83px;">1</text>
             </g>
             <g transform="matrix(0.909563,0,0,0.242351,86.3361,153.946)">
                 <text x="165.197px" y="11.182px" style="font-family:'OpenSans', 'Open Sans', sans-serif;font-size:10px;">x</text>
