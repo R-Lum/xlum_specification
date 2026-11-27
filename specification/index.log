@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.10.3)  26 NOV 2026 18:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.10.3)  27 NOV 2026 19:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -635,14 +635,14 @@ LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 exlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 245.
-<img/Curve_Level_Storage_V2.pdf, id=66, 421.34514pt x 776.11557pt>
+<img/Curve_Level_Storage_V2.pdf, id=66, 421.575pt x 776.9025pt>
 File: img/Curve_Level_Storage_V2.pdf Graphic file (type pdf)
 <use img/Curve_Level_Storage_V2.pdf>
 Package pdftex.def Info: img/Curve_Level_Storage_V2.pdf  used on input line 305
 .
-(pdftex.def)             Requested size: 421.3441pt x 776.11368pt.
+(pdftex.def)             Requested size: 421.57396pt x 776.90059pt.
 
-LaTeX Warning: Float too large for page by 159.68367pt on input line 310.
+LaTeX Warning: Float too large for page by 160.47058pt on input line 310.
 
 [3{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/lo
 cal/texlive/2026/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [4 <./img/Curve_
@@ -707,7 +707,7 @@ pe1/public/lm/lmtk10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public
 sr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 ></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10
 .pfb>
-Output written on index.pdf (18 pages, 522912 bytes).
+Output written on index.pdf (18 pages, 522298 bytes).
 PDF statistics:
  369 PDF objects out of 1000 (max. 8388607)
  295 compressed objects within 3 object streams
